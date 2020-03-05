@@ -1,4 +1,4 @@
-#include "headers/nodoCircular.h"
+#include "listaCircular.h"
 
 //MEOTODOS
 

@@ -1,4 +1,4 @@
-#include "headers/listaCircular.h"
+#include "listaCircular.h"
 
 //contructor
 listaCircular::listaCircular(){
@@ -26,13 +26,14 @@ void listaCircular::insertar(string arg){
         primero->setAnterior(ultimo);
     }else{
         ultimo->setSiguiente(nodoTemporal);
+        nodoTemporal->setSiguiente(primero);
         nodoTemporal->setAnterior(ultimo);
         ultimo = nodoTemporal;
     }
 }
 
 //impresion de la lista
-void listaCircular::imprimir(){
+void listaCircular::imprimir(){    
     if(estadoLista() == true){
         cout<<"no hay elemento en la lista";
     }else{
@@ -41,7 +42,7 @@ void listaCircular::imprimir(){
             cout<<"<---"<<nodoAuxiliar->getPalabra()<<"--->"<<endl;
             nodoAuxiliar = nodoAuxiliar->getSiguiente();
         }while(nodoAuxiliar != primero);
-    }
+    }    
 }
 
 //para genera archvio dot
@@ -50,6 +51,7 @@ void listaCircular::generarDot(){
     ofstream archivo("ArchivosDot\\ListaCircular.dot");//apertura de archivo
     archivo<<"digraph ListaDoble {"<<endl;
     archivo<<"rankdir=LR;"<<endl;
+    archivo<<"splines=ortho;"<<endl;
 
     //para colocar los nodos
     if(estadoLista()==true){        
@@ -60,16 +62,19 @@ void listaCircular::generarDot(){
             nodoTemporal->getPalabra()<<"|<next>}\"];"<<endl;
             nodoTemporal=nodoTemporal->getSiguiente();
             numeroNodo=numeroNodo+1;
-        } while (nodoTemporal!=primero);
+        } while (nodoTemporal != primero);
     }
+    cout<<"fin de la declaracion de los nodos"<<endl;
 
     //anidacion de los nodos
+    
     for (int i = 0; i < numeroNodo-1; i++){
-        archivo<<"Nodo"<<i<<":next->Nodo"<<i+1<<":pre;"<<endl;
-        archivo<<"Nodo"<<i+1<<":pre->Nodo"<<i<<":next;"<<endl;
-    }
+        archivo<<"Nodo"<<i<<"->Nodo"<<i+1<<";"<<endl;
+        archivo<<"Nodo"<<i+1<<"->Nodo"<<i<<";"<<endl;
+    }    
 
-    archivo<<"Nodo"<<numeroNodo-1<<":next->Nodo0:pre;"<<endl;
+    archivo<<"Nodo"<<numeroNodo-1<<"->Nodo0[constraint=false];"<<endl;
+    archivo<<"Nodo0->Nodo"<<numeroNodo-1<<"[constraint=false];"<<endl;
     archivo<<"label = \" Lista Circular Simple\";"<<endl;
     archivo<<"}"<<endl;
     archivo.close();

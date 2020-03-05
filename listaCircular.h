@@ -2,11 +2,12 @@
 #define LISTACIRCULAR_H
 
 //IMPORTACIONES DE USO
-#include "headers/nodoCircular.h"
+#include "nodoCircular.h"
 #include "iostream"
 #include "string"
 #include "fstream"
 #include "windows.h"
+#include "conio.h"
 using namespace std;
 
 class listaCircular
