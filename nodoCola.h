@@ -13,7 +13,7 @@ class nodoCola
         nodoCola *siguiente;
         
     public:
-        nodoCola(int num,string arg);
+        nodoCola(int num, char arg);
         
         int getPuntuacion();
         void setPuntuacion(int num);

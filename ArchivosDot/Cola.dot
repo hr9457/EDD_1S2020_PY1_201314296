@@ -1,0 +1,13 @@
+digraph Cola {
+Nodo0[shape=record,label="{D|<next>}"];
+Nodo1[shape=record,label="{B|<next>}"];
+Nodo2[shape=record,label="{P|<next>}"];
+Nodo3[shape=record,label="{A|<next>}"];
+Nodo4[shape=record,label="{H|<next>}"];
+Nodo5[shape=record,label="{V|<next>}"];
+Nodo0->Nodo1;
+Nodo1->Nodo2;
+Nodo2->Nodo3;
+Nodo3->Nodo4;
+Nodo4->Nodo5;
+}

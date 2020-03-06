@@ -65,7 +65,7 @@ void listaCircular::generarDot(){
             numeroNodo=numeroNodo+1;
         } while (nodoTemporal != primero);
     }
-    cout<<"fin de la declaracion de los nodos"<<endl;
+    //cout<<"fin de la declaracion de los nodos"<<endl;
 
     //anidacion de los nodos
     

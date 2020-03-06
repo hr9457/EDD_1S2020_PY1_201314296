@@ -1,6 +1,6 @@
 #include "nodoCola.h"
 
-nodoCola::nodoCola(int num,string arg){
+nodoCola::nodoCola(int num, char arg){
     this->puntuacion = num;
     this->letra = arg;
     this->siguiente = NULL;
