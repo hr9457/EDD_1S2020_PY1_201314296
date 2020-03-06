@@ -25,10 +25,11 @@ void listaCircular::insertar(string arg){
         ultimo->setSiguiente(primero);
         primero->setAnterior(ultimo);
     }else{
-        ultimo->setSiguiente(nodoTemporal);
-        nodoTemporal->setSiguiente(primero);
         nodoTemporal->setAnterior(ultimo);
+        ultimo->setSiguiente(nodoTemporal);
         ultimo = nodoTemporal;
+        ultimo->setSiguiente(primero);
+        primero->setAnterior(ultimo);
     }
 }
 
