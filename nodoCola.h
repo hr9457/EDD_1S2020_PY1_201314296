@@ -10,10 +10,10 @@ class nodoCola
         int puntuacion;
         string letra;
         int cantidad;
-        nodoCola *anterior;
+        nodoCola *siguiente;
         
     public:
-        nodoCola(int num,string arg, int num2);
+        nodoCola(int num,string arg);
         
         int getPuntuacion();
         void setPuntuacion(int num);
@@ -24,9 +24,9 @@ class nodoCola
         int getCantidad();
         void setCantidad(int num);
         
-        nodoCola * getAnterior();
-        void setAnterior(nodoCola *puntero);
-        
+        nodoCola * getSiguiente();
+        void setSiguiente(nodoCola *puntero);
+
         ~nodoCola();
 };
 

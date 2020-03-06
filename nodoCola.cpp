@@ -1,10 +1,9 @@
 #include "nodoCola.h"
 
-nodoCola::nodoCola(int num,string arg, int num2){
+nodoCola::nodoCola(int num,string arg){
     this->puntuacion = num;
     this->letra = arg;
-    this->cantidad = num2;
-    this->anterior = NULL;
+    this->siguiente = NULL;
 }
 
 
@@ -32,12 +31,12 @@ void nodoCola::setCantidad(int num){
     this->cantidad = num;
 }
 
-nodoCola * nodoCola::getAnterior(){
-    return anterior;
+nodoCola * nodoCola::getSiguiente(){
+    return siguiente;
 }
 
-void nodoCola::setAnterior(nodoCola *puntero){
-    this->anterior = puntero;
+void nodoCola::setSiguiente(nodoCola *puntero){
+    this->siguiente = puntero;
 }
 
 nodoCola::~nodoCola(){}
