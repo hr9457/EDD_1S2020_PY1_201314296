@@ -4,6 +4,9 @@
 #include "nodoCola.h"
 #include "iostream"
 #include "string"
+#include "windows.h"
+#include "conio.h"
+#include "fstream"
 using namespace std;
 
 class Cola
@@ -18,8 +21,11 @@ class Cola
         void setPrimero();
         nodoCola * getUltimo();
         void setUltimo();
-        void insertarLetra();
+        bool estadoCola();
+        void insertarLetra(int num, string arg);
         void eliminarLetra();
+        void generarDot();
+        void generarPNG();
         ~Cola();
 };
 
