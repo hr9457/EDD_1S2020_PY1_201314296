@@ -34,9 +34,28 @@ void Cola::insertarLetra(int num, char arg)
 }
 
 
+//metodo para ir vaciando la cola
 void Cola::eliminarLetra()
-{
-
+{    
+    if(estadoCola() == true)
+    {
+        
+    }
+    else
+    {
+        if(primero == ultimo)
+        {
+            primero = NULL;
+            ultimo = NULL;
+        }   
+        else
+        {
+            nodoCola *nodoAuxiiar = primero;
+            primero = primero->getSiguiente();
+            delete nodoAuxiiar;
+        }
+        
+    }
 }
 
 
@@ -75,30 +94,6 @@ void Cola::generarPNG()
 {
     system("dot.exe -Tpng ArchivosDot\\Cola.dot -o Reportes\\Cola.png");
 }
-
-void Cola::imprimir(){
-    nodoCola *nodoAuxiliar = primero;
-    cout<<"<---"<<nodoAuxiliar->getLetra()<<"--->"<<endl;
-    nodoAuxiliar = nodoAuxiliar->getSiguiente();
-    cout<<"<---"<<nodoAuxiliar->getLetra()<<"--->"<<endl;
-    nodoAuxiliar = nodoAuxiliar->getSiguiente();
-    /*
-    if(estadoCola()==true){        
-    }
-    else
-    {
-        nodoCola *nodoAuxiliar = primero;
-        while (nodoAuxiliar != NULL)
-        {
-            cout<<"<---"<<nodoAuxiliar->getLetra()<<"--->"<<endl;
-            nodoAuxiliar = nodoAuxiliar->getSiguiente();
-        }
-        
-    }
-    */
-    
-}
-
 
 Cola::~Cola(){}
 

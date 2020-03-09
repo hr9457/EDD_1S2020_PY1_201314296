@@ -16,7 +16,8 @@ int main(){
     cola.insertarLetra(1,'A');
     cola.insertarLetra(4,'H');
     cola.insertarLetra(4,'V');
-    cola.imprimir();
+    
+    cola.eliminarLetra();
     cola.generarDot();
     cola.generarPNG();
     cout<<"hola mundo"<<endl;
