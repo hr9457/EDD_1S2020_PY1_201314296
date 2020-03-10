@@ -6,20 +6,18 @@
 using namespace std;
 #include "listaCircular.h"
 #include "Cola.h"
+#include "arbolBinario.h"
 
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
-int main(){ 
-    Cola cola;
-    cola.insertarLetra(2,'D');
-    cola.insertarLetra(3,'B');
-    cola.insertarLetra(3,'P');
-    cola.insertarLetra(1,'A');
-    cola.insertarLetra(4,'H');
-    cola.insertarLetra(4,'V');
-    
-    cola.eliminarLetra();
-    cola.generarDot();
-    cola.generarPNG();
+int main(){
+    arbolBinario arbol;
+    arbol.insertarJugador("Heidy");
+    arbol.insertarJugador("Carlos");
+    arbol.insertarJugador("Eduardo");
+    arbol.insertarJugador("Rodrigo");
+    arbol.insertarJugador("Antonio");
+    arbol.generarDot();
+    arbol.generarPNG();
     cout<<"hola mundo"<<endl;
     getch();
     return 0;
