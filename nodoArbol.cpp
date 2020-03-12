@@ -1,8 +1,9 @@
 #include "nodoArbol.h"
 
 //metoodo contructor inicializa el nodo el arbol
-nodoArbol::nodoArbol(string arg){
+nodoArbol::nodoArbol(string arg, int num){
     this->nombreJugador = arg;
+    this->puntaje = num;
     this->derecha = NULL;
     this->izquierda = NULL;
 }
@@ -14,6 +15,17 @@ string nodoArbol::getNombreJugador(){
 
 void nodoArbol::setNombreJugador(string arg){
     this->nombreJugador = arg;
+}
+
+//metodos set  y ge para puntuajes 
+int nodoArbol::getPuntaje()
+{
+    return puntaje;
+}
+
+void nodoArbol::setPuntaje(int numero)
+{
+    this->puntaje = numero;
 }
 
 //metodo get y se para apuntadores de derecha y izquierda

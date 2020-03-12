@@ -9,13 +9,16 @@ class nodoArbol
 {
     private:
         string nombreJugador;
+        int puntaje;
         nodoArbol *derecha;
         nodoArbol *izquierda;
 
     public:
-        nodoArbol(string arg);
+        nodoArbol(string arg, int);
         string getNombreJugador();
         void setNombreJugador(string arg);
+        int getPuntaje();
+        void setPuntaje(int);
         nodoArbol * getDerecha();
         void setDerecha(nodoArbol *puntero);
         nodoArbol * getIzquierda();

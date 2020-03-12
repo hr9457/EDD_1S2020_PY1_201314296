@@ -22,6 +22,7 @@ class arbolBinario
         void insertarJugador(string);
         void recorrerArbol(nodoArbol *inicio);
         void recorrerArbol2(nodoArbol *inicio);
+        void buscarNodo();
         void generarDot();
         void generarPNG();
         ~arbolBinario();

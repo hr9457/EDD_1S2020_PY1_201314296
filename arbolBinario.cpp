@@ -30,7 +30,7 @@ void arbolBinario::buscarInsert(nodoArbol *nodo, string arg){
     {
         if(nodo->getIzquierda() == NULL)
         {
-            nodoArbol *nodoTemporal = new nodoArbol(arg);
+            nodoArbol *nodoTemporal = new nodoArbol(arg,0);
             nodo->setIzquierda(nodoTemporal);
         }
         else
@@ -43,7 +43,7 @@ void arbolBinario::buscarInsert(nodoArbol *nodo, string arg){
     {
         if(nodo->getDerecha() == NULL)
         {
-            nodoArbol *nodoTemporal = new nodoArbol(arg);
+            nodoArbol *nodoTemporal = new nodoArbol(arg,0);
             nodo->setDerecha(nodoTemporal);
         }
         else
@@ -58,7 +58,7 @@ void arbolBinario::buscarInsert(nodoArbol *nodo, string arg){
 void arbolBinario::insertarJugador(string arg){    
     if (estadoArbol() == true)
     {
-        nodoArbol *nodoTemporal = new nodoArbol(arg);
+        nodoArbol *nodoTemporal = new nodoArbol(arg,0);
         root = nodoTemporal;
     }
     else
