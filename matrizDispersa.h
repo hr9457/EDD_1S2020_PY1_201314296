@@ -19,10 +19,11 @@ class matrizDispersa
         matrizDispersa();
         bool estadoMatriz();
         void insertarEnColumna(int);
-        void insertarEnFila();
+        void insertarEnFila(int);
         void insertarCasillaPuntuacion(string,char,int,int);
         void insertarNodo(char,int,int);
         void imprimirColumnas();
+        void imprimirFilas();
         ~matrizDispersa();
 };
 

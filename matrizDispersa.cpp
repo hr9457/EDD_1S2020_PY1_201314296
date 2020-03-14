@@ -73,6 +73,49 @@ void matrizDispersa::insertarEnColumna(int posX)
 
 
 
+//para insertar en la matriz del lado que maneja las filas
+//apuntadores de abajo y arriba
+void matrizDispersa::insertarEnFila(int posY)
+{
+    if(root->getAbajo() == NULL)
+    {
+        nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
+        root->setAbajo(nuevaFila);
+        nuevaFila->setArriba(root);
+    }
+    else
+    {
+        //recorrido hacia abajo en la filas
+        //buscar nodo y posicionarme en el nodo anterior para insertar
+        nodoMatriz *rootTemporal = root;
+        while (rootTemporal->getAbajo()!=NULL && rootTemporal->getAbajo()->getPosy()<posY)
+        {
+            rootTemporal = rootTemporal->getAbajo();
+        }
+
+        //primer caso
+        if(rootTemporal->getAbajo() == NULL)
+        {
+            nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
+            rootTemporal->setAbajo(nuevaFila);
+            nuevaFila->setArriba(rootTemporal);
+        }
+        else if(rootTemporal->getAbajo()!=NULL && rootTemporal->getAbajo()->getPosy()!=posY)
+        {
+            nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
+            nodoMatriz *nodoAbajoTemporal = rootTemporal->getAbajo();
+            rootTemporal->setAbajo(nuevaFila);
+            nuevaFila->setArriba(rootTemporal);
+            nuevaFila->setAbajo(nodoAbajoTemporal);
+            nodoAbajoTemporal->setArriba(nuevaFila); 
+        }
+        
+    }
+    
+}
+
+
+
 //insertar un nuevo nodo en la matriz
 void matrizDispersa::insertarNodo(char caracter,int posX,int posY)
 {
@@ -85,6 +128,7 @@ void matrizDispersa::insertarNodo(char caracter,int posX,int posY)
         nodoMatriz *nodoTemporal = new nodoMatriz("",caracter,posX,posY);
         //creamos su columna
         insertarEnColumna(posX);
+        insertarEnFila(posY);
     }    
 }
 
@@ -108,6 +152,26 @@ void matrizDispersa::imprimirColumnas()
             rootTemporal = rootTemporal->getSiguiente();       
         }         
     }    
+}
+
+//para la impresion y saber que filas hay creadas
+void matrizDispersa::imprimirFilas()
+{
+    if(estadoMatriz()==true)
+    {
+        cout<<"no hay filas en la matriz";
+    }
+    else
+    {
+        nodoMatriz *rootTemporal = root;
+        while (rootTemporal != NULL)
+        {
+            cout<<rootTemporal->getPosy()<<"|"<<endl;
+            rootTemporal = rootTemporal->getAbajo();
+        }
+        
+    }
+    
 }
 
 
