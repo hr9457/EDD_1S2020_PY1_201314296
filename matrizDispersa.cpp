@@ -30,15 +30,18 @@ bool matrizDispersa::estadoMatriz()
 
 
 
+
+
 //para insertar en la lista - en el lado que maneja las columnas
 //apuntadores de siguiente y anterior en el root
-void matrizDispersa::insertarEnColumna(int posX)
+nodoMatriz * matrizDispersa::insertarEnColumna(int posX)
 {
     if(root->getSiguiente() == NULL)//si no hay ningun elemento en la matriz
     {
         nodoMatriz *nuevaColumna = new nodoMatriz("",0,posX,0);
         root->setSiguiente(nuevaColumna);
         nuevaColumna->setAnterior(root);
+        return nuevaColumna;
     }
     else
     {
@@ -56,6 +59,7 @@ void matrizDispersa::insertarEnColumna(int posX)
             nodoMatriz *nuevaColumna = new nodoMatriz("",0,posX,0);
             rootTemporal->setSiguiente(nuevaColumna);
             nuevaColumna->setAnterior(rootTemporal);
+            return nuevaColumna;
         }
         else if(rootTemporal->getSiguiente() != NULL && rootTemporal->getSiguiente()->getPosx() != posX)
         {
@@ -65,9 +69,19 @@ void matrizDispersa::insertarEnColumna(int posX)
             nuevaColumna->setAnterior(rootTemporal);
             nuevaColumna->setSiguiente(nodoDerecha);
             nodoDerecha->setAnterior(nuevaColumna);
-        }        
-    }    
+            return nuevaColumna;
+        }
+        else
+        {
+            nodoMatriz *columnaDeRetorno = rootTemporal->getSiguiente();
+            return columnaDeRetorno;
+        }
+                        
+    }
+    return NULL;
 }
+
+
 
 
 
@@ -75,13 +89,14 @@ void matrizDispersa::insertarEnColumna(int posX)
 
 //para insertar en la matriz del lado que maneja las filas
 //apuntadores de abajo y arriba
-void matrizDispersa::insertarEnFila(int posY)
+nodoMatriz *  matrizDispersa::insertarEnFila(int posY)
 {
     if(root->getAbajo() == NULL)
     {
         nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
         root->setAbajo(nuevaFila);
         nuevaFila->setArriba(root);
+        return nuevaFila;
     }
     else
     {
@@ -99,6 +114,7 @@ void matrizDispersa::insertarEnFila(int posY)
             nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
             rootTemporal->setAbajo(nuevaFila);
             nuevaFila->setArriba(rootTemporal);
+            return nuevaFila;
         }
         else if(rootTemporal->getAbajo()!=NULL && rootTemporal->getAbajo()->getPosy()!=posY)
         {
@@ -108,12 +124,70 @@ void matrizDispersa::insertarEnFila(int posY)
             nuevaFila->setArriba(rootTemporal);
             nuevaFila->setAbajo(nodoAbajoTemporal);
             nodoAbajoTemporal->setArriba(nuevaFila); 
+            return nuevaFila;
+        }
+        else
+        {
+            nodoMatriz *filaDeRetorno = rootTemporal->getAbajo();
+            return filaDeRetorno;
+        }
+                
+    }  
+    return NULL;  
+}
+
+
+
+
+void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *nodoTemporal)
+{
+    if(columna->getAbajo()==NULL)
+    {
+        columna->setAbajo(nodoTemporal);
+        nodoTemporal->setArriba(columna);
+    }
+}
+
+
+void matrizDispersa::anidarInforamcionFila(nodoMatriz *fila,nodoMatriz *nodoTemporal)
+{
+    if(fila->getSiguiente()==NULL)
+    {
+        fila->setSiguiente(nodoTemporal);
+        nodoTemporal->setAnterior(fila);    
+    }
+    else
+    {
+        //para buscar la posicion en la fila para insertar
+        nodoMatriz *filaTemporal = fila;
+        while (filaTemporal->getSiguiente() != NULL && 
+            filaTemporal->getSiguiente()->getPosx() < nodoTemporal->getPosx())
+        {
+            filaTemporal = filaTemporal->getSiguiente();
+        }
+
+        //situaciones que pueden existir
+        if(filaTemporal->getSiguiente() == NULL)
+        {
+            filaTemporal->setSiguiente(nodoTemporal);
+            nodoTemporal->setAnterior(filaTemporal);
+        }
+        else if(filaTemporal->getSiguiente() != NULL && filaTemporal->getSiguiente()->getPosx() != nodoTemporal->getPosx())
+        {
+            nodoMatriz *nodoDerecha = filaTemporal->getSiguiente();
+            filaTemporal->setSiguiente(nodoTemporal);
+            nodoTemporal->setAnterior(nodoDerecha);
+            nodoTemporal->setSiguiente(nodoDerecha);
+            nodoDerecha->setAnterior(nodoTemporal);
+        }
+        else if(filaTemporal->getSiguiente()!=NULL && filaTemporal->getSiguiente()->getPosx() == nodoTemporal->getPosx())
+        {
+            filaTemporal->getSiguiente()->setPalabra(nodoTemporal->getPalabra());               
         }
         
     }
     
 }
-
 
 
 //insertar un nuevo nodo en la matriz
@@ -126,16 +200,24 @@ void matrizDispersa::insertarNodo(char caracter,int posX,int posY)
     {
         //nodo que se va agregar dentro de la matriz
         nodoMatriz *nodoTemporal = new nodoMatriz("",caracter,posX,posY);
-        //creamos su columna
-        insertarEnColumna(posX);
-        insertarEnFila(posY);
+        //buscamos o creamos su columna
+        nodoMatriz *posicionColumna = insertarEnColumna(posX);
+        //buscamos o creamos su fila
+        nodoMatriz *posicionFila =  insertarEnFila(posY);
+
+        cout<<"insercion se realizara en: ["<<posicionColumna->getPosx()
+        <<","<<posicionFila->getPosy()<<"]"<<endl;
+
+        //agregando informacion
+        //anidarInformacionColumna(posicionColumna,nodoTemporal);
+        anidarInforamcionFila(posicionFila,nodoTemporal);
     }    
 }
 
 
 
 
-
+//--------------------codigo para pruebas---------------------------
 //para la impresion y saber que columnas hay creadas
 void matrizDispersa::imprimirColumnas()
 {
@@ -154,6 +236,8 @@ void matrizDispersa::imprimirColumnas()
     }    
 }
 
+
+
 //para la impresion y saber que filas hay creadas
 void matrizDispersa::imprimirFilas()
 {
@@ -168,11 +252,11 @@ void matrizDispersa::imprimirFilas()
         {
             cout<<rootTemporal->getPosy()<<"|"<<endl;
             rootTemporal = rootTemporal->getAbajo();
-        }
-        
-    }
-    
+        }        
+    }    
 }
+
+
 
 
 //destructor

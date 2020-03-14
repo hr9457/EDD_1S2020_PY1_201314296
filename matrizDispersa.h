@@ -18,10 +18,12 @@ class matrizDispersa
     public:
         matrizDispersa();
         bool estadoMatriz();
-        void insertarEnColumna(int);
-        void insertarEnFila(int);
-        void insertarCasillaPuntuacion(string,char,int,int);
-        void insertarNodo(char,int,int);
+        nodoMatriz * insertarEnColumna(int);//insertar en columnas
+        nodoMatriz * insertarEnFila(int);//insertar en filas
+        void insertarCasillaPuntuacion(string,char,int,int);//insertar columna casilla puntos
+        void anidarInformacionColumna(nodoMatriz *,nodoMatriz *);
+        void anidarInforamcionFila(nodoMatriz *,nodoMatriz *);
+        void insertarNodo(char,int,int);//insertar un nodo como tal
         void imprimirColumnas();
         void imprimirFilas();
         ~matrizDispersa();

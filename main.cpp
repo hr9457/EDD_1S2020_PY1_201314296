@@ -13,47 +13,13 @@ using namespace std;
 int main(){
     matrizDispersa matriz;    
     matriz.insertarNodo('a',2,1);
-    matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    getch();
-
     matriz.insertarNodo('a',3,1);
-    matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    getch();
-
     matriz.insertarNodo('a',3,1);
-    matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    getch();
-
     matriz.insertarNodo('a',1,1);
-    matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    getch();
 
     matriz.insertarNodo('a',2,2);
-        matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    getch();
-
     matriz.insertarNodo('a',3,3);
-    matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    getch();
-
     matriz.insertarNodo('a',3,3);
-    matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    getch();
-
     matriz.insertarNodo('a',1,1);
 
     matriz.imprimirColumnas();
