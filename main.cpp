@@ -7,17 +7,15 @@ using namespace std;
 #include "listaCircular.h"
 #include "Cola.h"
 #include "arbolBinario.h"
+#include "matrizDispersa.h"
 
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){
-    arbolBinario arbol;
-    arbol.insertarJugador("Heidy");
-    arbol.insertarJugador("Carlos");
-    arbol.insertarJugador("Eduardo");
-    arbol.insertarJugador("Rodrigo");
-    arbol.insertarJugador("Antonio");
-    arbol.generarDot();
-    arbol.generarPNG();
+    matrizDispersa matriz;    
+    matriz.insertarNodo('a',1,1);
+    matriz.insertarNodo('a',2,1);
+    matriz.imprimirColumnas();
+    cout<<endl;
     cout<<"hola mundo"<<endl;
     getch();
     return 0;

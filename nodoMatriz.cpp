@@ -1,7 +1,8 @@
 #include "nodoMatriz.h"
 
 //constructor
-nodoMatriz::nodoMatriz(char arg,int num, int num2){
+nodoMatriz::nodoMatriz(string tipo, char arg, int num, int num2){
+    this->tipoCasilla = tipo;
     this->palabra = arg;
     this->posX = num;
     this->posY = num2;

@@ -10,9 +10,19 @@ class matrizDispersa
 {
     private:
         nodoMatriz *root;
+        nodoMatriz *inicioColumnas;
+        nodoMatriz *finalColumnas;
+        nodoMatriz *inicioFilas;
+        nodoMatriz *finalFilas;
         
     public:
         matrizDispersa();
+        bool estadoMatriz();
+        void insertarEnColumna(int);
+        void insertarEnFila();
+        void insertarCasillaPuntuacion(string,char,int,int);
+        void insertarNodo(char,int,int);
+        void imprimirColumnas();
         ~matrizDispersa();
 };
 

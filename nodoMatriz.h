@@ -18,7 +18,7 @@ class nodoMatriz
         nodoMatriz *abajo;
 
     public:
-        nodoMatriz(char,int,int);
+        nodoMatriz(string,char,int,int);
         string getTipoCasilla();
         void setTipoCasilla(string);
         char getPalabra();
