@@ -18,7 +18,6 @@ int main(){
     matriz.insertarNodo('o',10,5);
     matriz.insertarNodo('l',10,6);
     matriz.insertarNodo('a',10,7);
-    matriz.insertarNodo('b',10,8);
 
     matriz.imprimirColumnas();
     cout<<endl;

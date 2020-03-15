@@ -146,6 +146,35 @@ void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *no
         columna->setAbajo(nodoTemporal);
         nodoTemporal->setArriba(columna);
     }
+    else
+    {
+        //para buscar la posicion en la fila para insertar
+        nodoMatriz *columnaTemporal = columna;
+        while (columnaTemporal->getAbajo() != NULL && 
+            columnaTemporal->getAbajo()->getPosy() < nodoTemporal->getPosy())
+        {
+            columnaTemporal = columnaTemporal->getAbajo();
+        }
+
+        //situaciones que pueden existir
+        if(columnaTemporal->getAbajo() == NULL)
+        {
+            columnaTemporal->setAbajo(nodoTemporal);
+            nodoTemporal->setArriba(columnaTemporal);
+        }
+        else if(columnaTemporal->getAbajo() != NULL && columnaTemporal->getAbajo()->getPosy() != nodoTemporal->getPosy())
+        {
+            nodoMatriz *nodoAbajo = columnaTemporal->getAbajo();
+            columnaTemporal->setAbajo(nodoTemporal);
+            nodoTemporal->setArriba(nodoTemporal);
+            nodoTemporal->setAbajo(nodoAbajo);
+            nodoAbajo->setArriba(nodoTemporal);
+        }
+        else if(columnaTemporal->getAbajo()!=NULL && columnaTemporal->getAbajo()->getPosy() == nodoTemporal->getPosy())
+        {
+            columnaTemporal->getAbajo()->setPalabra(nodoTemporal->getPalabra());               
+        }        
+    }
 }
 
 
@@ -209,7 +238,7 @@ void matrizDispersa::insertarNodo(char caracter,int posX,int posY)
         <<","<<posicionFila->getPosy()<<"]"<<endl;
 
         //agregando informacion
-        //anidarInformacionColumna(posicionColumna,nodoTemporal);
+        anidarInformacionColumna(posicionColumna,nodoTemporal);
         anidarInforamcionFila(posicionFila,nodoTemporal);
     }    
 }
@@ -259,12 +288,22 @@ void matrizDispersa::imprimirFilas()
 
 void matrizDispersa::impresionPorFilas(nodoMatriz *filaInicio)
 {
-    while (filaInicio!=NULL)
+    do
     {
         cout<<filaInicio->getPalabra()<<"<->";
         filaInicio = filaInicio->getSiguiente();    
-    }
+    }while (filaInicio!=NULL);
 }
+
+void matrizDispersa::impresionPorColumnas(nodoMatriz *columnaIncio)
+{
+    do
+    {
+        cout<<columnaIncio->getPalabra()<<"|"<<endl;
+        columnaIncio = columnaIncio->getAbajo();
+    }while (columnaIncio != NULL);   
+}
+
 
 //para imprimir la lista fila por fila
 void matrizDispersa::imprimirMatriz()
@@ -276,12 +315,24 @@ void matrizDispersa::imprimirMatriz()
     else
     {      
         nodoMatriz *rootTemporal = root;
+        
         do
         {
             impresionPorFilas(rootTemporal);
             cout<<endl;
             rootTemporal = rootTemporal->getAbajo();
-        }while(rootTemporal->getAbajo()!=NULL);     
+        }while(rootTemporal!=NULL);     
+        
+        cout<<endl;
+        //----------------------------------
+        
+        rootTemporal = root;
+        do
+        {
+            impresionPorColumnas(rootTemporal);
+            cout<<endl;
+            rootTemporal = rootTemporal->getSiguiente();
+        } while (rootTemporal!=NULL);
         
     }
 }

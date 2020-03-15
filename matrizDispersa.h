@@ -27,6 +27,7 @@ class matrizDispersa
         void imprimirColumnas();
         void imprimirFilas();
         void impresionPorFilas(nodoMatriz *);
+        void impresionPorColumnas(nodoMatriz *);
         void imprimirMatriz();
         void crearDOT();
         ~matrizDispersa();
