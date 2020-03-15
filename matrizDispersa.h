@@ -26,6 +26,9 @@ class matrizDispersa
         void insertarNodo(char,int,int);//insertar un nodo como tal
         void imprimirColumnas();
         void imprimirFilas();
+        void impresionPorFilas(nodoMatriz *);
+        void imprimirMatriz();
+        void crearDOT();
         ~matrizDispersa();
 };
 

@@ -257,6 +257,34 @@ void matrizDispersa::imprimirFilas()
 }
 
 
+void matrizDispersa::impresionPorFilas(nodoMatriz *filaInicio)
+{
+    while (filaInicio!=NULL)
+    {
+        cout<<filaInicio->getPalabra()<<"<->";
+        filaInicio = filaInicio->getSiguiente();    
+    }
+}
+
+//para imprimir la lista fila por fila
+void matrizDispersa::imprimirMatriz()
+{
+    if(estadoMatriz()==true)
+    {
+        cout<<"no hay elementos en la matriz";
+    }
+    else
+    {      
+        nodoMatriz *rootTemporal = root;
+        do
+        {
+            impresionPorFilas(rootTemporal);
+            cout<<endl;
+            rootTemporal = rootTemporal->getAbajo();
+        }while(rootTemporal->getAbajo()!=NULL);     
+        
+    }
+}
 
 
 //destructor
