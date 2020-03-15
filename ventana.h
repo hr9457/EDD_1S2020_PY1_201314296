@@ -27,9 +27,11 @@ class ventana
         int inKeyborad;
         string rutaArchivo;
         int dimensionMaxima;
+        json JSON;
 
     public:
         ventana();
+        void lecturaDeJson(json);
         void gotoxy(int,int);
         void menu();
         void opMenu(int);

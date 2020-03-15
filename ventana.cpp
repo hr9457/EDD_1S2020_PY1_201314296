@@ -6,7 +6,9 @@ ventana::ventana()
     menu();
 }
 
-//metodo gotoxy
+
+
+//----------metodo gotoxy----para dibujar en la consola
 void ventana::gotoxy(int posx, int posy)
 {
     HANDLE hcon;  
@@ -17,8 +19,20 @@ void ventana::gotoxy(int posx, int posy)
     SetConsoleCursorPosition(hcon,dwPos);  
 }
 
+
+//-----------------para lectura y asignaciones respectivas del archivo json
+void ventana::lecturaDeJson(json JSON)
+{
+    //GUARDO LA DIMESION PARA LA MATRIZ QUE TRAE EL ARCHIVO JSON
+    dimensionMaxima = JSON.at("dimension");
+}
+
+
+
+//-----------opciones del menu------------
 void ventana::opMenu(int op)
 {
+    //-----------opcion 1 para la lectura del archiv json
     if(op==49)
     {
         gotoxy(centroMenu,lineaMenu);
@@ -38,11 +52,12 @@ void ventana::opMenu(int op)
         }
         else
         {   
-            json JSON;
+            //json JSON;
             archivojson>>JSON;
-            lineaMenu = lineaMenu +1;
-            gotoxy(centroMenu,lineaMenu);
-            dimensionMaxima = JSON.at("dimension");
+            lecturaDeJson(JSON);
+            //lineaMenu = lineaMenu +1;
+            //gotoxy(centroMenu,lineaMenu);
+            //dimensionMaxima = JSON.at("dimension");
         }
         
         //cout<<"ruta del archivo es: "<<rutaArchivo;
