@@ -23,6 +23,7 @@ class Cola
         void setUltimo();
         bool estadoCola();
         void insertarLetra(int num, char arg);
+        string getLetraPrimero();
         void eliminarLetra();
         void generarDot();
         void generarPNG();

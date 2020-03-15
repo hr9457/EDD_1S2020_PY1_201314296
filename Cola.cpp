@@ -34,6 +34,9 @@ void Cola::insertarLetra(int num, char arg)
 }
 
 
+//para retornar el valor del strin del primero para meterlo en la lista de jugador
+
+
 //metodo para ir vaciando la cola
 void Cola::eliminarLetra()
 {    
