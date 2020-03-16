@@ -22,6 +22,7 @@ using namespace std;
 class ventana
 {
     private:
+        listaCircular bibliotecaDePalabras;//listado oficial que hay en archivo json
         int centroMenu = 45 ;
         int lineaMenu = 5 ;
         int inKeyborad;
@@ -31,8 +32,10 @@ class ventana
 
     public:
         ventana();
-        void lecturaDeJson(json);
         void gotoxy(int,int);
+        void lecturaDeJson(json);
+        void opReportes(int);
+        void ventanaReportes();
         void menu();
         void opMenu(int);
         ~ventana();

@@ -3,7 +3,7 @@
 //contructor de la ventana
 ventana::ventana()
 {
-    menu();
+    menu();//arranca el menu principal 
 }
 
 
@@ -25,7 +25,49 @@ void ventana::lecturaDeJson(json JSON)
 {
     //GUARDO LA DIMESION PARA LA MATRIZ QUE TRAE EL ARCHIVO JSON
     dimensionMaxima = JSON.at("dimension");
+
+    //creacion de la biblioteca  para la validacion de las palabras
+    //for me ayuda saber la cantidad de labras que hay y buscarlas una por una
+    
+    for (int palabra = 0; palabra<JSON.at("diccionario").size() ; palabra++)
+    {
+        string palabraEncontrada = JSON.at("diccionario")[palabra].at("palabra");
+        bibliotecaDePalabras.insertar(palabraEncontrada);
+    }
 }
+
+
+//------------para la apertura de los reportes segun la opcion del usuario
+void ventana::opReportes(int op)
+{
+    if(op == 49)
+    {
+        bibliotecaDePalabras.generarDot();
+        bibliotecaDePalabras.generarPNG();
+    }
+}
+
+
+//-------------vetana para la visualizacion de los reportes de cada EDD
+void ventana::ventanaReportes()
+{
+    do
+    {
+        system("cls");//limpieza de pantalla
+        system("color 2");   
+        lineaMenu=5;//para posicionar el cursos arriba
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"Reportes de las EDD";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"1. Lista Circular";
+        inKeyborad=getch();//entrada por teclado para saber la entrada en codigo ascii
+        opReportes(inKeyborad);//mando la entrada por teclado para la apertura de reporte
+    } while (inKeyborad!=50);
+    menu();
+}
+
+
 
 
 
@@ -55,23 +97,29 @@ void ventana::opMenu(int op)
             //json JSON;
             archivojson>>JSON;
             lecturaDeJson(JSON);
-            //lineaMenu = lineaMenu +1;
-            //gotoxy(centroMenu,lineaMenu);
-            //dimensionMaxima = JSON.at("dimension");
         }
-        
-        //cout<<"ruta del archivo es: "<<rutaArchivo;
     }
+
+    //1. jugar
     else if(op==50)
-    {
-        
+    {        
     }
-    else
+
+    //3. jugadores
+    else if(op==51)
     {
+    }
+
+    //4. reportes
+    else if(op==52)
+    {
+        ventanaReportes();
     }
 }
 
 
+
+//----------------menu principal- menu de arranque
 void ventana::menu(){
     do
     {
@@ -122,6 +170,9 @@ void ventana::menu(){
 
     } while (inKeyborad!=53);//para cerrar la ventana      
  }
+
+
+
 
 //desctructor de la ventana
 ventana::~ventana(){}
