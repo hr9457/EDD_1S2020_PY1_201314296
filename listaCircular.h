@@ -23,6 +23,7 @@ class listaCircular
         void imprimir();
         void generarDot();
         void generarPNG();
+        void aperturaImagen();
         ~listaCircular();
 };
 

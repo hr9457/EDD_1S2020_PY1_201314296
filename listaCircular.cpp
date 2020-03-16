@@ -86,5 +86,12 @@ void listaCircular::generarPNG(){
     system("dot.exe -Tpng ArchivosDot\\ListaCircular.dot -o Reportes\\ListaCircular.png");
 }
 
+
+//metodo para abrir la imagen que se creo
+void listaCircular::aperturaImagen()
+{
+    system("Reportes\\ListaCircular.png");
+}
+
 //destructor
 listaCircular::~listaCircular(){}

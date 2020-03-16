@@ -44,6 +44,7 @@ void ventana::opReportes(int op)
     {
         bibliotecaDePalabras.generarDot();
         bibliotecaDePalabras.generarPNG();
+        bibliotecaDePalabras.aperturaImagen();
     }
 }
 
