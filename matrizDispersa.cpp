@@ -362,7 +362,7 @@ void matrizDispersa::columnasDOT(nodoMatriz *columnas,nodoMatriz *enlazeColumnas
         enlazeColumnas = enlazeColumnas->getSiguiente();
     }
 
-    archivo<<";"<<endl;
+    archivo<<"[dir=both];"<<endl;
 
     archivo<<"{rank = same; matriz;";
     enlazeColumnas = root->getSiguiente();
@@ -400,36 +400,41 @@ void matrizDispersa::filasDOT(nodoMatriz *filas,nodoMatriz *enlazeFilas)
         }
         enlazeFilas = enlazeFilas->getAbajo();
     }
-    archivo<<";";
+    archivo<<"[dir=both];";
 }
 
 
 
 //--------------------------------------------------------------------------
-//--------------CREAR INFO Y ENLAZAR CON LAS FILAS
+//--------------CREAR INFO Y ENLAZAR CON LAS FILAS--------------------------
 void matrizDispersa::nodosDOT(nodoMatriz *nodoInformacion)
 {
     nodoMatriz *rankInformacion = nodoInformacion;//para poner a la misma altura
+
+    //busco o creo la fila para poder anidar los nodos que puedan venir a la izquierda
     archivo<<"F"<<nodoInformacion->getPosx()<<""<<nodoInformacion->getPosy()<<
     "->";
+    //paso al dato de la derecha
     nodoInformacion = nodoInformacion->getSiguiente();    
     while (nodoInformacion != NULL)
     {
-        archivo<<"nodo"<<nodoInformacion->getPalabra();
+        archivo<<"nodo"<<nodoInformacion->getPosx()<<""<<
+        nodoInformacion->getPosy()<<""<<nodoInformacion->getPalabra();
         if(nodoInformacion->getSiguiente() != NULL)
         {
             archivo<<"->";
         }
         nodoInformacion = nodoInformacion->getSiguiente();   
     } 
-    archivo<<";"<<endl;
+    archivo<<"[dir=both];"<<endl;
 
     archivo<<"{rank = same; ";
     archivo<<"F"<<rankInformacion->getPosx()<<""<<rankInformacion->getPosy()<<";";
     rankInformacion = rankInformacion->getSiguiente(); 
     while (rankInformacion != NULL)
     {
-        archivo<<"nodo"<<rankInformacion->getPalabra()<<";";  
+        archivo<<"nodo"<<rankInformacion->getPosx()<<""<<
+        rankInformacion->getPosy()<<""<<rankInformacion->getPalabra()<<";";  
         rankInformacion = rankInformacion->getSiguiente(); 
     }  
     archivo<<"}"<<endl; 
@@ -444,8 +449,9 @@ void matrizDispersa::crearDOT()
         cout<<"no se puedo abrir el archivo"<<endl;
     }else{
 
-        archivo<<"digraph Matriz {"<<endl;        
-        archivo<<"node [shape=record];";
+        archivo<<"digraph Matriz {"<<endl; 
+        archivo<<"graph [ranksep=\"0.5\", nodesep=\"0.5\"];"<<endl;       
+        archivo<<"node [shape=record];"<<endl;
         archivo<<"matriz;"<<endl;
         
         //crea y anidar las columnas
@@ -464,16 +470,18 @@ void matrizDispersa::crearDOT()
         //crear y anidar columnas
         columnasDOT(columnas,enlazeColumnas);
         archivo<<"matriz->"<<"C"<<root->getSiguiente()->getPosx()<<""
-        <<root->getSiguiente()->getPosy()<<endl;
+        <<root->getSiguiente()->getPosy()<<"[dir=both];"<<endl;
+        archivo<<endl;
 
         //crear y anidar filas
         filasDOT(filas,enlazeFilas);
         archivo<<endl;
         archivo<<"matriz->"<<"F"<<root->getAbajo()->getPosx()<<""
-        <<root->getAbajo()->getPosy()<<";";
+        <<root->getAbajo()->getPosy()<<"[dir=both];";
+        archivo<<endl;
         archivo<<endl;
 
-        //crear y andidar informacion
+        //crear y andidar informacion por filas
         while (nodoInformacion != NULL)
         {
             nodosDOT(nodoInformacion);
