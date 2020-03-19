@@ -4,6 +4,7 @@
 #include "nodoMatriz.h"
 #include "iostream"
 #include "string"
+#include "fstream"
 using namespace std;
 
 class matrizDispersa
@@ -14,6 +15,7 @@ class matrizDispersa
         nodoMatriz *finalColumnas;
         nodoMatriz *inicioFilas;
         nodoMatriz *finalFilas;
+        ofstream archivo;
         
     public:
         matrizDispersa();
@@ -29,6 +31,9 @@ class matrizDispersa
         void impresionPorFilas(nodoMatriz *);
         void impresionPorColumnas(nodoMatriz *);
         void imprimirMatriz();
+        void columnasDOT(nodoMatriz *,nodoMatriz *);
+        void filasDOT(nodoMatriz *,nodoMatriz *);
+        void nodosDOT(nodoMatriz *);
         void crearDOT();
         ~matrizDispersa();
 };

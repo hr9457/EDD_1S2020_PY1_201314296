@@ -338,5 +338,155 @@ void matrizDispersa::imprimirMatriz()
 }
 
 
+
+
+
+
+//----------------------------------------------------------
+//---------------------CREAR Y ENLAZAR COLUMNAS
+void matrizDispersa::columnasDOT(nodoMatriz *columnas,nodoMatriz *enlazeColumnas)
+{
+    while (columnas != NULL)
+    {        
+        archivo<<"C"<<columnas->getPosx()<<""<<columnas->getPosy()<<";"<<endl;
+        columnas = columnas->getSiguiente();        
+    }   
+
+    while (enlazeColumnas != NULL)
+    {
+        archivo<<"C"<<enlazeColumnas->getPosx()<<""<<enlazeColumnas->getPosy();
+        if(enlazeColumnas->getSiguiente() != NULL)
+        {
+            archivo<<"->";
+        }
+        enlazeColumnas = enlazeColumnas->getSiguiente();
+    }
+
+    archivo<<";"<<endl;
+
+    archivo<<"{rank = same; matriz;";
+    enlazeColumnas = root->getSiguiente();
+    //ranke para la columna
+    while (enlazeColumnas != NULL)
+    {
+        archivo<<"C"<<enlazeColumnas->getPosx()<<""<<enlazeColumnas->getPosy();
+        if(enlazeColumnas->getSiguiente() != NULL)
+        {
+            archivo<<";";
+        }
+        enlazeColumnas = enlazeColumnas->getSiguiente();
+    }    
+    archivo<<"}"<<endl; 
+}
+
+
+
+//----------------------------------------------------------------------
+//---------------------------CREAR Y ENLAZAR LAS FILAS
+void matrizDispersa::filasDOT(nodoMatriz *filas,nodoMatriz *enlazeFilas)
+{
+    while (filas != NULL)
+    {        
+        archivo<<"F"<<filas->getPosx()<<""<<filas->getPosy()<<";"<<endl;
+        filas = filas->getAbajo();        
+    }
+
+    while (enlazeFilas != NULL)
+    {
+        archivo<<"F"<<enlazeFilas->getPosx()<<""<<enlazeFilas->getPosy();
+        if(enlazeFilas->getAbajo() != NULL)
+        {
+            archivo<<"->";
+        }
+        enlazeFilas = enlazeFilas->getAbajo();
+    }
+    archivo<<";";
+}
+
+
+
+//--------------------------------------------------------------------------
+//--------------CREAR INFO Y ENLAZAR CON LAS FILAS
+void matrizDispersa::nodosDOT(nodoMatriz *nodoInformacion)
+{
+    nodoMatriz *rankInformacion = nodoInformacion;//para poner a la misma altura
+    archivo<<"F"<<nodoInformacion->getPosx()<<""<<nodoInformacion->getPosy()<<
+    "->";
+    nodoInformacion = nodoInformacion->getSiguiente();    
+    while (nodoInformacion != NULL)
+    {
+        archivo<<"nodo"<<nodoInformacion->getPalabra();
+        if(nodoInformacion->getSiguiente() != NULL)
+        {
+            archivo<<"->";
+        }
+        nodoInformacion = nodoInformacion->getSiguiente();   
+    } 
+    archivo<<";"<<endl;
+
+    archivo<<"{rank = same; ";
+    archivo<<"F"<<rankInformacion->getPosx()<<""<<rankInformacion->getPosy()<<";";
+    rankInformacion = rankInformacion->getSiguiente(); 
+    while (rankInformacion != NULL)
+    {
+        archivo<<"nodo"<<rankInformacion->getPalabra()<<";";  
+        rankInformacion = rankInformacion->getSiguiente(); 
+    }  
+    archivo<<"}"<<endl; 
+}
+
+
+//metodo para crear el dot del archivo
+void matrizDispersa::crearDOT()
+{
+    archivo.open("ArchivosDot\\Matriz.dot",ios::out);
+    if(archivo.fail()){
+        cout<<"no se puedo abrir el archivo"<<endl;
+    }else{
+
+        archivo<<"digraph Matriz {"<<endl;        
+        archivo<<"node [shape=record];";
+        archivo<<"matriz;"<<endl;
+        
+        //crea y anidar las columnas
+        nodoMatriz *columnas = root->getSiguiente();
+        nodoMatriz *enlazeColumnas = root->getSiguiente();
+
+        //crear y anidad la filas
+        nodoMatriz *filas = root->getAbajo();
+        nodoMatriz *enlazeFilas = root->getAbajo();
+
+
+        //para crear y anidar la informacion con las filas
+        nodoMatriz *nodoInformacion = root->getAbajo();//para empezar abajo de la raiz
+                             
+
+        //crear y anidar columnas
+        columnasDOT(columnas,enlazeColumnas);
+        archivo<<"matriz->"<<"C"<<root->getSiguiente()->getPosx()<<""
+        <<root->getSiguiente()->getPosy()<<endl;
+
+        //crear y anidar filas
+        filasDOT(filas,enlazeFilas);
+        archivo<<endl;
+        archivo<<"matriz->"<<"F"<<root->getAbajo()->getPosx()<<""
+        <<root->getAbajo()->getPosy()<<";";
+        archivo<<endl;
+
+        //crear y andidar informacion
+        while (nodoInformacion != NULL)
+        {
+            nodosDOT(nodoInformacion);
+            nodoInformacion = nodoInformacion->getAbajo();
+        }        
+        archivo<<endl;
+        
+        archivo<<"}"<<endl; 
+        archivo.close(); 
+    }    
+}
+
+
+
 //destructor
 matrizDispersa::~matrizDispersa(){}
