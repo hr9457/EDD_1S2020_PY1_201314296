@@ -2,10 +2,10 @@ digraph Matriz {
 graph [ranksep="0.5", nodesep="0.5"];
 node [shape=record];
 matriz[group = columna];
-C80[group =0];
-C90[group =1];
-C100[group =2];
-C110[group =3];
+C80[group =0,label="C8"];
+C90[group =1,label="C9"];
+C100[group =2,label="C10"];
+C110[group =3,label="C11"];
 C80->C90->C100->C110[dir=both];
 {rank = same; matriz;C80;C90;C100;C110}
 matriz->C80[dir=both];
@@ -29,16 +29,16 @@ F06->nodo106l[dir=both];
 F07->nodo107a[dir=both];
 {rank = same; F07;nodo107a;}
 
-nodo85o[group =0];
+nodo85o[group =0,label="o"];
 C80->nodo85o[dir=both];
-nodo95s[group =1];
+nodo95s[group =1,label="s"];
 C90->nodo95s[dir=both];
-nodo104h[group =2];
-nodo105o[group =2];
-nodo106l[group =2];
-nodo107a[group =2];
+nodo104h[group =2,label="h"];
+nodo105o[group =2,label="o"];
+nodo106l[group =2,label="l"];
+nodo107a[group =2,label="a"];
 C100->nodo104h->nodo105o->nodo106l->nodo107a[dir=both];
-nodo113j[group =3];
+nodo113j[group =3,label="j"];
 C110->nodo113j[dir=both];
 
 }

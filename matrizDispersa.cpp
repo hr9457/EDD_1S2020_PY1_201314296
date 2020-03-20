@@ -346,10 +346,11 @@ void matrizDispersa::imprimirMatriz()
 //---------------------CREAR Y ENLAZAR COLUMNAS
 void matrizDispersa::columnasDOT(nodoMatriz *columnas,nodoMatriz *enlazeColumnas)
 {
+    //crear las columnas con su nombre
     while (columnas != NULL)
     {        
         archivo<<"C"<<columnas->getPosx()<<""<<columnas->getPosy()<<
-        "[group ="<<contadorGroup<<"];"<<endl;
+        "[group ="<<contadorGroup<<",label=\""<<"C"<<columnas->getPosx()<<"\"];"<<endl;
         contadorGroup ++;
         columnas = columnas->getSiguiente();        
     }   
@@ -387,6 +388,7 @@ void matrizDispersa::columnasDOT(nodoMatriz *columnas,nodoMatriz *enlazeColumnas
 //---------------------------CREAR Y ENLAZAR LAS FILAS
 void matrizDispersa::filasDOT(nodoMatriz *filas,nodoMatriz *enlazeFilas)
 {
+    //creando filas con su nombre
     while (filas != NULL)
     {        
         archivo<<"F"<<filas->getPosx()<<""<<filas->getPosy()<<"[group = columna];"<<endl;
@@ -453,7 +455,8 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
     while (crearNodo != NULL)
     {
         archivo<<"nodo"<<crearNodo->getPosx()<<""<<
-        crearNodo->getPosy()<<""<<crearNodo->getPalabra()<<"[group ="<<contadorGroup<<"];"<<endl;
+        crearNodo->getPosy()<<""<<crearNodo->getPalabra()<<"[group ="<<contadorGroup<<","<<
+        "label=\""<<crearNodo->getPalabra()<<"\"];"<<endl;
         crearNodo = crearNodo->getAbajo();   
     }
 
