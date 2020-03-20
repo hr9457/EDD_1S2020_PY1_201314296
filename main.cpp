@@ -21,7 +21,8 @@ int main(){
     matriz.insertarNodo('o',10,5);
     matriz.insertarNodo('l',10,6);
     matriz.insertarNodo('a',10,7);
-    
+    matriz.insertarNodo('j',11,3);
+
     matriz.imprimirColumnas();
     cout<<endl;
     matriz.imprimirFilas();
@@ -29,6 +30,8 @@ int main(){
     cout<<"--------------------------"<<endl;
     matriz.imprimirMatriz();
     matriz.crearDOT();
+    matriz.crearPNG();
+    matriz.abrirPNG();
     getch();
     return 0;
 }

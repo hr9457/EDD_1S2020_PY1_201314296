@@ -16,6 +16,8 @@ class matrizDispersa
         nodoMatriz *inicioFilas;
         nodoMatriz *finalFilas;
         ofstream archivo;
+        int contadorGroup = 0;
+        
         
     public:
         matrizDispersa();
@@ -31,10 +33,14 @@ class matrizDispersa
         void impresionPorFilas(nodoMatriz *);
         void impresionPorColumnas(nodoMatriz *);
         void imprimirMatriz();
+        //-----------para matriz graphviz--------------
         void columnasDOT(nodoMatriz *,nodoMatriz *);
         void filasDOT(nodoMatriz *,nodoMatriz *);
-        void nodosDOT(nodoMatriz *);
+        void nodosFILASDOT(nodoMatriz *);
+        void nodoCOLUMNASDOT(nodoMatriz *);
         void crearDOT();
+        void crearPNG();
+        void abrirPNG();
         ~matrizDispersa();
 };
 
