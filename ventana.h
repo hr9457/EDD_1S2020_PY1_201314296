@@ -23,6 +23,7 @@ class ventana
 {
     private:
         listaCircular bibliotecaDePalabras;//listado oficial que hay en archivo json
+        matrizDispersa matrizScrabble;
         int centroMenu = 45 ;
         int lineaMenu = 5 ;
         int inKeyborad;

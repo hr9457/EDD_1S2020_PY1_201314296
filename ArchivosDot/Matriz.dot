@@ -2,43 +2,55 @@ digraph Matriz {
 graph [ranksep="0.5", nodesep="0.5"];
 node [shape=record];
 matriz[group = columna];
-C80[group =0,label="C8"];
-C90[group =1,label="C9"];
-C100[group =2,label="C10"];
-C110[group =3,label="C11"];
-C80->C90->C100->C110[dir=both];
-{rank = same; matriz;C80;C90;C100;C110}
-matriz->C80[dir=both];
+C00[group =0,label="C0"];
+C40[group =1,label="C4"];
+C50[group =2,label="C5"];
+C60[group =3,label="C6"];
+C70[group =4,label="C7"];
+C80[group =5,label="C8"];
+C90[group =6,label="C9"];
+C00->C40->C50->C60->C70->C80->C90[dir=both];
+{rank = same; matriz;C00;C40;C50;C60;C70;C80;C90}
+matriz->C00[dir=both];
 
+F01[group = columna];
 F03[group = columna];
-F04[group = columna];
 F05[group = columna];
-F06[group = columna];
-F07[group = columna];
-F03->F04->F05->F06->F07[dir=both];
-matriz->F03[dir=both];
+F09[group = columna];
+F010[group = columna];
+F055[group = columna];
+F065[group = columna];
+F01->F03->F05->F09->F010->F055->F065[dir=both];
+matriz->F01[dir=both];
 
-F03->nodo113j[dir=both];
-{rank = same; F03;nodo113j;}
-F04->nodo104h[dir=both];
-{rank = same; F04;nodo104h;}
-F05->nodo85o->nodo95s->nodo105o[dir=both];
-{rank = same; F05;nodo85o;nodo95s;nodo105o;}
-F06->nodo106l[dir=both];
-{rank = same; F06;nodo106l;}
-F07->nodo107a[dir=both];
-{rank = same; F07;nodo107a;}
+F01->nodo010[dir=both];
+{rank = same; F01;nodo010;}
+F03->nodo730[dir=both];
+{rank = same; F03;nodo730;}
+F05->nodo550[dir=both];
+{rank = same; F05;nodo550;}
+F09->nodo690[dir=both];
+{rank = same; F09;nodo690;}
+F010->nodo9100[dir=both];
+{rank = same; F010;nodo9100;}
+F055->nodo4550[dir=both];
+{rank = same; F055;nodo4550;}
+F065->nodo8650[dir=both];
+{rank = same; F065;nodo8650;}
 
-nodo85o[group =0,label="o"];
-C80->nodo85o[dir=both];
-nodo95s[group =1,label="s",style=filled,fillcolor="Indianred"];
-C90->nodo95s[dir=both];
-nodo104h[group =2,label="h"];
-nodo105o[group =2,label="o",style=filled,fillcolor="cyan4"];
-nodo106l[group =2,label="l"];
-nodo107a[group =2,label="a"];
-C100->nodo104h->nodo105o->nodo106l->nodo107a[dir=both];
-nodo113j[group =3,label="j",style=filled,fillcolor="cyan4"];
-C110->nodo113j[dir=both];
+nodo010[group =0,label="",style=filled,fillcolor="cyan4"];
+C00->nodo010[dir=both];
+nodo4550[group =1,label="",style=filled,fillcolor="Indianred"];
+C40->nodo4550[dir=both];
+nodo550[group =2,label="",style=filled,fillcolor="Indianred"];
+C50->nodo550[dir=both];
+nodo690[group =3,label="",style=filled,fillcolor="cyan4"];
+C60->nodo690[dir=both];
+nodo730[group =4,label="",style=filled,fillcolor="cyan4"];
+C70->nodo730[dir=both];
+nodo8650[group =5,label="",style=filled,fillcolor="Indianred"];
+C80->nodo8650[dir=both];
+nodo9100[group =6,label="",style=filled,fillcolor="Indianred"];
+C90->nodo9100[dir=both];
 
 }

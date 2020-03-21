@@ -245,8 +245,11 @@ void matrizDispersa::insertarNodo(int tipoCasilla,char caracter,int posX,int pos
         //buscamos o creamos su fila
         nodoMatriz *posicionFila =  insertarEnFila(posY);
 
+       //---- prueba impression en consola saber dond insertaria el nodo
+        /*
         cout<<"insercion se realizara en: ["<<posicionColumna->getPosx()
         <<","<<posicionFila->getPosy()<<"]"<<endl;
+        */
 
         //agregando informacion
         anidarInformacionColumna(posicionColumna,nodoTemporal);

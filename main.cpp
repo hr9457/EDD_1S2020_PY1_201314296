@@ -14,7 +14,11 @@ using namespace std;
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){    
     matrizDispersa matriz; 
-    //ventana principal;   
+    ventana principal;
+    //------------------pruba cond datos en la matriz 
+    //------------------ingresar datos,simples, dobles y triples
+    //-------------------sustitucion con una casilla existente
+    /*   
     matriz.insertarNodo(0,'h',10,4);
     matriz.insertarNodo(0,'o',8,5);
     matriz.insertarNodo(1,0,9,5);
@@ -34,5 +38,6 @@ int main(){
     matriz.crearPNG();
     matriz.abrirPNG();
     getch();
+    */
     return 0;
 }
