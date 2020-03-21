@@ -3,7 +3,7 @@
 //constructor
 matrizDispersa::matrizDispersa()
 {
-    nodoMatriz *nodoTemporal = new nodoMatriz("",0,-1,-1);
+    nodoMatriz *nodoTemporal = new nodoMatriz(0,0,-1,-1);
     this->root = nodoTemporal;
     this->inicioColumnas = root;
     this->finalColumnas = NULL;
@@ -31,14 +31,14 @@ bool matrizDispersa::estadoMatriz()
 
 
 
-
+//----------------------------------------------------------------
 //para insertar en la lista - en el lado que maneja las columnas
 //apuntadores de siguiente y anterior en el root
 nodoMatriz * matrizDispersa::insertarEnColumna(int posX)
 {
     if(root->getSiguiente() == NULL)//si no hay ningun elemento en la matriz
     {
-        nodoMatriz *nuevaColumna = new nodoMatriz("",0,posX,0);
+        nodoMatriz *nuevaColumna = new nodoMatriz(0,0,posX,0);
         root->setSiguiente(nuevaColumna);
         nuevaColumna->setAnterior(root);
         return nuevaColumna;
@@ -56,14 +56,14 @@ nodoMatriz * matrizDispersa::insertarEnColumna(int posX)
         //agregando despues de aver encontrado el nodo 
         if(rootTemporal->getSiguiente() == NULL)
         {
-            nodoMatriz *nuevaColumna = new nodoMatriz("",0,posX,0);
+            nodoMatriz *nuevaColumna = new nodoMatriz(0,0,posX,0);
             rootTemporal->setSiguiente(nuevaColumna);
             nuevaColumna->setAnterior(rootTemporal);
             return nuevaColumna;
         }
         else if(rootTemporal->getSiguiente() != NULL && rootTemporal->getSiguiente()->getPosx() != posX)
         {
-            nodoMatriz *nuevaColumna = new nodoMatriz("",0,posX,0);
+            nodoMatriz *nuevaColumna = new nodoMatriz(0,0,posX,0);
             nodoMatriz *nodoDerecha = rootTemporal->getSiguiente();
             rootTemporal->setSiguiente(nuevaColumna);
             nuevaColumna->setAnterior(rootTemporal);
@@ -86,14 +86,14 @@ nodoMatriz * matrizDispersa::insertarEnColumna(int posX)
 
 
 
-
+//----------------------------------------------------------------
 //para insertar en la matriz del lado que maneja las filas
 //apuntadores de abajo y arriba
 nodoMatriz *  matrizDispersa::insertarEnFila(int posY)
 {
     if(root->getAbajo() == NULL)
     {
-        nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
+        nodoMatriz *nuevaFila = new nodoMatriz(0,0,0,posY);
         root->setAbajo(nuevaFila);
         nuevaFila->setArriba(root);
         return nuevaFila;
@@ -111,14 +111,14 @@ nodoMatriz *  matrizDispersa::insertarEnFila(int posY)
         //primer caso
         if(rootTemporal->getAbajo() == NULL)
         {
-            nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
+            nodoMatriz *nuevaFila = new nodoMatriz(0,0,0,posY);
             rootTemporal->setAbajo(nuevaFila);
             nuevaFila->setArriba(rootTemporal);
             return nuevaFila;
         }
         else if(rootTemporal->getAbajo()!=NULL && rootTemporal->getAbajo()->getPosy()!=posY)
         {
-            nodoMatriz *nuevaFila = new nodoMatriz("",0,0,posY);
+            nodoMatriz *nuevaFila = new nodoMatriz(0,0,0,posY);
             nodoMatriz *nodoAbajoTemporal = rootTemporal->getAbajo();
             rootTemporal->setAbajo(nuevaFila);
             nuevaFila->setArriba(rootTemporal);
@@ -138,7 +138,8 @@ nodoMatriz *  matrizDispersa::insertarEnFila(int posY)
 
 
 
-
+//--------------------------------------------------------------------------------
+//metodo que anida la informacion por columnas
 void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *nodoTemporal)
 {
     if(columna->getAbajo()==NULL)
@@ -178,6 +179,9 @@ void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *no
 }
 
 
+
+//------------------------------------------------------------------------------------
+//--------------anidar la informacion en la filas corespondientes----------------------
 void matrizDispersa::anidarInforamcionFila(nodoMatriz *fila,nodoMatriz *nodoTemporal)
 {
     if(fila->getSiguiente()==NULL)
@@ -219,8 +223,15 @@ void matrizDispersa::anidarInforamcionFila(nodoMatriz *fila,nodoMatriz *nodoTemp
 }
 
 
-//insertar un nuevo nodo en la matriz
-void matrizDispersa::insertarNodo(char caracter,int posX,int posY)
+
+
+
+//------------------------------------------------------------------------------
+//-------------------------insertar un nuevo nodo en la matriz
+//-------------------------metodo que recibe los parametros iniciales para crear el nodo 
+//-------------------------despues mandar a sus respetivos metodos para crea y buscar filas , columas
+//-------------------------despues anido la info en su columnas y su fila
+void matrizDispersa::insertarNodo(int tipoCasilla,char caracter,int posX,int posY)
 {
     if(estadoMatriz() == true)
     {
@@ -228,7 +239,7 @@ void matrizDispersa::insertarNodo(char caracter,int posX,int posY)
     else
     {
         //nodo que se va agregar dentro de la matriz
-        nodoMatriz *nodoTemporal = new nodoMatriz("",caracter,posX,posY);
+        nodoMatriz *nodoTemporal = new nodoMatriz(tipoCasilla,caracter,posX,posY);
         //buscamos o creamos su columna
         nodoMatriz *posicionColumna = insertarEnColumna(posX);
         //buscamos o creamos su fila
@@ -341,9 +352,9 @@ void matrizDispersa::imprimirMatriz()
 
 
 
-
-//----------------------------------------------------------
-//---------------------CREAR Y ENLAZAR COLUMNAS
+//---------------------CODIGO PARA CREAR EL ARCHIVO DOT - IMAGEN VISUAL PARA EL JUGADOR--------------
+//--------------------------------------------------------------------
+//---------------------CREAR Y ENLAZAR COLUMNAS-----------------------
 void matrizDispersa::columnasDOT(nodoMatriz *columnas,nodoMatriz *enlazeColumnas)
 {
     //crear las columnas con su nombre
@@ -423,7 +434,17 @@ void matrizDispersa::nodosFILASDOT(nodoMatriz *nodoInformacion)
     while (nodoInformacion != NULL)
     {
         archivo<<"nodo"<<nodoInformacion->getPosx()<<""<<
-        nodoInformacion->getPosy()<<""<<nodoInformacion->getPalabra();
+        nodoInformacion->getPosy()<<"";
+        //---------condicion por si el nodo tiene no exite la palabra
+        if(nodoInformacion->getPalabra() != 0)
+        {
+            archivo<<nodoInformacion->getPalabra();
+        }
+        else
+        {
+            archivo<<"0";
+        }
+        //-----------------------------------------------------------
         if(nodoInformacion->getSiguiente() != NULL)
         {
             archivo<<"->";
@@ -435,10 +456,20 @@ void matrizDispersa::nodosFILASDOT(nodoMatriz *nodoInformacion)
     archivo<<"{rank = same; ";
     archivo<<"F"<<rankInformacion->getPosx()<<""<<rankInformacion->getPosy()<<";";
     rankInformacion = rankInformacion->getSiguiente(); 
+
     while (rankInformacion != NULL)
     {
         archivo<<"nodo"<<rankInformacion->getPosx()<<""<<
-        rankInformacion->getPosy()<<""<<rankInformacion->getPalabra()<<";";  
+        rankInformacion->getPosy(); 
+        //-------------condicion saber si no viene la letra
+        if(rankInformacion->getPalabra() != 0)
+        {
+            archivo<<rankInformacion->getPalabra()<<";";
+        }
+        else
+        {
+            archivo<<0<<";";
+        }
         rankInformacion = rankInformacion->getSiguiente(); 
     }  
     archivo<<"}"<<endl; 
@@ -455,8 +486,44 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
     while (crearNodo != NULL)
     {
         archivo<<"nodo"<<crearNodo->getPosx()<<""<<
-        crearNodo->getPosy()<<""<<crearNodo->getPalabra()<<"[group ="<<contadorGroup<<","<<
-        "label=\""<<crearNodo->getPalabra()<<"\"];"<<endl;
+        crearNodo->getPosy();
+        //-------------condicion para saber si el nodo no contiene ninguna letra
+        if(crearNodo->getPalabra() != 0)
+        {
+            archivo<<crearNodo->getPalabra();
+        }
+        else
+        {
+            archivo<<0;
+        }
+
+
+        archivo<<"[group ="<<contadorGroup<<",";
+        //-------------condicion para saber si el nodo no contiene ninguna letra
+        if(crearNodo->getPalabra() != 0)
+        {
+            archivo<<"label=\""<<crearNodo->getPalabra()<<"\"";
+        }
+        else
+        {
+            archivo<<"label=\"\"";
+        }
+        
+        
+        //----------- condicion para saber que color se colocara en el nodo -----------
+        if(crearNodo->getTipoCasilla() == 0)
+        {
+            archivo<<"];"<<endl;
+        }
+        else if(crearNodo->getTipoCasilla() == 1)
+        {
+            archivo<<",style=filled,fillcolor=\"Indianred\"];"<<endl;
+        }
+        else
+        {
+            archivo<<",style=filled,fillcolor=\"cyan4\"];"<<endl;
+        }
+        
         crearNodo = crearNodo->getAbajo();   
     }
 
@@ -465,11 +532,23 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
     "->";
 
     //paso al dato de la derecha
+    //---metodo donde anido la informacion con sus columnas respectivas
     nodoInformacion = nodoInformacion->getAbajo();    
     while (nodoInformacion != NULL)
     {
         archivo<<"nodo"<<nodoInformacion->getPosx()<<""<<
-        nodoInformacion->getPosy()<<""<<nodoInformacion->getPalabra();
+        nodoInformacion->getPosy()<<"";
+        //---------condicion por si el nodo tiene no exite la palabra
+        if(nodoInformacion->getPalabra() != 0)
+        {
+            archivo<<nodoInformacion->getPalabra();
+        }
+        else
+        {
+            archivo<<"0";
+        }
+        
+        //--------------------------------------
         if(nodoInformacion->getAbajo() != NULL)
         {
             archivo<<"->";
@@ -554,16 +633,24 @@ void matrizDispersa::crearDOT()
 
 
 
+
+
+//-------------------CONVERTIR EL ARCHIVO DOT A PNG
 void matrizDispersa::crearPNG()
 {
     system("dot.exe -Tpng ArchivosDot\\Matriz.dot -o Reportes\\Matriz.png");
 }
 
 
+//---------------------  APERTURA DEL ARCHIVO PNG QUE SER GENERO ---------------------
 void matrizDispersa::abrirPNG()
 {
     system("Reportes\\Matriz.png");
 }
 
-//destructor
+
+
+
+
+//----------------------   destructor   ---------------------
 matrizDispersa::~matrizDispersa(){}

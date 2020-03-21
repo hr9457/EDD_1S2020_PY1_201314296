@@ -31,14 +31,14 @@ F07->nodo107a[dir=both];
 
 nodo85o[group =0,label="o"];
 C80->nodo85o[dir=both];
-nodo95s[group =1,label="s"];
+nodo95s[group =1,label="s",style=filled,fillcolor="Indianred"];
 C90->nodo95s[dir=both];
 nodo104h[group =2,label="h"];
-nodo105o[group =2,label="o"];
+nodo105o[group =2,label="o",style=filled,fillcolor="cyan4"];
 nodo106l[group =2,label="l"];
 nodo107a[group =2,label="a"];
 C100->nodo104h->nodo105o->nodo106l->nodo107a[dir=both];
-nodo113j[group =3,label="j"];
+nodo113j[group =3,label="j",style=filled,fillcolor="cyan4"];
 C110->nodo113j[dir=both];
 
 }

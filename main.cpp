@@ -15,13 +15,14 @@ using namespace std;
 int main(){    
     matrizDispersa matriz; 
     //ventana principal;   
-    matriz.insertarNodo('h',10,4);
-    matriz.insertarNodo('o',8,5);
-    matriz.insertarNodo('s',9,5);
-    matriz.insertarNodo('o',10,5);
-    matriz.insertarNodo('l',10,6);
-    matriz.insertarNodo('a',10,7);
-    matriz.insertarNodo('j',11,3);
+    matriz.insertarNodo(0,'h',10,4);
+    matriz.insertarNodo(0,'o',8,5);
+    matriz.insertarNodo(1,0,9,5);
+    matriz.insertarNodo(2,'o',10,5);
+    matriz.insertarNodo(0,'l',10,6);
+    matriz.insertarNodo(0,'a',10,7);
+    matriz.insertarNodo(2,'j',11,3);
+    matriz.insertarNodo(1,'s',9,5);
 
     matriz.imprimirColumnas();
     cout<<endl;

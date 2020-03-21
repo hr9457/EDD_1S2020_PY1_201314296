@@ -8,19 +8,20 @@ using namespace std;
 class nodoMatriz
 {
     private:
-        string tipoCasilla;
+        int tipoCasilla;//0-simples , 1-doble y 2-triples
         char palabra;
         int posX;
         int posY;
+        //apuntadores
         nodoMatriz *siguiente;
         nodoMatriz *anterior;
         nodoMatriz *arriba;
         nodoMatriz *abajo;
 
     public:
-        nodoMatriz(string,char,int,int);
-        string getTipoCasilla();
-        void setTipoCasilla(string);
+        nodoMatriz(int,char,int,int);
+        int getTipoCasilla();
+        void setTipoCasilla(int);
         char getPalabra();
         void setPalabra(char);
         int getPosx();

@@ -27,7 +27,7 @@ class matrizDispersa
         void insertarCasillaPuntuacion(string,char,int,int);//insertar columna casilla puntos
         void anidarInformacionColumna(nodoMatriz *,nodoMatriz *);
         void anidarInforamcionFila(nodoMatriz *,nodoMatriz *);
-        void insertarNodo(char,int,int);//insertar un nodo como tal
+        void insertarNodo(int,char,int,int);//insertar un nodo como tal
         void imprimirColumnas();
         void imprimirFilas();
         void impresionPorFilas(nodoMatriz *);

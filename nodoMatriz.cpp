@@ -1,7 +1,7 @@
 #include "nodoMatriz.h"
 
 //constructor
-nodoMatriz::nodoMatriz(string tipo, char arg, int num, int num2){
+nodoMatriz::nodoMatriz(int tipo, char arg, int num, int num2){
     this->tipoCasilla = tipo;
     this->palabra = arg;
     this->posX = num;
@@ -14,12 +14,12 @@ nodoMatriz::nodoMatriz(string tipo, char arg, int num, int num2){
 
 //metodo get y set 
 //para palabra
-string nodoMatriz::getTipoCasilla()
+int nodoMatriz::getTipoCasilla()
 {
     return tipoCasilla;
 }
 
-void nodoMatriz::setTipoCasilla(string tipo)
+void nodoMatriz::setTipoCasilla(int tipo)
 {
     this->tipoCasilla = tipo;
 }
