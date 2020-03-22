@@ -1,14 +1,14 @@
 digraph arbol
 {
 rankdir=TB;
-nodoHeidy[ label = "Heidy"]; 
-nodoHeidy->nodoCarlos
-nodoCarlos[ label = "Carlos"]; 
-nodoCarlos->nodoAntonio
-nodoAntonio[ label = "Antonio"]; 
-nodoCarlos->nodoEduardo
-nodoEduardo[ label = "Eduardo"]; 
-nodoHeidy->nodoRodrigo
-nodoRodrigo[ label = "Rodrigo"]; 
+nodoheidy[ label = "heidy"]; 
+nodoheidy->nodocarlos
+nodocarlos[ label = "carlos"]; 
+nodocarlos->nodoantonio
+nodoantonio[ label = "antonio"]; 
+nodocarlos->nodoeduardo
+nodoeduardo[ label = "eduardo"]; 
+nodoheidy->nodorodrigo
+nodorodrigo[ label = "rodrigo"]; 
 label = " Arbol Binario " 
 }

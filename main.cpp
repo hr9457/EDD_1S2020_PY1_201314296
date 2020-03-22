@@ -14,7 +14,23 @@ using namespace std;
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){    
     matrizDispersa matriz; 
-    ventana principal;
+    arbolBinario arbol;
+    arbol.insertarJugador("heidy");
+    arbol.insertarJugador("carlos");
+    arbol.insertarJugador("antonio");
+    arbol.insertarJugador("eduardo");
+    arbol.insertarJugador("rodrigo");
+    arbol.generarDot();
+    arbol.generarPNG(); 
+
+    arbol.generarDotPreorden();
+    arbol.generarPNGPreorden();
+    
+    arbol.generarDotInorden();
+    arbol.generarPNGInorden();
+    arbol.generarDotPostorden();
+    arbol.generarPNGPostorden();
+    //ventana principal;
     //------------------pruba cond datos en la matriz 
     //------------------ingresar datos,simples, dobles y triples
     //-------------------sustitucion con una casilla existente

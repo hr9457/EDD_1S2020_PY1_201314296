@@ -35,6 +35,7 @@ class ventana
         ventana();
         void gotoxy(int,int);
         void lecturaDeJson(json);
+        void ventanaJugadores();
         void opReportes(int);
         void ventanaReportes();
         void menu();

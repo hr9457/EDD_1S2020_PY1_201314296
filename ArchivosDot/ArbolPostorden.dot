@@ -1,0 +1,11 @@
+digraph arbolPostorden {
+node [shape=record];
+rankdir=LR;
+nodo0[label="antonio"];
+nodo1[label="eduardo"];
+nodo2[label="carlos"];
+nodo3[label="rodrigo"];
+nodo4[label="heidy"];
+nodo0->nodo1->nodo2->nodo3->nodo4;
+label = " Arbol Binario - PostOrden " 
+}

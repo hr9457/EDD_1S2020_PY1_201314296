@@ -25,6 +25,7 @@ void ventana::gotoxy(int posx, int posy)
 
 //---------------------- JSON
 //--------------------- para lectura y asignaciones respectivas del archivo json
+//--------------------- metodo para la opcion 1 de lectura de archivo json
 void ventana::lecturaDeJson(json JSON)
 {
     //GUARDO LA DIMESION PARA LA MATRIZ QUE TRAE EL ARCHIVO JSON
@@ -66,8 +67,32 @@ void ventana::lecturaDeJson(json JSON)
 
 
 
+//------------------------- metodo para la ventana de la opcion  3
+//------------------------- anadir jugadores
+void ventana::ventanaJugadores()
+{
+    do
+    {
+        system("cls");//limpieza de pantalla
+        system("color 2");   
+        lineaMenu=5;//para posicionar el cursos arriba
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"-Ventana para agregar jugadores-";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"1. Agregar nuevo jugador: ";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"2. Salir";
+        inKeyborad=getch();//entrada por teclado para saber la entrada en codigo ascii
+        opReportes(inKeyborad);//mando la entrada por teclado para la apertura de reporte
+    } while (inKeyborad!=50);
+    menu();//regreso al menu principal
+}
 
-//------------para la apertura de los reportes segun la opcion del usuario
+
+
+//-----------------    para la apertura de los reportes segun la opcion del usuario
 void ventana::opReportes(int op)
 {
     //--------- generar el reporte de la lista circulas
@@ -90,7 +115,7 @@ void ventana::opReportes(int op)
 
 
 
-//-------------vetana para la visualizacion de los reportes de cada EDD
+//------------------   vetana para la visualizacion de los reportes de cada EDD
 void ventana::ventanaReportes()
 {
     do
@@ -149,12 +174,12 @@ void ventana::opMenu(int op)
         }
     }
 
-    //--------------------------------  1. jugar
+    //--------------------------------  opcion 2 - jugar
     else if(op==50)
     {        
     }
 
-    //3. jugadores
+    //--------------------------------  opcion 3 jugadores
     else if(op==51)
     {
     }
@@ -204,7 +229,7 @@ void ventana::menu(){
         cout<<"2. Jugar";//entrar al juego
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"3. Jugadores";//ver y ingreso de juadores
+        cout<<"3. Anadir Jugadores";//ver y ingreso de juadores
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
         cout<<"4. Score Board";//record de los jugadores
