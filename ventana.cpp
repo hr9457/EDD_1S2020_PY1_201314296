@@ -67,26 +67,50 @@ void ventana::lecturaDeJson(json JSON)
 
 
 
+
+
+
+
 //------------------------- metodo para la ventana de la opcion  3
+void ventana::opJugadores(int op)
+{
+    if(op == 49)
+    {
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"ingrese el nombre del nuevo jugador ";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<">>>";
+        cin>>nuevoJugador;
+        arbol.insertarJugador(nuevoJugador);
+    }
+    
+}
+
 //------------------------- anadir jugadores
 void ventana::ventanaJugadores()
-{
+{    
     do
     {
+        arbol.generarDot();
+        arbol.generarPNG();
+        arbol.abrirPNG();
+        //nodoArbol *auxRoot = arbol.getRoot();//para mostrar cuantos usuarios hay 
         system("cls");//limpieza de pantalla
         system("color 2");   
         lineaMenu=5;//para posicionar el cursos arriba
         gotoxy(centroMenu,lineaMenu);
-        cout<<"-Ventana para agregar jugadores-";
-        lineaMenu = lineaMenu +1;
+        cout<<"-Ventana para agregar jugadores-";    
+        lineaMenu = lineaMenu +1;        
         gotoxy(centroMenu,lineaMenu);
         cout<<"1. Agregar nuevo jugador: ";
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
         cout<<"2. Salir";
         inKeyborad=getch();//entrada por teclado para saber la entrada en codigo ascii
-        opReportes(inKeyborad);//mando la entrada por teclado para la apertura de reporte
-    } while (inKeyborad!=50);
+        opJugadores(inKeyborad);
+    }while (inKeyborad !=50);
     menu();//regreso al menu principal
 }
 
@@ -103,8 +127,46 @@ void ventana::opReportes(int op)
         bibliotecaDePalabras.generarPNG();
         bibliotecaDePalabras.aperturaImagen();
     }
-    //visualizar la matriz
+
+    //cola fichas disponibles
     if(op == 50)
+    {        
+    }
+
+    //arbol binario
+    if(op == 51)
+    {
+        arbol.generarDot();
+        arbol.generarPNG();
+        arbol.abrirPNG();
+    }
+
+    //arbol binario preorden
+    if(op == 52)
+    {
+        arbol.generarDotPreorden();
+        arbol.generarPNGPreorden();
+        arbol.abrirPNGPreorden();
+    }
+
+    //arbol binario inorden
+    if(op == 53)
+    {
+        arbol.generarDotInorden();
+        arbol.generarPNGInorden();
+        arbol.abrirPNGInorden();
+    }
+
+    //arbol binario postorden
+    if(op == 54)
+    {
+        arbol.generarDotPostorden();
+        arbol.generarPNGPostorden();
+        arbol.abrirPNGPostorden();
+    }
+
+    //matriz
+    if(op ==56)
     {
         matrizScrabble.crearDOT();
         matrizScrabble.crearPNG();
@@ -124,19 +186,40 @@ void ventana::ventanaReportes()
         system("color 2");   
         lineaMenu=5;//para posicionar el cursos arriba
         gotoxy(centroMenu,lineaMenu);
-        cout<<"Reportes de las EDD";
+        cout<<"-Reportes de las EDD-";
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
         cout<<"1. Lista Circular";
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"2. Matriz juego";
+        cout<<"2. Cola Fichas disponibles";
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"3. Salir";
+        cout<<"3. Arbol Binario";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"4. Recorrido preorden arbol binario";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"5. Recorrdio inorden arbol binario";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"6. Recorrdio postorden arbol binario";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"7. historial puntaje por jugador";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"8. matriz dispersa";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"9. lista contiene ficahs por de los jugadores";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"Esc(Salir)";
         inKeyborad=getch();//entrada por teclado para saber la entrada en codigo ascii
         opReportes(inKeyborad);//mando la entrada por teclado para la apertura de reporte
-    } while (inKeyborad!=51);
+    } while (inKeyborad!=27);
     menu();
 }
 
@@ -182,6 +265,7 @@ void ventana::opMenu(int op)
     //--------------------------------  opcion 3 jugadores
     else if(op==51)
     {
+        ventanaJugadores();
     }
 
     //------------------------------ 4. reportes
@@ -229,7 +313,7 @@ void ventana::menu(){
         cout<<"2. Jugar";//entrar al juego
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"3. Anadir Jugadores";//ver y ingreso de juadores
+        cout<<"3. Agregar Jugadores";//ver y ingreso de juadores
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
         cout<<"4. Score Board";//record de los jugadores

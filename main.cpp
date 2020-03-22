@@ -12,25 +12,10 @@ using namespace std;
 #include "matrizDispersa.h"
 
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
-int main(){    
-    matrizDispersa matriz; 
-    arbolBinario arbol;
-    arbol.insertarJugador("heidy");
-    arbol.insertarJugador("carlos");
-    arbol.insertarJugador("antonio");
-    arbol.insertarJugador("eduardo");
-    arbol.insertarJugador("rodrigo");
-    arbol.generarDot();
-    arbol.generarPNG(); 
-
-    arbol.generarDotPreorden();
-    arbol.generarPNGPreorden();
+int main(){  
+    ventana principal;  
+    //matrizDispersa matriz;    
     
-    arbol.generarDotInorden();
-    arbol.generarPNGInorden();
-    arbol.generarDotPostorden();
-    arbol.generarPNGPostorden();
-    //ventana principal;
     //------------------pruba cond datos en la matriz 
     //------------------ingresar datos,simples, dobles y triples
     //-------------------sustitucion con una casilla existente
@@ -54,6 +39,27 @@ int main(){
     matriz.crearPNG();
     matriz.abrirPNG();
     getch();
+
+
+
+    ----------------------------------prueba para el arbol
+    arbolBinario arbol;
+    arbol.insertarJugador("heidy");
+    arbol.insertarJugador("carlos");
+    arbol.insertarJugador("antonio");
+    arbol.insertarJugador("eduardo");
+    arbol.insertarJugador("rodrigo");
+    arbol.generarDot();
+    arbol.generarPNG(); 
+
+    arbol.generarDotPreorden();
+    arbol.generarPNGPreorden();
+    
+    arbol.generarDotInorden();
+    arbol.generarPNGInorden();
+    arbol.generarDotPostorden();
+    arbol.generarPNGPostorden();
+
     */
     return 0;
 }

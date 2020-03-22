@@ -13,6 +13,7 @@ class arbolBinario
 {
     private:
         nodoArbol *root;//raiz del arbol
+        nodoArbol *auxRoot=root;
         int nodoPostorden=0;
         int nodoPreorden=0;
         int nodoInorden=0;
@@ -42,13 +43,15 @@ class arbolBinario
         void generarDotInorden();
         void generarPNGInorden();
         void abrirPNGInorden();
-        
+
         //------------------------
         void Postorden(nodoArbol *);
         void generarDotPostorden();
         void generarPNGPostorden();
         void abrirPNGPostorden();
         //-------------------------
+
+        void impresionInorden(nodoArbol *);
         ~arbolBinario();
 };
 

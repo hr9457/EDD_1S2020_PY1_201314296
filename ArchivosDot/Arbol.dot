@@ -4,10 +4,6 @@ rankdir=TB;
 nodoheidy[ label = "heidy"]; 
 nodoheidy->nodocarlos
 nodocarlos[ label = "carlos"]; 
-nodocarlos->nodoantonio
-nodoantonio[ label = "antonio"]; 
-nodocarlos->nodoeduardo
-nodoeduardo[ label = "eduardo"]; 
 nodoheidy->nodorodrigo
 nodorodrigo[ label = "rodrigo"]; 
 label = " Arbol Binario " 

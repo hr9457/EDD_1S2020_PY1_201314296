@@ -14,6 +14,7 @@
 #include "listaCircular.h"
 #include "Cola.h"
 #include "arbolBinario.h"
+#include "nodoArbol.h"
 #include "matrizDispersa.h"
 
 using json = nlohmann::json;//para el archiv json
@@ -24,17 +25,20 @@ class ventana
     private:
         listaCircular bibliotecaDePalabras;//listado oficial que hay en archivo json
         matrizDispersa matrizScrabble;
+        arbolBinario arbol;
         int centroMenu = 45 ;
         int lineaMenu = 5 ;
         int inKeyborad;
         string rutaArchivo;
         int dimensionMaxima;
         json JSON;
+        string nuevoJugador;
 
     public:
         ventana();
         void gotoxy(int,int);
         void lecturaDeJson(json);
+        void opJugadores(int);
         void ventanaJugadores();
         void opReportes(int);
         void ventanaReportes();

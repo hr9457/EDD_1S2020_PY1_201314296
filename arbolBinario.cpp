@@ -315,4 +315,16 @@ void arbolBinario::generarDotPostorden()
 }
 
 
+
+//-----------------prueba para mostrar en consola
+void arbolBinario::impresionInorden(nodoArbol *nodo)
+{
+    if(nodo !=NULL)
+    {        
+        Inorden(nodo->getIzquierda());
+        cout<<nodo->getNombreJugador()<<endl;
+        Inorden(nodo->getDerecha());
+    } 
+}
+
 arbolBinario::~arbolBinario(){}
