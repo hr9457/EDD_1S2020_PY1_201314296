@@ -1,5 +1,6 @@
 //IMPORTACIONES
 #include "iostream"
+#include "string"
 #include "windows.h"
 #include "conio.h"
 #include "json.hpp"
@@ -7,13 +8,76 @@ using namespace std;
 
 #include "ventana.h"
 #include "listaCircular.h"
+#include "listaABC.h"
 #include "Cola.h"
 #include "arbolBinario.h"
 #include "matrizDispersa.h"
 
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
-int main(){  
+int main(){
+
     ventana principal;  
+
+
+
+
+    /*
+    listaABC lista;
+    Cola colafichas;
+    //-----------------MENU PROVICIONAL
+    int entradaTeclado;    
+    do
+    {
+        cout<<"1. Ingresar ficha en la lista"<<endl;
+        cout<<"2. Imprimir elementos de la lista"<<endl;
+        cout<<"3. Eliminar ficha de la lista"<<endl;
+        cout<<"4. Imprimir elemento de la cola"<<endl;
+        cout<<"5. Salir"<<endl;
+        entradaTeclado = getch();
+        
+        if(entradaTeclado==49)
+        {
+            int puntaje;
+            cout<<"ingrese puntaje: "<<endl;            
+            cin>>puntaje;
+            string letra;
+            cout<<"ingrese una letra: "<<endl;
+            cin>>letra;
+            int cantidad;
+            cout<<"ingrese la cantidad de fichas: "<<endl;
+            cin>>cantidad;
+            lista.insertar(puntaje,letra,cantidad);
+            cout<<endl;
+        }
+        else if(entradaTeclado==50)
+        {
+            lista.imprimirLista();
+            cout<<endl;
+        }
+        else if(entradaTeclado==51)//eliminar de la lista
+        {
+            int posicion;
+            cout<<"ingrese la posicion de la ficha: "<<endl;
+            cin>>posicion;            
+            int puntajeReturn;
+            string letraReturn;
+            lista.eliminar(posicion,puntajeReturn,letraReturn);
+            colafichas.insertarLetra(puntajeReturn,letraReturn);
+            cout<<endl;
+        }
+        else if(entradaTeclado==52)
+        {
+            colafichas.imprimir();
+            cout<<endl;
+        }
+       
+    } while (entradaTeclado!=53);
+    
+    */
+
+
+
+    
     //matrizDispersa matriz;    
     
     //------------------pruba cond datos en la matriz 

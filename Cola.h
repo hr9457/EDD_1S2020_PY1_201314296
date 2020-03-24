@@ -22,7 +22,7 @@ class Cola
         nodoCola * getUltimo();
         void setUltimo();
         bool estadoCola();
-        void insertarLetra(int num, char arg);
+        void insertarLetra(int num, string arg);
         string getLetraPrimero();
         void eliminarLetra();
         void generarDot();

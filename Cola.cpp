@@ -18,7 +18,7 @@ bool Cola::estadoCola()
 }
 
 
-void Cola::insertarLetra(int num, char arg)
+void Cola::insertarLetra(int num, string arg)
 {
     nodoCola *nodoTemporal = new nodoCola(num,arg);
     if (estadoCola() == true)
@@ -98,5 +98,26 @@ void Cola::generarPNG()
     system("dot.exe -Tpng ArchivosDot\\Cola.dot -o Reportes\\Cola.png");
 }
 
+
+
+//----------- metodo para imprimir elemetos en la cola
+void Cola::imprimir()
+{
+    nodoCola *auxPrimero = primero;
+    while (auxPrimero != NULL)
+    {
+        cout<<"ficha: "<<auxPrimero->getLetra()<<" Puntaje: "<<auxPrimero->getPuntuacion()<<endl;
+        auxPrimero = auxPrimero->getSiguiente();
+    }    
+}
+
+
+
+
+nodoCola * Cola::getPrimero()
+{
+    return primero;
+}
+//----------destructor
 Cola::~Cola(){}
 
