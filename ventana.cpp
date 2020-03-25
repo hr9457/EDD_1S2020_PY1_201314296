@@ -67,6 +67,59 @@ void ventana::lecturaDeJson(json JSON)
 
 
 
+//---------------------- metodo para la opcion 2 JUGAR
+void ventana::generarFichas()
+{
+    //insertando todas la letras con la que se van a jugar
+    //------------ LISTADO OFICIAL EN LA PAGINA DEL PROYECTO
+    //------------ 1PUNTO
+    listaFichas.insertar(1,"A",12);
+    listaFichas.insertar(1,"E",12);
+    listaFichas.insertar(1,"O",9);
+    listaFichas.insertar(1,"I",6);
+    listaFichas.insertar(1,"S",6);
+    listaFichas.insertar(1,"N",5);
+    listaFichas.insertar(1,"L",4);
+    listaFichas.insertar(1,"R",5);
+    listaFichas.insertar(1,"U",5);
+    listaFichas.insertar(1,"T",4);
+    //------------ 2PUNTOS
+    listaFichas.insertar(2,"D",5);
+    listaFichas.insertar(2,"G",2);
+    //------------ 3PUNTOS
+    listaFichas.insertar(3,"C",4);
+    listaFichas.insertar(3,"B",2);
+    listaFichas.insertar(3,"M",2);
+    listaFichas.insertar(3,"P",2);
+    //------------ 4PUNTOS
+    listaFichas.insertar(4,"H",2);
+    listaFichas.insertar(4,"F",1);
+    listaFichas.insertar(4,"V",1);
+    listaFichas.insertar(4,"Y",1);
+    //------------- 5PUNTOS
+    listaFichas.insertar(5,"Q",1);
+    //------------- 8PUNTOS
+    listaFichas.insertar(8,"J",1);
+    listaFichas.insertar(8,"Ñ",1);
+    listaFichas.insertar(8,"X",1);
+    //-------------- 10PUNTOS
+    listaFichas.insertar(10,"Z",1);
+
+    int size = listaFichas.getSize();
+    int puntajeReturn;
+    string letraReturn;
+    do
+    {    
+        srand((unsigned)time(0)); 
+        int numeroRandom;
+        numeroRandom = (rand()%size);//genero mi numero random
+
+        listaFichas.eliminar(numeroRandom,puntajeReturn,letraReturn);//saco de mi lista ficha de esa posicion 
+        colaFichas.insertarLetra(puntajeReturn,letraReturn);//lo ingreso en mi cola
+        size = listaFichas.getSize();
+    }while(size>0);
+}
+
 
 
 
@@ -131,6 +184,9 @@ void ventana::opReportes(int op)
     //cola fichas disponibles
     if(op == 50)
     {        
+        colaFichas.generarDot();
+        colaFichas.generarPNG();
+        colaFichas.abrirPNG();
     }
 
     //arbol binario
@@ -259,7 +315,8 @@ void ventana::opMenu(int op)
 
     //--------------------------------  opcion 2 - jugar
     else if(op==50)
-    {        
+    {   
+        generarFichas();//metodo realiza lo de las fichas
     }
 
     //--------------------------------  opcion 3 jugadores

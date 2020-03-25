@@ -76,7 +76,7 @@ void Cola::generarDot()
         while (nodoTemporal != NULL)
         {
             archivo<<"Nodo"<<numeroNodo<<"[shape=record,label=\"{"<<
-            nodoTemporal->getLetra()<<"|<next>}\"];"<<endl;
+            nodoTemporal->getLetra()<<","<<nodoTemporal->getPuntuacion()<<"|<next>}\"];"<<endl;
             nodoTemporal = nodoTemporal->getSiguiente();
             numeroNodo = numeroNodo + 1;
         }
@@ -99,6 +99,10 @@ void Cola::generarPNG()
 }
 
 
+void Cola::abrirPNG()
+{
+    system("Reportes\\Cola.png");
+}
 
 //----------- metodo para imprimir elemetos en la cola
 void Cola::imprimir()

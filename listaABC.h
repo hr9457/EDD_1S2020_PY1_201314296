@@ -14,7 +14,7 @@ class listaABC
         nodoABC *primero;
         nodoABC *ultimo;
         Cola colafichas;
-        int size;
+        int size=0;
 
     public:
         listaABC();

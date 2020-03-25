@@ -44,14 +44,14 @@ void listaABC::insertar(int num,string arg,int num2)
     {
         primero = nodoTemporal;
         ultimo = nodoTemporal;
-        size++;
+        size=size+1;
     }
     else
     {
         ultimo->setSiguiente(nodoTemporal);
         nodoTemporal->setAnterior(ultimo);
         ultimo = nodoTemporal;
-        size++;//aumentamos el contador para saber el tamanio de la lista
+        size=size+1;//aumentamos el contador para saber el tamanio de la lista
     }
 }
 
@@ -86,6 +86,7 @@ void listaABC::eliminar(int tamanio,int& puntajeReturn,string& letraReturn)
                         //colafichas.insertarLetra(auxPrimero->getPuntuacion(),auxPrimero->getLetra());//inserto en la cola
                         puntajeReturn = auxPrimero->getPuntuacion();
                         letraReturn = auxPrimero->getLetra();
+                        size= size - 1;
                         if(auxPrimero->getSiguiente()==NULL)
                         {
                             this->primero=NULL;
@@ -117,6 +118,7 @@ void listaABC::eliminar(int tamanio,int& puntajeReturn,string& letraReturn)
                         //colafichas.insertarLetra(auxPrimero->getPuntuacion(),auxPrimero->getLetra());//inserto en la cola
                         puntajeReturn = auxPrimero->getPuntuacion();
                         letraReturn = auxPrimero->getLetra();
+                        size= size - 1;
                         if(auxPrimero->getAnterior()==NULL)
                         {
                             this->ultimo=NULL;
@@ -148,6 +150,7 @@ void listaABC::eliminar(int tamanio,int& puntajeReturn,string& letraReturn)
                         //colafichas.insertarLetra(auxPrimero->getPuntuacion(),auxPrimero->getLetra());//inserto en la cola
                         puntajeReturn = auxPrimero->getPuntuacion();
                         letraReturn = auxPrimero->getLetra();
+                        size= size - 1;
                         //recoloco los apuntadores
                         nodoABC *aux1 = auxPrimero->getAnterior();
                         nodoABC *aux2 = auxPrimero->getSiguiente();

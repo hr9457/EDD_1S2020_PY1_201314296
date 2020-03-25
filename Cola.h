@@ -27,6 +27,7 @@ class Cola
         void eliminarLetra();
         void generarDot();
         void generarPNG();
+        void abrirPNG();
         void imprimir();
         ~Cola();
 };

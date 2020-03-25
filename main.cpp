@@ -1,5 +1,7 @@
 //IMPORTACIONES
 #include "iostream"
+#include "cstdlib"
+#include "ctime"
 #include "string"
 #include "windows.h"
 #include "conio.h"
@@ -18,6 +20,19 @@ int main(){
 
     ventana principal;  
 
+    /*
+    int size = 5;
+    while(size>0)
+    {
+        srand((unsigned)time(0)); 
+        int i;
+        i = (rand()%size); 
+        cout << i << "\n";        
+        size--;
+    }
+    getch();
+    */
+    
 
 
 
@@ -53,6 +68,8 @@ int main(){
         {
             lista.imprimirLista();
             cout<<endl;
+            cout<<"tamanio lista: "<<lista.getSize()<<endl;
+            cout<<endl;
         }
         else if(entradaTeclado==51)//eliminar de la lista
         {
@@ -72,8 +89,8 @@ int main(){
         }
        
     } while (entradaTeclado!=53);
-    
     */
+    
 
 
 
