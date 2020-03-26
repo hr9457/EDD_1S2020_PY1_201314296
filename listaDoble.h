@@ -12,12 +12,16 @@ class listaDoble
     private:
         nodoListaDoble *primero;
         nodoListaDoble *ultimo;
+        int size=0;
 
     public:
         listaDoble();
         bool estdoLista();
         void insertaFicha(string,int);
         void eliminarFicha(string);
+        int getSize();
+        void setSize(int);
+        void imprimir();
         void generarDOT(string);
         void generarPNG();
         void abrirPNG();

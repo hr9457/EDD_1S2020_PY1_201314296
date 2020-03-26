@@ -30,14 +30,19 @@ void listaDoble::insertaFicha(string caracter,int num)
     {
         primero = nodoTemporal;
         ultimo = nodoTemporal;
+        size = size + 1;
     }
     else
     {
         ultimo->setSiguiente(nodoTemporal);
         nodoTemporal->setAnterior(ultimo); 
-        ultimo = nodoTemporal;              
+        ultimo = nodoTemporal;   
+        size = size + 1;           
     }    
 }
+
+
+
 
 
 
@@ -49,14 +54,45 @@ void listaDoble::eliminarFicha(string letra)
     {
         if(letra==nodoAuxiliar->getLetra())
         {
-            if(nodoAuxiliar==primero)
-            {                
+            if(primero==nodoAuxiliar)
+            {  
+                if(nodoAuxiliar->getSiguiente()!=NULL)
+                {
+                    primero = nodoAuxiliar->getSiguiente();
+                    delete nodoAuxiliar;
+                    size = size - 1;
+                }
+                else
+                {
+                    primero = NULL;
+                    ultimo = NULL;
+                    size = size - 1;
+                }
             }
-            else if(nodoAuxiliar==ultimo)
-            {                
+            else if(ultimo==nodoAuxiliar)
+            {     
+                if(nodoAuxiliar->getAnterior()!=NULL)
+                {
+                    nodoListaDoble *nodoAux = ultimo->getAnterior();
+                    ultimo->setAnterior(NULL);
+                    nodoAux->setSiguiente(NULL);
+                    ultimo = nodoAux;
+                }
+                else
+                {
+                    ultimo= NULL;
+                    primero = NULL;
+                    size = size - 1;
+                }
             }
             else
-            {                
+            {
+                nodoListaDoble *aux1 = nodoAuxiliar->getAnterior();
+                nodoListaDoble *aux2 = nodoAuxiliar->getSiguiente();
+                aux1->setSiguiente(aux2);
+                aux2->setAnterior(aux1);
+                delete nodoAuxiliar; 
+                size = size - 1;             
             }
             break;
         }
@@ -66,6 +102,32 @@ void listaDoble::eliminarFicha(string letra)
 
 
 
+
+
+
+//-------------------- METODO PARA MANEJAR LA CANTIDAD ELEMENTOS DE LA LISTA
+int listaDoble::getSize()
+{
+    return size;
+}
+
+void listaDoble::setSize(int num)
+{
+    this->size = num;
+}
+
+
+
+void listaDoble::imprimir()
+{
+    nodoListaDoble *nodoAuxiliar = primero;
+    while (nodoAuxiliar!=NULL)
+    {
+        cout<<"letra: "<<nodoAuxiliar->getLetra()<<" puntaje: "<<nodoAuxiliar->getPuntaje()<<endl;
+        nodoAuxiliar = nodoAuxiliar->getSiguiente();
+    }
+    
+}
 
 //-------------------- METODOS PARA GENERA LOS REPORTES 
 void listaDoble::generarDOT(string nombreJugador)
@@ -95,6 +157,13 @@ void listaDoble::generarDOT(string nombreJugador)
         archivo<<"}"<<endl;
         archivo.close();
     }
+    else
+    {
+        ofstream archivo("ArchivosDot\\ListaJugador.dot");
+        archivo<<"digraph Lista {"<<endl;
+        archivo<<"}"<<endl;
+    }
+    
 }
 
 

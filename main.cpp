@@ -67,7 +67,10 @@ int main(){
         }
         else if(entradaTeclado==51)
         {
-            
+            string letraEliminar;
+            cout<<"ingrese la letra de la ficha"<<endl;
+            cin>>letraEliminar;
+            lista.eliminarFicha(letraEliminar);
         }
        
     } while (entradaTeclado!=52);

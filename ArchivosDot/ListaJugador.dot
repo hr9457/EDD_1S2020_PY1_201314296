@@ -1,10 +1,8 @@
 digraph Lista {
 rankdir=LR;
 node [shape=record];
-Nodo0[label="a  X1pts"]
-Nodo1[label="b  X3pts"]
-Nodo2[label="g  X1pts"]
+Nodo0[label="B2  X2pts"]
+Nodo1[label="C  X3pts"]
 Nodo0->Nodo1[dir=both];
-Nodo1->Nodo2[dir=both];
 label="hector";
 }
