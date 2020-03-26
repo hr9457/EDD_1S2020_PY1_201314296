@@ -10,12 +10,16 @@ class nodoListaDoble
 {
     private:
         string letra;
+        int puntaje;
         nodoListaDoble *siguiente;
         nodoListaDoble *anterior;
+
     public:
-        nodoListaDoble(string);
+        nodoListaDoble(string,int);
         string getLetra();
         void setLetra(string);
+        int getPuntaje();
+        void setPuntaje(int);
         nodoListaDoble * getSiguiente();
         void setSiguiente(nodoListaDoble *);
         nodoListaDoble * getAnterior();

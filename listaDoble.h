@@ -3,6 +3,8 @@
 
 #include "nodoListaDoble.h"
 #include "iostream"
+#include "fstream"
+#include "windows.h"
 using namespace std;
 
 class listaDoble
@@ -14,9 +16,11 @@ class listaDoble
     public:
         listaDoble();
         bool estdoLista();
-        void insertaFicha(string);
-        void eliminarFicha();
-        void imprimirLista();
+        void insertaFicha(string,int);
+        void eliminarFicha(string);
+        void generarDOT(string);
+        void generarPNG();
+        void abrirPNG();
         ~listaDoble();
 };
 

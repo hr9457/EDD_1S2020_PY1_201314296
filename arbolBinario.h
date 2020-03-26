@@ -28,10 +28,13 @@ class arbolBinario
         void insertarJugador(string);
         void recorrerArbol(nodoArbol *inicio);
         void recorrerArbol2(nodoArbol *inicio);
-        void buscarNodo();
+        
         void generarDot();
         void generarPNG();
         void abrirPNG();
+        void buscar(nodoArbol *, string,bool&);
+        bool buscarEnArbol(string);
+
         //-----Metodos para los diferentes tipos de recorridos
         void Preorden(nodoArbol *);
         void generarDotPreorden();

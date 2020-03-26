@@ -26,6 +26,7 @@ void ventana::gotoxy(int posx, int posy)
 //---------------------- JSON
 //--------------------- para lectura y asignaciones respectivas del archivo json
 //--------------------- metodo para la opcion 1 de lectura de archivo json
+/*
 void ventana::lecturaDeJson(json JSON)
 {
     //GUARDO LA DIMESION PARA LA MATRIZ QUE TRAE EL ARCHIVO JSON
@@ -64,6 +65,7 @@ void ventana::lecturaDeJson(json JSON)
     }
     
 }
+*/
 
 
 
@@ -224,9 +226,9 @@ void ventana::opReportes(int op)
     //matriz
     if(op ==56)
     {
-        matrizScrabble.crearDOT();
-        matrizScrabble.crearPNG();
-        matrizScrabble.abrirPNG();
+        //matrizScrabble.crearDOT();
+        //matrizScrabble.crearPNG();
+        //matrizScrabble.abrirPNG();
     }
 }
 
@@ -282,11 +284,212 @@ void ventana::ventanaReportes()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+//------------------------ METODO PARA INICIAR LA VENTANA DE INTERRACION CON EL JUEGO
+void ventana::ventanaJugar()
+{
+    matrizDispersa matrizScrabble;
+    //----------------------- realizo la lectura del archivo json primero
+    gotoxy(centroMenu,lineaMenu);
+    cout<<"ingrese la ruta del archivo json: ";
+    lineaMenu = lineaMenu +1;
+    gotoxy(centroMenu,lineaMenu);
+    cout<<">>";
+    cin>>rutaArchivo;
+
+    ifstream archivojson(rutaArchivo);
+    if(archivojson.fail())//por si el archivo de entrada no se encuentra
+    {
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"no se encuentra el archivo";
+        getch();//espera de una entrada en teclado
+        this->rutaArchivo = "";//vaciado de la variable
+    }
+    else//el archivo se encuentra en el ordenador
+    {   
+        //json JSON;
+        archivojson>>JSON;
+        //lecturaDeJson(JSON);//metodo realiza toda la lectura del archivo json
+        //GUARDO LA DIMESION PARA LA MATRIZ QUE TRAE EL ARCHIVO JSON
+        //limitar la entrada de posiciones  x,y con esta variable no ingreesa datos sobrepasen la matriz
+        dimensionMaxima = JSON.at("dimension");
+
+        //creacion de la biblioteca  para la validacion de las palabras
+        //for me ayuda saber la cantidad de labras que hay y buscarlas una por una    
+        for (int palabra = 0; palabra<JSON.at("diccionario").size() ; palabra++)
+        {
+            string palabraEncontrada = JSON.at("diccionario")[palabra].at("palabra");
+            bibliotecaDePalabras.insertar(palabraEncontrada);
+        }
+
+        //creacion de la matriz principal donde se jugara
+        //for me ayuda ver las casillas que tendran doble y triple puntuacion
+        //for para casillas con doble puntuacion
+        // valor 1 para casillas dobles
+        
+        for(int casilla = 0; casilla<JSON.at("casillas").at("dobles").size(); casilla++)
+        {
+            int posicionX = JSON.at("casillas").at("dobles")[casilla].at("x");
+            int posicionY = JSON.at("casillas").at("dobles")[casilla].at("y");
+            matrizScrabble.insertarNodo(1,0,posicionX,posicionY);//ingreso a la matriz un nodo con datos
+            //cout<<"poscion x: "<<JSON.at("casillas").at("dobles")[casilla].at("x");
+            //getch();
+        }
+        
+        //for para casillas con triple puntuacion
+        // valro 2 para casillas triples
+        for(int casilla = 0; casilla<JSON.at("casillas").at("triples").size(); casilla++)
+        {
+            int posicionX = JSON.at("casillas").at("triples")[casilla].at("x");
+            int posicionY = JSON.at("casillas").at("triples")[casilla].at("y");
+            matrizScrabble.insertarNodo(2,0,posicionX,posicionY);//ingreso a la matriz
+        }
+    }//fin de la lectura json y asignacion 
+
+
+
+    //abro la matriz
+    matrizScrabble.crearDOT();
+    matrizScrabble.crearPNG();
+    matrizScrabble.abrirPNG();
+
+
+    //creo la pila aleatoriamente con las fichas 
+    generarFichas();
+
+    //creo las dos lista de cada jugador
+    
+    listaDoble listaJugador1;
+
+    
+    //asignos fichas a cada lista del jugador
+    int puntajeLista;
+    string letraLista;
+    colaFichas.eliminarLetra(puntajeLista,letraLista);
+    //listaJugador1.insertaFicha(letraLista,puntajeLista);
+
+    /*
+    for (int i = 0; i < 7; i++)
+    {
+        //-------------- insertar en la lista del jugador1
+        colaFichas.eliminarLetra(puntajeLista,letraLista);
+        listaJugador1.insertaFicha(letraLista,puntajeLista);
+    }
+    */
+
+    /*
+    listaJugador1.generarDOT(jugador1);
+    listaJugador1.generarPNG();
+    listaJugador1.abrirPNG();
+    */ 
+
+}
+
+
+
+
+
+
+
+
+
+///---------------------------- METODO PARA SELECIONAR EL JUGADOR
+void ventana::selecionJugador(int op)
+{
+    if(op==49)
+    {
+        arbol.generarDot();
+        arbol.generarPNG();
+        arbol.abrirPNG(); 
+        lineaMenu=lineaMenu+1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"Ingrese el nombre del primer jugador";
+        lineaMenu=lineaMenu+1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<">>";
+        cin>>jugador1;
+    	resultadoBusquedaJugador1 = arbol.buscarEnArbol(jugador1);
+
+        lineaMenu=lineaMenu+1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"Ingrese el nombre del segundo jugador";
+        lineaMenu=lineaMenu+1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<">>";
+        cin>>jugador2; 
+        resultadoBusquedaJugador2 = arbol.buscarEnArbol(jugador2);    
+    }
+    else if(op==50)
+    {
+        if(resultadoBusquedaJugador1==false && resultadoBusquedaJugador2==false)
+        {
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"jugadores no exiten vuelva a selecionarlos";
+            getch();
+        }
+        else
+        {
+            ventanaJugar();   
+        }        
+    }
+}
+
+
+//------------------------------ VENTANA PARA LA SELECCION DE LOS JUGADORES
+void ventana::ventanaSelecionJugador()
+{
+    do
+    {
+        system("cls");//limpieza de pantalla
+        system("color 2");   
+        lineaMenu=5;//para posicionar el cursos arriba
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"-Selecionar dos jugadores para iniciar la partida-";
+        lineaMenu=lineaMenu+1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"1. Selecionar jugadores";
+        lineaMenu=lineaMenu+1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"2. JUGAR";
+        lineaMenu=lineaMenu+1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"(Esc) para salir ";  
+        inKeyborad=getch();//entrada por teclado para saber la entrada en codigo ascii
+        selecionJugador(inKeyborad);
+    } while (inKeyborad!=27);
+    menu();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //------------------------------------------------
 //-------------------opciones del menu------------
 void ventana::opMenu(int op)
 {
     //----------------------- opcion 1 para la lectura del archiv json
+    /*
     if(op==49)
     {
         gotoxy(centroMenu,lineaMenu);
@@ -312,21 +515,25 @@ void ventana::opMenu(int op)
             lecturaDeJson(JSON);//metodo realiza toda la lectura del archivo json
         }
     }
+    */
 
-    //--------------------------------  opcion 2 - jugar
-    else if(op==50)
+    //--------------------------------  opcion 1 - jugar
+    if(op==49)
     {   
-        generarFichas();//metodo realiza lo de las fichas
+        //generarFichas();//metodo realiza lo de las fichas
+        ventanaSelecionJugador();
     }
 
-    //--------------------------------  opcion 3 jugadores
-    else if(op==51)
+
+    //--------------------------------  opcion 2 agregar jugadores
+    else if(op==50)
     {
         ventanaJugadores();
+        
     }
 
-    //------------------------------ 4. reportes
-    else if(op==53)
+    //--------------------------------- opcion 4 ventana de  reportes
+    else if(op==52)
     {
         ventanaReportes();
     }
@@ -364,29 +571,26 @@ void ventana::menu(){
         cout<<"MENU";
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"1. Leer Archivo";//leer un archivo json
+        cout<<"1. Jugar";//entrar al juego
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"2. Jugar";//entrar al juego
+        cout<<"2. Agregar Jugadores";//agregar jugadores
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"3. Agregar Jugadores";//ver y ingreso de juadores
+        cout<<"3. Score Board";//top jugadores
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"4. Score Board";//record de los jugadores
+        cout<<"4. Reportes";//reportes
         lineaMenu=lineaMenu+1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"5. Reportes";//ventana de reportes
-        lineaMenu=lineaMenu+1;
-        gotoxy(centroMenu,lineaMenu);
-        cout<<"6. Salir";//salir de la aplicacion
+        cout<<"(Esc) Salir";//salir de la aplicacion
         lineaMenu=lineaMenu+3;
         inKeyborad=getch();//obtengo la entrada del  teclado 
 
         //cout<<"valor entrada es: "<<inKeyborad;
         opMenu(inKeyborad);//envio de la entrada por teclado
 
-    } while (inKeyborad!=54);//para cerrar la ventana      
+    } while (inKeyborad!=27);//para cerrar la ventana      
  }
 
 

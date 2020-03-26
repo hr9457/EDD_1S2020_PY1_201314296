@@ -139,6 +139,69 @@ void arbolBinario::abrirPNG()
 
 
 
+void arbolBinario::buscar(nodoArbol *nodo,string nombre,bool &resultado)
+{
+    if(nombre == nodo->getNombreJugador())
+    {  
+        resultado =  true;      
+    }
+    else if(nombre < nodo->getNombreJugador())
+    {
+        if(nodo->getIzquierda() == NULL)
+        {
+            resultado =  false;
+        }
+        else
+        {
+            buscar(nodo->getIzquierda(),nombre,resultado);
+        }        
+    }
+    else if(nombre > nodo->getNombreJugador())
+    {
+        if(nodo->getDerecha() == NULL)
+        {
+            resultado =  false;
+        }
+        else
+        {
+            buscar(nodo->getDerecha(),nombre,resultado);
+        } 
+    }
+    else
+    {
+        resultado =  false;
+    }    
+}
+
+
+
+//-------------METODO PARA BUSCAR UN NODO DENTRO DEL ARBOL
+bool arbolBinario::buscarEnArbol(string nombre)
+{
+    if(estadoArbol()!=true)
+    {
+        nodoArbol *auxRoot = root;//empiezo a buscar desde la raiz
+        bool resultado;
+        buscar(auxRoot,nombre,resultado);
+        if(resultado==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    else{
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
 //------------------------------METODO DE RECORRIDO EN EL ARBOL-----------------------------------------
 
 //--------------------------METODO PARA PREORDEN

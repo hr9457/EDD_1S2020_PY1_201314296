@@ -18,7 +18,7 @@ using namespace std;
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){
 
-    ventana principal;  
+    //ventana principal;  
 
     /*
     int size = 5;
@@ -36,9 +36,9 @@ int main(){
 
 
 
-    /*
-    listaABC lista;
-    Cola colafichas;
+    
+    
+    listaDoble lista;
     //-----------------MENU PROVICIONAL
     int entradaTeclado;    
     do
@@ -46,50 +46,32 @@ int main(){
         cout<<"1. Ingresar ficha en la lista"<<endl;
         cout<<"2. Imprimir elementos de la lista"<<endl;
         cout<<"3. Eliminar ficha de la lista"<<endl;
-        cout<<"4. Imprimir elemento de la cola"<<endl;
-        cout<<"5. Salir"<<endl;
+        cout<<"4. Salir"<<endl;
         entradaTeclado = getch();
         
         if(entradaTeclado==49)
         {
-            int puntaje;
-            cout<<"ingrese puntaje: "<<endl;            
-            cin>>puntaje;
             string letra;
-            cout<<"ingrese una letra: "<<endl;
-            cin>>letra;
-            int cantidad;
-            cout<<"ingrese la cantidad de fichas: "<<endl;
-            cin>>cantidad;
-            lista.insertar(puntaje,letra,cantidad);
-            cout<<endl;
+            int num;
+            cout<<"ingrese la letra"<<endl;
+            cin>>letra;  
+            cout<<"ingres puntaje"<<endl;
+            cin>>num;
+            lista.insertaFicha(letra,num); 
         }
         else if(entradaTeclado==50)
         {
-            lista.imprimirLista();
-            cout<<endl;
-            cout<<"tamanio lista: "<<lista.getSize()<<endl;
-            cout<<endl;
+            lista.generarDOT("hector");
+            lista.generarPNG();
+            lista.abrirPNG();
         }
-        else if(entradaTeclado==51)//eliminar de la lista
+        else if(entradaTeclado==51)
         {
-            int posicion;
-            cout<<"ingrese la posicion de la ficha: "<<endl;
-            cin>>posicion;            
-            int puntajeReturn;
-            string letraReturn;
-            lista.eliminar(posicion,puntajeReturn,letraReturn);
-            colafichas.insertarLetra(puntajeReturn,letraReturn);
-            cout<<endl;
-        }
-        else if(entradaTeclado==52)
-        {
-            colafichas.imprimir();
-            cout<<endl;
+            
         }
        
-    } while (entradaTeclado!=53);
-    */
+    } while (entradaTeclado!=52);
+    
     
 
 

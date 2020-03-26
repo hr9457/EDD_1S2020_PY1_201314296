@@ -38,28 +38,32 @@ void Cola::insertarLetra(int num, string arg)
 
 
 //metodo para ir vaciando la cola
-void Cola::eliminarLetra()
+void Cola::eliminarLetra(int& puntaje,string& letra)
 {    
     if(estadoCola() == true)
-    {
-        
+    {        
     }
     else
     {
         if(primero == ultimo)
         {
+            puntaje = primero->getPuntuacion();
+            letra = primero->getLetra();
             primero = NULL;
             ultimo = NULL;
         }   
         else
         {
             nodoCola *nodoAuxiiar = primero;
+            puntaje = nodoAuxiiar->getPuntuacion();
+            letra = nodoAuxiiar->getLetra();            
             primero = primero->getSiguiente();
             delete nodoAuxiiar;
-        }
-        
+        }        
     }
 }
+
+
 
 
 void Cola::generarDot()

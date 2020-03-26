@@ -20,6 +20,7 @@
 #include "arbolBinario.h"
 #include "nodoArbol.h"
 #include "matrizDispersa.h"
+#include "listaDoble.h"
 
 using json = nlohmann::json;//para el archiv json
 using namespace std;
@@ -28,10 +29,11 @@ class ventana
 {
     private:
         listaCircular bibliotecaDePalabras;//listado oficial que hay en archivo json
-        matrizDispersa matrizScrabble;
+        //matrizDispersa matrizScrabble;
         arbolBinario arbol;//arbol de usuarios
         listaABC listaFichas;
         Cola colaFichas;//colas de las fichas random
+        
 
         int centroMenu = 45 ;
         int lineaMenu = 5 ;
@@ -40,6 +42,10 @@ class ventana
         int dimensionMaxima;
         json JSON;
         string nuevoJugador;
+        string jugador1;
+        string jugador2;
+        bool resultadoBusquedaJugador1=false;
+        bool resultadoBusquedaJugador2=false;
 
     public:
         ventana();
@@ -50,6 +56,9 @@ class ventana
         void ventanaJugadores();
         void opReportes(int);
         void ventanaReportes();
+        void ventanaJugar();
+        void selecionJugador(int);
+        void ventanaSelecionJugador();
         void menu();
         void opMenu(int);
         ~ventana();

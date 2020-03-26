@@ -24,7 +24,7 @@ class Cola
         bool estadoCola();
         void insertarLetra(int num, string arg);
         string getLetraPrimero();
-        void eliminarLetra();
+        void eliminarLetra(int&,string&);
         void generarDot();
         void generarPNG();
         void abrirPNG();
