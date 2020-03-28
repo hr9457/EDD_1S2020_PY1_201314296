@@ -180,5 +180,19 @@ void listaDoble::abrirPNG()
 }
 
 
+//------------------- metodo para utilizar de elimiar de ultimo 
+void listaDoble::eliminarUltimo()
+{
+    if(estdoLista()!=true)
+    {
+        nodoListaDoble *nodoAux = ultimo->getAnterior();
+        ultimo->setAnterior(NULL);
+        nodoAux->setSiguiente(NULL);
+        ultimo = nodoAux;
+    }
+}
+
+
+
 
 listaDoble::~listaDoble(){}

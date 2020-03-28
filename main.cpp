@@ -37,7 +37,7 @@ int main(){
 
 
     
-    
+    /*
     listaDoble lista;
     //-----------------MENU PROVICIONAL
     int entradaTeclado;    
@@ -74,7 +74,7 @@ int main(){
         }
        
     } while (entradaTeclado!=52);
-    
+    */
     
 
 
@@ -85,15 +85,15 @@ int main(){
     //------------------pruba cond datos en la matriz 
     //------------------ingresar datos,simples, dobles y triples
     //-------------------sustitucion con una casilla existente
-    /*   
-    matriz.insertarNodo(0,'h',10,4);
-    matriz.insertarNodo(0,'o',8,5);
-    matriz.insertarNodo(1,0,9,5);
-    matriz.insertarNodo(2,'o',10,5);
-    matriz.insertarNodo(0,'l',10,6);
-    matriz.insertarNodo(0,'a',10,7);
-    matriz.insertarNodo(2,'j',11,3);
-    matriz.insertarNodo(1,'s',9,5);
+    matrizDispersa matriz; 
+    matriz.insertarNodo(0,"H",0,10,4);
+    matriz.insertarNodo(0,"O",0,8,5);
+    matriz.insertarNodo(1,"",0,9,5);
+    matriz.insertarNodo(2,"O",0,10,5);
+    matriz.insertarNodo(0,"L",0,10,6);
+    matriz.insertarNodo(0,"A",0,10,7);
+    matriz.insertarNodo(2,"J",0,11,3);
+    matriz.insertarNodo(1,"S",0,9,5);
 
     matriz.imprimirColumnas();
     cout<<endl;
@@ -107,7 +107,7 @@ int main(){
     getch();
 
 
-
+    /*
     ----------------------------------prueba para el arbol
     arbolBinario arbol;
     arbol.insertarJugador("heidy");

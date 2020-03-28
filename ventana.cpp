@@ -110,10 +110,10 @@ void ventana::generarFichas()
     int size = listaFichas.getSize();
     int puntajeReturn;
     string letraReturn;
+    srand((unsigned)time(0)); 
+    int numeroRandom;
     do
-    {    
-        srand((unsigned)time(0)); 
-        int numeroRandom;
+    {     
         numeroRandom = (rand()%size);//genero mi numero random
 
         listaFichas.eliminar(numeroRandom,puntajeReturn,letraReturn);//saco de mi lista ficha de esa posicion 
@@ -330,6 +330,10 @@ void ventana::ventanaJugar()
         for (int palabra = 0; palabra<JSON.at("diccionario").size() ; palabra++)
         {
             string palabraEncontrada = JSON.at("diccionario")[palabra].at("palabra");
+            for (int i = 0; i < palabraEncontrada.length(); i++)
+            {
+                palabraEncontrada[i] = toupper(palabraEncontrada[i]);
+            }            
             bibliotecaDePalabras.insertar(palabraEncontrada);
         }
 
@@ -342,7 +346,7 @@ void ventana::ventanaJugar()
         {
             int posicionX = JSON.at("casillas").at("dobles")[casilla].at("x");
             int posicionY = JSON.at("casillas").at("dobles")[casilla].at("y");
-            matrizScrabble.insertarNodo(1,0,posicionX,posicionY);//ingreso a la matriz un nodo con datos
+            matrizScrabble.insertarNodo(1,"",0,posicionX,posicionY);//ingreso a la matriz un nodo con datos
             //cout<<"poscion x: "<<JSON.at("casillas").at("dobles")[casilla].at("x");
             //getch();
         }
@@ -353,7 +357,7 @@ void ventana::ventanaJugar()
         {
             int posicionX = JSON.at("casillas").at("triples")[casilla].at("x");
             int posicionY = JSON.at("casillas").at("triples")[casilla].at("y");
-            matrizScrabble.insertarNodo(2,0,posicionX,posicionY);//ingreso a la matriz
+            matrizScrabble.insertarNodo(2,"",0,posicionX,posicionY);//ingreso a la matriz
         }
     }//fin de la lectura json y asignacion 
 
@@ -368,31 +372,34 @@ void ventana::ventanaJugar()
     //creo la pila aleatoriamente con las fichas 
     generarFichas();
 
+
     //creo las dos lista de cada jugador
     
     listaDoble listaJugador1;
+    listaDoble listaJugador2;
 
     
     //asignos fichas a cada lista del jugador
     int puntajeLista;
     string letraLista;
-    colaFichas.eliminarLetra(puntajeLista,letraLista);
-    //listaJugador1.insertaFicha(letraLista,puntajeLista);
-
-    /*
+    //insetando las 7 fichas en cada lista del jugador
     for (int i = 0; i < 7; i++)
     {
         //-------------- insertar en la lista del jugador1
         colaFichas.eliminarLetra(puntajeLista,letraLista);
         listaJugador1.insertaFicha(letraLista,puntajeLista);
+        //-------------- insertar en la lista del jugador2
+        colaFichas.eliminarLetra(puntajeLista,letraLista);
+        listaJugador2.insertaFicha(letraLista,puntajeLista);
     }
-    */
-
-    /*
+    
+    
+    //abro las fichas disponibles para el jugador 1
+    //para que inicie a jugar el jugador 1
     listaJugador1.generarDOT(jugador1);
     listaJugador1.generarPNG();
     listaJugador1.abrirPNG();
-    */ 
+    
 
 }
 
@@ -441,7 +448,7 @@ void ventana::selecionJugador(int op)
         }
         else
         {
-            ventanaJugar();   
+            ventanaJugar(); 
         }        
     }
 }

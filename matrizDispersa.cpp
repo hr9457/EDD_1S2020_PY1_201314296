@@ -3,7 +3,7 @@
 //constructor
 matrizDispersa::matrizDispersa()
 {
-    nodoMatriz *nodoTemporal = new nodoMatriz(0,0,-1,-1);
+    nodoMatriz *nodoTemporal = new nodoMatriz(0,"",0,-1,-1);
     this->root = nodoTemporal;
     this->inicioColumnas = root;
     this->finalColumnas = NULL;
@@ -38,7 +38,7 @@ nodoMatriz * matrizDispersa::insertarEnColumna(int posX)
 {
     if(root->getSiguiente() == NULL)//si no hay ningun elemento en la matriz
     {
-        nodoMatriz *nuevaColumna = new nodoMatriz(0,0,posX,0);
+        nodoMatriz *nuevaColumna = new nodoMatriz(0,"",0,posX,0);
         root->setSiguiente(nuevaColumna);
         nuevaColumna->setAnterior(root);
         return nuevaColumna;
@@ -56,14 +56,14 @@ nodoMatriz * matrizDispersa::insertarEnColumna(int posX)
         //agregando despues de aver encontrado el nodo 
         if(rootTemporal->getSiguiente() == NULL)
         {
-            nodoMatriz *nuevaColumna = new nodoMatriz(0,0,posX,0);
+            nodoMatriz *nuevaColumna = new nodoMatriz(0,"",0,posX,0);
             rootTemporal->setSiguiente(nuevaColumna);
             nuevaColumna->setAnterior(rootTemporal);
             return nuevaColumna;
         }
         else if(rootTemporal->getSiguiente() != NULL && rootTemporal->getSiguiente()->getPosx() != posX)
         {
-            nodoMatriz *nuevaColumna = new nodoMatriz(0,0,posX,0);
+            nodoMatriz *nuevaColumna = new nodoMatriz(0,"",0,posX,0);
             nodoMatriz *nodoDerecha = rootTemporal->getSiguiente();
             rootTemporal->setSiguiente(nuevaColumna);
             nuevaColumna->setAnterior(rootTemporal);
@@ -93,7 +93,7 @@ nodoMatriz *  matrizDispersa::insertarEnFila(int posY)
 {
     if(root->getAbajo() == NULL)
     {
-        nodoMatriz *nuevaFila = new nodoMatriz(0,0,0,posY);
+        nodoMatriz *nuevaFila = new nodoMatriz(0,"",0,0,posY);
         root->setAbajo(nuevaFila);
         nuevaFila->setArriba(root);
         return nuevaFila;
@@ -111,14 +111,14 @@ nodoMatriz *  matrizDispersa::insertarEnFila(int posY)
         //primer caso
         if(rootTemporal->getAbajo() == NULL)
         {
-            nodoMatriz *nuevaFila = new nodoMatriz(0,0,0,posY);
+            nodoMatriz *nuevaFila = new nodoMatriz(0,"",0,0,posY);
             rootTemporal->setAbajo(nuevaFila);
             nuevaFila->setArriba(rootTemporal);
             return nuevaFila;
         }
         else if(rootTemporal->getAbajo()!=NULL && rootTemporal->getAbajo()->getPosy()!=posY)
         {
-            nodoMatriz *nuevaFila = new nodoMatriz(0,0,0,posY);
+            nodoMatriz *nuevaFila = new nodoMatriz(0,"",0,0,posY);
             nodoMatriz *nodoAbajoTemporal = rootTemporal->getAbajo();
             rootTemporal->setAbajo(nuevaFila);
             nuevaFila->setArriba(rootTemporal);
@@ -231,7 +231,7 @@ void matrizDispersa::anidarInforamcionFila(nodoMatriz *fila,nodoMatriz *nodoTemp
 //-------------------------metodo que recibe los parametros iniciales para crear el nodo 
 //-------------------------despues mandar a sus respetivos metodos para crea y buscar filas , columas
 //-------------------------despues anido la info en su columnas y su fila
-void matrizDispersa::insertarNodo(int tipoCasilla,char caracter,int posX,int posY)
+void matrizDispersa::insertarNodo(int tipoCasilla,string caracter,int puntaje,int posX,int posY)
 {
     if(estadoMatriz() == true)
     {
@@ -239,7 +239,7 @@ void matrizDispersa::insertarNodo(int tipoCasilla,char caracter,int posX,int pos
     else
     {
         //nodo que se va agregar dentro de la matriz
-        nodoMatriz *nodoTemporal = new nodoMatriz(tipoCasilla,caracter,posX,posY);
+        nodoMatriz *nodoTemporal = new nodoMatriz(tipoCasilla,caracter,puntaje,posX,posY);
         //buscamos o creamos su columna
         nodoMatriz *posicionColumna = insertarEnColumna(posX);
         //buscamos o creamos su fila
@@ -256,6 +256,101 @@ void matrizDispersa::insertarNodo(int tipoCasilla,char caracter,int posX,int pos
         anidarInforamcionFila(posicionFila,nodoTemporal);
     }    
 }
+
+
+
+
+
+
+
+
+
+
+
+//--------------------- metodo para quitar la informacion de la columna
+void matrizDispersa::eliminarInformacionColumna(nodoMatriz *rootTemporal,int posX)
+{
+    //busco la columnas para luego buscar la informacion en la columna
+    while (rootTemporal!=NULL && rootTemporal->getPosx()!=posX)
+    {
+        rootTemporal = rootTemporal->getSiguiente();//me quedo en la columna
+    }
+
+    //una vez econtrada la posicion en la columnas
+    //empiezo a moverme hacia abajo
+    rootTemporal = rootTemporal->getAbajo();//muevo hacia abajo de la columna encontrda
+    while (rootTemporal!=NULL && rootTemporal->getPosx()!=posX)
+    {
+        rootTemporal = rootTemporal->getAbajo();//muevo hacia abajo y me quedo en el nodo
+    }
+
+
+    //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
+    //hacia abajo y hacia arriba
+    //---------- 1. que hacia abajo ya no halla ningun nodo
+    if(rootTemporal->getAbajo()==NULL)
+    {
+        nodoMatriz *nodoAuxArriba = rootTemporal->getArriba();
+        rootTemporal->setArriba(NULL);
+        nodoAuxArriba->setAbajo(NULL);
+    }    
+}
+
+
+
+//--------------------- metodo para quitar la informacion de la fila
+void matrizDispersa::eliminarInformacionFila(nodoMatriz *rootTemporal,int posY)
+{
+    //busco la columnas para luego buscar la informacion en la filas
+    while (rootTemporal!=NULL && rootTemporal->getPosy()!=posY)
+    {
+        rootTemporal = rootTemporal->getAbajo();//me quedo en la fila que corresponde
+    }
+
+    //una vez econtrada la posicion de la fila donde esta la informacion
+    //empiezo a moverme hacia la izquierda para buscar el nodo
+    rootTemporal = rootTemporal->getSiguiente();//muevo hacia la derecha
+    while (rootTemporal!=NULL && rootTemporal->getPosy()!=posY)
+    {
+        rootTemporal = rootTemporal->getSiguiente();//muevo hacia abajo y me quedo en el nodo
+    }
+
+
+    //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
+    //hacia izquierda y derecha
+    //---------- 1. que hacia la derecha no halla otro nodo
+    if(rootTemporal->getSiguiente()==NULL)
+    {
+        nodoMatriz *nodoAuxAnterior = rootTemporal->getAnterior();
+        rootTemporal->setAnterior(NULL);
+        nodoAuxAnterior->setSiguiente(NULL);
+    }
+}
+
+
+
+//--------------------------------------------------------------------
+//-------------------- ELIMINAR FICHAS DE LA MATRIZ
+//-------------------- METODO RECIBO LOS PARAMETROS DE LAS FICHAS JUGADAS
+void matrizDispersa::eliminarNodo(string letra,int posX, int posY)
+{
+    if(estadoMatriz()!=true)
+    {
+        nodoMatriz *rootTemporal = root;
+        eliminarInformacionColumna(rootTemporal,posX);
+        eliminarInformacionFila(rootTemporal,posY);
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -439,7 +534,7 @@ void matrizDispersa::nodosFILASDOT(nodoMatriz *nodoInformacion)
         archivo<<"nodo"<<nodoInformacion->getPosx()<<""<<
         nodoInformacion->getPosy()<<"";
         //---------condicion por si el nodo tiene no exite la palabra
-        if(nodoInformacion->getPalabra() != 0)
+        if(nodoInformacion->getPalabra() != "")
         {
             archivo<<nodoInformacion->getPalabra();
         }
@@ -460,12 +555,13 @@ void matrizDispersa::nodosFILASDOT(nodoMatriz *nodoInformacion)
     archivo<<"F"<<rankInformacion->getPosx()<<""<<rankInformacion->getPosy()<<";";
     rankInformacion = rankInformacion->getSiguiente(); 
 
-    while (rankInformacion != NULL)
+    //usar el rank para ponerlos a la misma altura en filas
+    while (rankInformacion != NULL)//rank en filas
     {
         archivo<<"nodo"<<rankInformacion->getPosx()<<""<<
         rankInformacion->getPosy(); 
         //-------------condicion saber si no viene la letra
-        if(rankInformacion->getPalabra() != 0)
+        if(rankInformacion->getPalabra() != "")
         {
             archivo<<rankInformacion->getPalabra()<<";";
         }
@@ -491,7 +587,7 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
         archivo<<"nodo"<<crearNodo->getPosx()<<""<<
         crearNodo->getPosy();
         //-------------condicion para saber si el nodo no contiene ninguna letra
-        if(crearNodo->getPalabra() != 0)
+        if(crearNodo->getPalabra() != "")
         {
             archivo<<crearNodo->getPalabra();
         }
@@ -503,9 +599,9 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
 
         archivo<<"[group ="<<contadorGroup<<",";
         //-------------condicion para saber si el nodo no contiene ninguna letra
-        if(crearNodo->getPalabra() != 0)
+        if(crearNodo->getPalabra() != "")
         {
-            archivo<<"label=\""<<crearNodo->getPalabra()<<"\"";
+            archivo<<"label=\""<<crearNodo->getPalabra()<<"\"";//salto linea
         }
         else
         {
@@ -542,7 +638,7 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
         archivo<<"nodo"<<nodoInformacion->getPosx()<<""<<
         nodoInformacion->getPosy()<<"";
         //---------condicion por si el nodo tiene no exite la palabra
-        if(nodoInformacion->getPalabra() != 0)
+        if(nodoInformacion->getPalabra() != "")
         {
             archivo<<nodoInformacion->getPalabra();
         }

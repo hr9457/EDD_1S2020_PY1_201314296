@@ -13,6 +13,7 @@ class listaDoble
         nodoListaDoble *primero;
         nodoListaDoble *ultimo;
         int size=0;
+        int sizeJugada=0;
 
     public:
         listaDoble();
@@ -21,10 +22,11 @@ class listaDoble
         void eliminarFicha(string);
         int getSize();
         void setSize(int);
-        void imprimir();
+        void imprimir();        
         void generarDOT(string);
         void generarPNG();
         void abrirPNG();
+        void eliminarUltimo();
         ~listaDoble();
 };
 

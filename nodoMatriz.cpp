@@ -1,9 +1,10 @@
 #include "nodoMatriz.h"
 
 //constructor
-nodoMatriz::nodoMatriz(int tipo, char arg, int num, int num2){
+nodoMatriz::nodoMatriz(int tipo, string arg,int puntaje ,int num, int num2){
     this->tipoCasilla = tipo;
     this->palabra = arg;
+    this->puntaje = puntaje;
     this->posX = num;
     this->posY = num2;
     this->siguiente = NULL;
@@ -24,14 +25,24 @@ void nodoMatriz::setTipoCasilla(int tipo)
     this->tipoCasilla = tipo;
 }
 
-char nodoMatriz::getPalabra()
+string nodoMatriz::getPalabra()
 {
     return palabra;
 }
 
-void nodoMatriz::setPalabra(char arg)
+void nodoMatriz::setPalabra(string arg)
 {
     this->palabra = arg;
+}
+
+int nodoMatriz::getPuntaje()
+{
+    return puntaje;
+}
+
+void nodoMatriz::setPuntaje(int num)
+{
+    this->puntaje = num;
 }
 
 int nodoMatriz::getPosx()

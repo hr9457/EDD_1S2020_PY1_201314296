@@ -9,7 +9,8 @@ class nodoMatriz
 {
     private:
         int tipoCasilla;//0-simples , 1-doble y 2-triples
-        char palabra;
+        string palabra;
+        int puntaje;
         int posX;
         int posY;
         //apuntadores
@@ -19,11 +20,13 @@ class nodoMatriz
         nodoMatriz *abajo;
 
     public:
-        nodoMatriz(int,char,int,int);
+        nodoMatriz(int,string,int,int,int);
         int getTipoCasilla();
         void setTipoCasilla(int);
-        char getPalabra();
-        void setPalabra(char);
+        string getPalabra();
+        void setPalabra(string);
+        int getPuntaje();
+        void setPuntaje(int);
         int getPosx();
         void setPosx(int);
         int getPosy();
