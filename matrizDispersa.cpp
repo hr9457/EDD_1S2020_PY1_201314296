@@ -30,7 +30,7 @@ bool matrizDispersa::estadoMatriz()
 
 
 
-
+//----------------------------------------AGREGAR COLUMNAS O BUSCAR
 //----------------------------------------------------------------
 //para insertar en la lista - en el lado que maneja las columnas
 //apuntadores de siguiente y anterior en el root
@@ -135,9 +135,13 @@ nodoMatriz *  matrizDispersa::insertarEnFila(int posY)
     }  
     return NULL;  
 }
+//-------------------------------------------------------------------------------------------
 
 
 
+
+
+//-------------------------------------AGREGAR LA INFORMACION
 //--------------------------------------------------------------------------------
 //metodo que anida la informacion por columnas
 void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *nodoTemporal)
@@ -173,7 +177,9 @@ void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *no
         }
         else if(columnaTemporal->getAbajo()!=NULL && columnaTemporal->getAbajo()->getPosy() == nodoTemporal->getPosy())
         {
-            columnaTemporal->getAbajo()->setPalabra(nodoTemporal->getPalabra());               
+            //CUANDO SON IGUALES
+            columnaTemporal->getAbajo()->setPalabra(nodoTemporal->getPalabra()); 
+            columnaTemporal->getAbajo()->setPuntaje(nodoTemporal->getPuntaje());              
         }        
     }
 }
@@ -221,7 +227,7 @@ void matrizDispersa::anidarInforamcionFila(nodoMatriz *fila,nodoMatriz *nodoTemp
     }
     
 }
-
+//-------------------------------------------------------------------------------------------
 
 
 
@@ -256,6 +262,12 @@ void matrizDispersa::insertarNodo(int tipoCasilla,string caracter,int puntaje,in
         anidarInforamcionFila(posicionFila,nodoTemporal);
     }    
 }
+
+
+
+
+
+
 
 
 
@@ -601,7 +613,7 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
         //-------------condicion para saber si el nodo no contiene ninguna letra
         if(crearNodo->getPalabra() != "")
         {
-            archivo<<"label=\""<<crearNodo->getPalabra()<<"\"";//salto linea
+            archivo<<"label=\""<<crearNodo->getPalabra()<<" - "<<crearNodo->getPuntaje()<<"\"";//salto linea
         }
         else
         {

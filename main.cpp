@@ -85,16 +85,46 @@ int main(){
     //------------------pruba cond datos en la matriz 
     //------------------ingresar datos,simples, dobles y triples
     //-------------------sustitucion con una casilla existente
-    matrizDispersa matriz; 
-    matriz.insertarNodo(0,"H",0,10,4);
-    matriz.insertarNodo(0,"O",0,8,5);
+    matrizDispersa matriz;
     matriz.insertarNodo(1,"",0,9,5);
-    matriz.insertarNodo(2,"O",0,10,5);
-    matriz.insertarNodo(0,"L",0,10,6);
-    matriz.insertarNodo(0,"A",0,10,7);
+    matriz.insertarNodo(2,"",0,10,5);
     matriz.insertarNodo(2,"J",0,11,3);
-    matriz.insertarNodo(1,"S",0,9,5);
+    matriz.insertarNodo(1,"",0,9,5);
+    int entradaTeclado;    
+    do
+    {
+        cout<<"1. Insertar ficha"<<endl;
+        cout<<"2. Eliminar ficha"<<endl;
+        cout<<"3. Mostrar matriz"<<endl;
+        cout<<"Salir-Esc"<<endl;
+        entradaTeclado = getch();
+        
+        if(entradaTeclado==49)
+        {
+            string letra;
+            int posx,posy;
+            cout<<"ingrese la letra que quiere insertar: ";
+            cin>>letra;
+            cout<<"ingres la posicion en x: ";
+            cin>>posx;
+            cout<<"ingrese la posicion en y: ";
+            cin>>posy;
+            matriz.insertarNodo(0,letra,1,posx,posy);
+        }
+        else if(entradaTeclado==50)
+        {
+        }
+        else if(entradaTeclado==51)
+        {
+            matriz.crearDOT();
+            matriz.crearPNG();
+            matriz.abrirPNG();
+        }
+       
+    } while (entradaTeclado!=27);
 
+
+    /*
     matriz.imprimirColumnas();
     cout<<endl;
     matriz.imprimirFilas();
@@ -105,7 +135,7 @@ int main(){
     matriz.crearPNG();
     matriz.abrirPNG();
     getch();
-
+    */
 
     /*
     ----------------------------------prueba para el arbol
