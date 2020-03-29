@@ -317,12 +317,32 @@ void matrizDispersa::eliminarInformacionColumna(nodoMatriz *rootTemporalColumna,
         cout<<"abajo y arrib hay elemento"<<endl;  
         nodoMatriz *nodoArriba = rootTemporalColumna->getArriba();//obtengo el nodo que esta arriba
         nodoMatriz *nodoAbajo = rootTemporalColumna->getAbajo();//obtengo el nodo que esta abajo
-        
-        cout<<"nodo arriba"<<nodoArriba->getPosx()<<","<<nodoArriba->getPosy()<<endl; 
+        rootTemporalColumna->setArriba(NULL);
+        rootTemporalColumna->setAbajo(NULL);
         nodoArriba->setAbajo(nodoAbajo);
         nodoAbajo->setArriba(nodoArriba);
     }
-    
+
+    //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
+    //hacia la derecha y a la izquierda
+    //---------- 1. que hacia la derecha no halla nada
+    if(rootTemporalColumna->getSiguiente()==NULL)
+    {
+        nodoMatriz *nodoIzquierda = rootTemporalColumna->getAnterior();
+        rootTemporalColumna->setAnterior(NULL);
+        nodoIzquierda->setSiguiente(NULL);
+    }
+    else if(rootTemporalColumna->getSiguiente()!=NULL)
+    {
+        nodoMatriz *nodoIzquierda = rootTemporalColumna->getAnterior();
+        nodoMatriz *nodoDerecha = rootTemporalColumna->getSiguiente();
+        nodoIzquierda->setSiguiente(NULL);
+        nodoDerecha->setAnterior(NULL);
+        rootTemporalColumna->setAnterior(NULL);
+        rootTemporalColumna->setSiguiente(NULL);
+        nodoIzquierda->setSiguiente(nodoDerecha);
+        nodoDerecha->setAnterior(nodoIzquierda);
+    }
 }
 
 

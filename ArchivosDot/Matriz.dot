@@ -11,20 +11,24 @@ matriz->C90[dir=both];
 
 F03[group = columna];
 F05[group = columna];
-F03->F05[dir=both];
+F06[group = columna];
+F03->F05->F06[dir=both];
 matriz->F03[dir=both];
 
-F03->nodo93a->nodo103b->nodo113J[dir=both];
-{rank = same; F03;nodo93a;nodo103b;nodo113J;}
+F03->nodo93G->nodo103b[dir=both];
+{rank = same; F03;nodo93G;nodo103b;}
 F05->nodo950->nodo1050[dir=both];
 {rank = same; F05;nodo950;nodo1050;}
+F06->nodo96e[dir=both];
+{rank = same; F06;nodo96e;}
 
+nodo93G[group =0,label="G"];
 nodo950[group =0,label="",style=filled,fillcolor="Indianred"];
-C90->nodo950[dir=both];
+nodo96e[group =0,label="e"];
+C90->nodo93G->nodo950->nodo96e[dir=both];
 nodo103b[group =1,label="b"];
 nodo1050[group =1,label="",style=filled,fillcolor="cyan4"];
 C100->nodo103b->nodo1050[dir=both];
-nodo113J[group =2,label="J",style=filled,fillcolor="cyan4"];
-C110->nodo113J[dir=both];
+C110->[dir=both];
 
 }
