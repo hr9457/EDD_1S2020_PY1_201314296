@@ -286,64 +286,75 @@ void matrizDispersa::eliminarInformacionColumna(nodoMatriz *rootTemporalColumna,
     rootTemporalColumna = rootTemporalColumna->getSiguiente();
     while (rootTemporalColumna->getPosx()!=posX)
     {
-        cout<<"coumnas--"<<rootTemporalColumna->getPosx()<<endl; 
         rootTemporalColumna = rootTemporalColumna->getSiguiente();//me quedo en la columna
     }
 
-    cout<<"coumnas--"<<rootTemporalColumna->getPosx()<<endl; 
+
     //una vez econtrada la posicion en la columnas
     //empiezo a moverme hacia abajo
     //rootTemporalColumna = rootTemporalColumna->getAbajo();//muevo hacia abajo de la columna encontrda
     while (rootTemporalColumna->getPosy()!=posY)
     {
-        cout<<"fila--"<<rootTemporalColumna->getPosy()<<endl; 
         rootTemporalColumna = rootTemporalColumna->getAbajo();//muevo hacia abajo y me quedo en el nodo
     }
-    cout<<"fila--"<<rootTemporalColumna->getPosy()<<endl;
 
-    //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
-    //hacia abajo y hacia arriba
-    //---------- 1. que hacia abajo ya no halla ningun nodo
-    if(rootTemporalColumna->getAbajo()==NULL)
+
+
+    //busco y reviso si el tipo de nodo ese un nodo simple o una casillas de doble y triple 
+    //puntuacion para eliminarlo o no eliminarlo
+    if(rootTemporalColumna->getTipoCasilla()==0)
     {
-        cout<<"abjo no ningun nodo"<<endl;  
-        nodoMatriz *nodoAuxArriba = rootTemporalColumna->getArriba();
-        cout<<"nodo arriba"<<nodoAuxArriba->getPosx()<<","<<nodoAuxArriba->getPosy()<<endl; 
-        rootTemporalColumna->setArriba(NULL);
-        nodoAuxArriba->setAbajo(NULL);
-    }    
-    else if(rootTemporalColumna->getAbajo()!=NULL) 
+        //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
+        //hacia abajo y hacia arriba
+        //---------- 1. que hacia abajo ya no halla ningun nodo
+        if(rootTemporalColumna->getAbajo()==NULL)
+        { 
+            nodoMatriz *nodoAuxArriba = rootTemporalColumna->getArriba();
+            rootTemporalColumna->setArriba(NULL);
+            nodoAuxArriba->setAbajo(NULL);
+        }    
+        else if(rootTemporalColumna->getAbajo()!=NULL) 
+        { 
+            nodoMatriz *nodoArriba = rootTemporalColumna->getArriba();//obtengo el nodo que esta arriba
+            nodoMatriz *nodoAbajo = rootTemporalColumna->getAbajo();//obtengo el nodo que esta abajo
+            rootTemporalColumna->setArriba(NULL);
+            rootTemporalColumna->setAbajo(NULL);
+            nodoArriba->setAbajo(nodoAbajo);
+            nodoAbajo->setArriba(nodoArriba);
+        }
+
+        //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
+        //hacia la derecha y a la izquierda
+        //---------- 1. que hacia la derecha no halla nada
+        if(rootTemporalColumna->getSiguiente()==NULL)
+        {
+            nodoMatriz *nodoIzquierda = rootTemporalColumna->getAnterior();
+            rootTemporalColumna->setAnterior(NULL);
+            nodoIzquierda->setSiguiente(NULL);
+        }
+        else if(rootTemporalColumna->getSiguiente()!=NULL)
+        {
+            nodoMatriz *nodoIzquierda = rootTemporalColumna->getAnterior();
+            nodoMatriz *nodoDerecha = rootTemporalColumna->getSiguiente();
+            nodoIzquierda->setSiguiente(NULL);
+            nodoDerecha->setAnterior(NULL);
+            rootTemporalColumna->setAnterior(NULL);
+            rootTemporalColumna->setSiguiente(NULL);
+            nodoIzquierda->setSiguiente(nodoDerecha);
+            nodoDerecha->setAnterior(nodoIzquierda);
+        }
+
+
+    }
+    else
     {
-        cout<<"abajo y arrib hay elemento"<<endl;  
-        nodoMatriz *nodoArriba = rootTemporalColumna->getArriba();//obtengo el nodo que esta arriba
-        nodoMatriz *nodoAbajo = rootTemporalColumna->getAbajo();//obtengo el nodo que esta abajo
-        rootTemporalColumna->setArriba(NULL);
-        rootTemporalColumna->setAbajo(NULL);
-        nodoArriba->setAbajo(nodoAbajo);
-        nodoAbajo->setArriba(nodoArriba);
+        rootTemporalColumna->setPalabra("");
+        rootTemporalColumna->setPuntaje(0);
     }
 
-    //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
-    //hacia la derecha y a la izquierda
-    //---------- 1. que hacia la derecha no halla nada
-    if(rootTemporalColumna->getSiguiente()==NULL)
-    {
-        nodoMatriz *nodoIzquierda = rootTemporalColumna->getAnterior();
-        rootTemporalColumna->setAnterior(NULL);
-        nodoIzquierda->setSiguiente(NULL);
-    }
-    else if(rootTemporalColumna->getSiguiente()!=NULL)
-    {
-        nodoMatriz *nodoIzquierda = rootTemporalColumna->getAnterior();
-        nodoMatriz *nodoDerecha = rootTemporalColumna->getSiguiente();
-        nodoIzquierda->setSiguiente(NULL);
-        nodoDerecha->setAnterior(NULL);
-        rootTemporalColumna->setAnterior(NULL);
-        rootTemporalColumna->setSiguiente(NULL);
-        nodoIzquierda->setSiguiente(nodoDerecha);
-        nodoDerecha->setAnterior(nodoIzquierda);
-    }
-}
+
+    
+}//fin del metodo
 
 
 

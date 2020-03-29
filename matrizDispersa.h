@@ -34,7 +34,7 @@ class matrizDispersa
         void eliminarColumna();
         void eliminarFila();
         void eliminarInformacionColumna(nodoMatriz *,int,int);
-        void eliminarInformacionFila(nodoMatriz *,int,int);
+        void eliminarFilasColumnas();
         void eliminarNodo(string,int,int);
 
 
