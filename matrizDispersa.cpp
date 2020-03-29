@@ -171,7 +171,7 @@ void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *no
         {
             nodoMatriz *nodoAbajo = columnaTemporal->getAbajo();
             columnaTemporal->setAbajo(nodoTemporal);
-            nodoTemporal->setArriba(nodoTemporal);
+            nodoTemporal->setArriba(columnaTemporal);
             nodoTemporal->setAbajo(nodoAbajo);
             nodoAbajo->setArriba(nodoTemporal);
         }
@@ -215,7 +215,7 @@ void matrizDispersa::anidarInforamcionFila(nodoMatriz *fila,nodoMatriz *nodoTemp
         {
             nodoMatriz *nodoDerecha = filaTemporal->getSiguiente();
             filaTemporal->setSiguiente(nodoTemporal);
-            nodoTemporal->setAnterior(nodoDerecha);
+            nodoTemporal->setAnterior(filaTemporal);
             nodoTemporal->setSiguiente(nodoDerecha);
             nodoDerecha->setAnterior(nodoTemporal);
         }
@@ -284,84 +284,51 @@ void matrizDispersa::eliminarInformacionColumna(nodoMatriz *rootTemporalColumna,
 {
     //busco la columnas para luego buscar la informacion en la columna
     rootTemporalColumna = rootTemporalColumna->getSiguiente();
-    while (rootTemporalColumna!=NULL && rootTemporalColumna->getPosx()!=posX)
+    while (rootTemporalColumna->getPosx()!=posX)
     {
+        cout<<"coumnas--"<<rootTemporalColumna->getPosx()<<endl; 
         rootTemporalColumna = rootTemporalColumna->getSiguiente();//me quedo en la columna
     }
 
+    cout<<"coumnas--"<<rootTemporalColumna->getPosx()<<endl; 
     //una vez econtrada la posicion en la columnas
     //empiezo a moverme hacia abajo
-    rootTemporalColumna = rootTemporalColumna->getAbajo();//muevo hacia abajo de la columna encontrda
-    while (rootTemporalColumna!=NULL && rootTemporalColumna->getPosy()!=posY)
+    //rootTemporalColumna = rootTemporalColumna->getAbajo();//muevo hacia abajo de la columna encontrda
+    while (rootTemporalColumna->getPosy()!=posY)
     {
+        cout<<"fila--"<<rootTemporalColumna->getPosy()<<endl; 
         rootTemporalColumna = rootTemporalColumna->getAbajo();//muevo hacia abajo y me quedo en el nodo
     }
-
+    cout<<"fila--"<<rootTemporalColumna->getPosy()<<endl;
 
     //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
     //hacia abajo y hacia arriba
     //---------- 1. que hacia abajo ya no halla ningun nodo
     if(rootTemporalColumna->getAbajo()==NULL)
     {
+        cout<<"abjo no ningun nodo"<<endl;  
         nodoMatriz *nodoAuxArriba = rootTemporalColumna->getArriba();
+        cout<<"nodo arriba"<<nodoAuxArriba->getPosx()<<","<<nodoAuxArriba->getPosy()<<endl; 
         rootTemporalColumna->setArriba(NULL);
         nodoAuxArriba->setAbajo(NULL);
     }    
-    //else if(rootTemporalColumna->getAbajo()!=NULL)
-    else 
+    else if(rootTemporalColumna->getAbajo()!=NULL) 
     {
+        cout<<"abajo y arrib hay elemento"<<endl;  
         nodoMatriz *nodoArriba = rootTemporalColumna->getArriba();//obtengo el nodo que esta arriba
         nodoMatriz *nodoAbajo = rootTemporalColumna->getAbajo();//obtengo el nodo que esta abajo
-        rootTemporalColumna->setArriba(NULL);
-        rootTemporalColumna->setAbajo(NULL);
+        
+        cout<<"nodo arriba"<<nodoArriba->getPosx()<<","<<nodoArriba->getPosy()<<endl; 
         nodoArriba->setAbajo(nodoAbajo);
         nodoAbajo->setArriba(nodoArriba);
     }
+    else
+    {
+        cout<<"no se pudo"<<endl;      
+    }
+    
 }
 
-
-
-//--------------------- metodo para quitar la informacion de la fila
-void matrizDispersa::eliminarInformacionFila(nodoMatriz *rootTemporalFila,int posX,int posY)
-{
-    //busco la columnas para luego buscar la informacion en la filas
-    rootTemporalFila = rootTemporalFila->getAbajo();
-    while (rootTemporalFila!=NULL && rootTemporalFila->getPosy()!=posY)
-    {
-        rootTemporalFila = rootTemporalFila->getAbajo();//me quedo en la fila que corresponde
-    }
-
-    //una vez econtrada la posicion de la fila donde esta la informacion
-    //empiezo a moverme hacia la izquierda para buscar el nodo
-    rootTemporalFila = rootTemporalFila->getSiguiente();//muevo hacia la derecha
-    while (rootTemporalFila!=NULL && rootTemporalFila->getPosx()!=posX)
-    {
-        rootTemporalFila = rootTemporalFila->getSiguiente();//muevo hacia abajo y me quedo en el nodo
-    }
-
-
-    //una vez econtrado el nodo busco las posibilidad que hallas mas nodos
-    //hacia izquierda y derecha
-    //---------- 1. que hacia la derecha no halla otro nodo
-    if(rootTemporalFila->getSiguiente()==NULL)
-    {
-        nodoMatriz *nodoAnterior = rootTemporalFila->getAnterior();
-        rootTemporalFila->setAnterior(NULL);
-        nodoAnterior->setSiguiente(NULL);
-        delete rootTemporalFila;
-    }
-    //else if(rootTemporal->getSiguiente()!=NULL)
-    else 
-    {
-        nodoMatriz *nodoAnterior = rootTemporalFila->getAnterior();
-        nodoMatriz *nodoSiguiente = rootTemporalFila->getSiguiente();
-        rootTemporalFila->setAnterior(NULL);
-        rootTemporalFila->setSiguiente(NULL);
-        nodoAnterior->setSiguiente(nodoSiguiente);
-        nodoSiguiente->setAnterior(nodoAnterior);
-        delete rootTemporalFila;
-    }
-}
 
 
 
@@ -375,7 +342,6 @@ void matrizDispersa::eliminarNodo(string letra,int posX, int posY)
         nodoMatriz *rootTemporalColumna = root;//obtengo la posicion memoria en la raiz 
         nodoMatriz *rootTemporalFila = root;
         eliminarInformacionColumna(rootTemporalColumna,posX,posY);
-        eliminarInformacionFila(rootTemporalFila,posX,posY);
     }
 }
 
