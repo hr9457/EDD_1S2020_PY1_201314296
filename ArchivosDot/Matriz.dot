@@ -2,9 +2,9 @@ digraph Matriz {
 graph [ranksep="0.5", nodesep="0.5"];
 node [shape=record];
 matriz[group = columna];
-C90[group =3,label="C9"];
-C100[group =4,label="C10"];
-C110[group =5,label="C11"];
+C90[group =4,label="C9"];
+C100[group =5,label="C10"];
+C110[group =6,label="C11"];
 C90->C100->C110[dir=both];
 {rank = same; matriz;C90;C100;C110}
 matriz->C90[dir=both];
@@ -14,17 +14,16 @@ F05[group = columna];
 F03->F05[dir=both];
 matriz->F03[dir=both];
 
-F03->nodo93A->nodo1130[dir=both];
-{rank = same; F03;nodo93A;nodo1130;}
+F03->nodo113J[dir=both];
+{rank = same; F03;nodo113J;}
 F05->nodo950->nodo1050[dir=both];
 {rank = same; F05;nodo950;nodo1050;}
 
-nodo93A[group =0,label="A"];
 nodo950[group =0,label="",style=filled,fillcolor="Indianred"];
-C90->nodo93A->nodo950[dir=both];
+C90->nodo950[dir=both];
 nodo1050[group =1,label="",style=filled,fillcolor="cyan4"];
 C100->nodo1050[dir=both];
-nodo1130[group =2,label="",style=filled,fillcolor="cyan4"];
-C110->nodo1130[dir=both];
+nodo113J[group =2,label="J",style=filled,fillcolor="cyan4"];
+C110->nodo113J[dir=both];
 
 }

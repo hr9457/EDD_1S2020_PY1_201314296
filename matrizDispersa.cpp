@@ -358,17 +358,80 @@ void matrizDispersa::eliminarInformacionColumna(nodoMatriz *rootTemporalColumna,
 
 
 
+//------------------------------------MEOTOD REVISAR SI LA COLUMNAS O FILA
+//-----------------------------------SE QUE SIN NOS QUE ENLAZAR PARA ELIMINARLOS
+void matrizDispersa::eliminarFilasColumnas(nodoMatriz *rootTemporalColumna,nodoMatriz *rootTemporalFila,int posX,int posY)
+{
+    //Recorro hasta encontrar la columnas
+    while (rootTemporalColumna->getPosx()!=posX)
+    {
+        rootTemporalColumna = rootTemporalColumna->getSiguiente();//me quedo en la columna
+    }
+
+
+    //reviso si abajo de esa columna no se halla quedado sin ningun elemento
+    if(rootTemporalColumna->getAbajo()==NULL)
+    {
+        if(rootTemporalColumna->getSiguiente()!=NULL)
+        {
+            nodoMatriz *nodoAnterior = rootTemporalColumna->getAnterior();
+            nodoMatriz *nodoSiguiente = rootTemporalColumna->getSiguiente();
+            //eliminacion de enlazes
+            nodoAnterior->setSiguiente(nodoSiguiente);
+            nodoSiguiente->setAnterior(nodoAnterior);
+            rootTemporalColumna->setAnterior(NULL);
+            rootTemporalColumna->setSiguiente(NULL);
+        }
+        else
+        {
+            nodoMatriz *nodoAnterior = rootTemporalColumna->getAnterior();
+            //eliminacion de enlazes
+            nodoAnterior->setSiguiente(NULL);
+            rootTemporalColumna->setAnterior(NULL);
+        }
+    }
+
+    //Recorro la fials hasta encontrar donde se elimino el nodo
+    while(rootTemporalFila->getPosy()!=posY)
+    {
+        rootTemporalFila = rootTemporalFila->getAbajo();
+    }
+
+    //reviso si ala izquierdo la fila no se halla quedado sin ningun elemento
+    if(rootTemporalFila->getSiguiente()==NULL)
+    {
+        if(rootTemporalFila->getAbajo()!=NULL)
+        {
+            nodoMatriz *nodoArriba = rootTemporalFila->getArriba();
+            nodoMatriz *nodoAbajo = rootTemporalFila->getAbajo();
+            //elimino los enlazes
+            nodoArriba->setAbajo(nodoAbajo);
+            nodoAbajo->setArriba(nodoArriba);
+            rootTemporalFila->setArriba(NULL);
+            rootTemporalFila->setAbajo(NULL);
+        }
+        else
+        {
+            nodoMatriz *nodoArriba = rootTemporalFila->getArriba();
+            nodoArriba->setAbajo(NULL);
+            rootTemporalColumna->setArriba(NULL);
+        }
+    }
+}
+
 
 //--------------------------------------------------------------------
 //-------------------- ELIMINAR FICHAS DE LA MATRIZ
 //-------------------- METODO RECIBO LOS PARAMETROS DE LAS FICHAS JUGADAS
-void matrizDispersa::eliminarNodo(string letra,int posX, int posY)
+void matrizDispersa::eliminarNodo(int posX, int posY)
 {
     if(estadoMatriz()!=true)
     {
-        nodoMatriz *rootTemporalColumna = root;//obtengo la posicion memoria en la raiz 
-        nodoMatriz *rootTemporalFila = root;
-        eliminarInformacionColumna(rootTemporalColumna,posX,posY);
+        nodoMatriz *rootTemporal = root;//obtengo la posicion memoria en la raiz 
+        nodoMatriz *rootTemporalColumna = root;
+        nodoMatriz *rootTemporalFila = root;//para ver en filas
+        eliminarInformacionColumna(rootTemporal,posX,posY);
+        eliminarFilasColumnas(rootTemporalColumna,rootTemporalFila,posX,posY);
     }
 }
 

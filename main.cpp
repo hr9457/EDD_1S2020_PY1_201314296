@@ -125,7 +125,7 @@ int main(){
             cout<<endl;
             matriz.imprimirFilas();
             cout<<endl;
-            matriz.eliminarNodo(letra,posx,posy);
+            matriz.eliminarNodo(posx,posy);
             cout<<"--------------------------"<<endl;
             matriz.imprimirMatriz();
         }
