@@ -322,10 +322,6 @@ void matrizDispersa::eliminarInformacionColumna(nodoMatriz *rootTemporalColumna,
         nodoArriba->setAbajo(nodoAbajo);
         nodoAbajo->setArriba(nodoArriba);
     }
-    else
-    {
-        cout<<"no se pudo"<<endl;      
-    }
     
 }
 
