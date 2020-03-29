@@ -102,7 +102,7 @@ void ventana::generarFichas()
     listaFichas.insertar(5,"Q",1);
     //------------- 8PUNTOS
     listaFichas.insertar(8,"J",1);
-    listaFichas.insertar(8,"Ñ",1);
+    //listaFichas.insertar(8,"Ñ",1);
     listaFichas.insertar(8,"X",1);
     //-------------- 10PUNTOS
     listaFichas.insertar(10,"Z",1);

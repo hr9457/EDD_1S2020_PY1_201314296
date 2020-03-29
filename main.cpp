@@ -113,6 +113,21 @@ int main(){
         }
         else if(entradaTeclado==50)
         {
+            string letra;
+            int posx,posy;
+            cout<<"ingres la letra: ";
+            cin>>letra;
+            cout<<"ingres la posicion en x: ";
+            cin>>posx;
+            cout<<"ingrese la posicion en y: ";
+            cin>>posy;
+            matriz.imprimirColumnas();
+            cout<<endl;
+            matriz.imprimirFilas();
+            cout<<endl;
+            matriz.eliminarNodo(letra,posx,posy);
+            cout<<"--------------------------"<<endl;
+            matriz.imprimirMatriz();
         }
         else if(entradaTeclado==51)
         {

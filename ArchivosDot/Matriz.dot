@@ -11,20 +11,27 @@ matriz->C90[dir=both];
 
 F03[group = columna];
 F05[group = columna];
-F03->F05[dir=both];
+F06[group = columna];
+F03->F05->F06[dir=both];
 matriz->F03[dir=both];
 
-F03->nodo93B->nodo113J[dir=both];
-{rank = same; F03;nodo93B;nodo113J;}
-F05->nodo95A->nodo1050[dir=both];
-{rank = same; F05;nodo95A;nodo1050;}
+F03->nodo93F->nodo103F->nodo113J[dir=both];
+{rank = same; F03;nodo93F;nodo103F;nodo113J;}
+F05->nodo950[dir=both];
+{rank = same; F05;nodo950;}
+F06->nodo96F->nodo106A->nodo116B[dir=both];
+{rank = same; F06;nodo96F;nodo106A;nodo116B;}
 
-nodo93B[group =0,label="B - 1"];
-nodo95A[group =0,label="A - 1",style=filled,fillcolor="Indianred"];
-C90->nodo93B->nodo95A[dir=both];
-nodo1050[group =1,label="",style=filled,fillcolor="cyan4"];
-C100->nodo1050[dir=both];
-nodo113J[group =2,label="J - 0",style=filled,fillcolor="cyan4"];
-C110->nodo113J[dir=both];
+nodo93F[group =0,label="F"];
+nodo950[group =0,label="",style=filled,fillcolor="Indianred"];
+nodo96F[group =0,label="F"];
+C90->nodo93F->nodo950->nodo96F[dir=both];
+nodo103F[group =1,label="F"];
+nodo106A[group =1,label="A"];
+C100->nodo103F->nodo106A[dir=both];
+nodo113J[group =2,label="J",style=filled,fillcolor="cyan4"];
+nodo115F[group =2,label="F"];
+nodo116B[group =2,label="B"];
+C110->nodo113J->nodo115F->nodo116B[dir=both];
 
 }
