@@ -237,7 +237,8 @@ void matrizDispersa::anidarInforamcionFila(nodoMatriz *fila,nodoMatriz *nodoTemp
 //-------------------------metodo que recibe los parametros iniciales para crear el nodo 
 //-------------------------despues mandar a sus respetivos metodos para crea y buscar filas , columas
 //-------------------------despues anido la info en su columnas y su fila
-void matrizDispersa::insertarNodo(int tipoCasilla,string caracter,int puntaje,int posX,int posY)
+//-------------------------tipo,letra,puntaje,posx,posy
+void matrizDispersa::insertarNodo(int tipoCasilla,string caracter,int puntaje,int posX,int posY)//tipo,letra,puntaje,posx,posy
 {
     if(estadoMatriz() == true)
     {
@@ -439,6 +440,45 @@ void matrizDispersa::eliminarNodo(int posX, int posY)
 
 
 
+
+
+
+
+//------------------------- METODO PARA BUSCAR UN NODO 
+//------------------------- PARA USAR EN LA PALABRA QUE EL USUARIO QUIERE USAR
+bool matrizDispersa::buscarNodo(int posX,int posY,int &puntaje)
+{
+    if(estadoMatriz()!=true)
+    {
+        nodoMatriz *rootTemporal = root;//creo un nodo aux para buscar desde la raiz
+
+        //empiezo a buscar por filas
+        while (rootTemporal!=NULL && rootTemporal->getPosy()!=posY)
+        {
+            rootTemporal = rootTemporal->getAbajo();
+        }   
+        //busco por columnas ahora
+        while (rootTemporal!=NULL && rootTemporal->getPosx()!=posX)
+        {
+            rootTemporal = rootTemporal->getSiguiente();
+        }
+
+        if(rootTemporal!=NULL)
+        {
+            puntaje = rootTemporal->getPuntaje();
+            return true;
+        }
+        else
+        {
+            return false;
+        }       
+
+    }
+    else
+    {
+        return false;
+    }
+}
 
 
 

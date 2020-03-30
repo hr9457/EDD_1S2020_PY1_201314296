@@ -28,7 +28,7 @@ using namespace std;
 class ventana
 {
     private:
-        listaCircular bibliotecaDePalabras;//listado oficial que hay en archivo json
+        //listaCircular bibliotecaDePalabras;//listado oficial que hay en archivo json
         //matrizDispersa matrizScrabble;
         arbolBinario arbol;//arbol de usuarios
         listaABC listaFichas;

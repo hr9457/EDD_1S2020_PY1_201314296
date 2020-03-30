@@ -38,7 +38,7 @@ void Cola::insertarLetra(int num, string arg)
 
 
 //metodo para ir vaciando la cola
-void Cola::eliminarLetra(int& puntaje,string& letra)
+void Cola::eliminarLetra(int &puntaje,string &letra)
 {    
     if(estadoCola() == true)
     {        

@@ -18,7 +18,7 @@ using namespace std;
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){
 
-    //ventana principal;  
+    ventana principal;  
 
     /*
     int size = 5;
@@ -85,10 +85,11 @@ int main(){
     //------------------pruba cond datos en la matriz 
     //------------------ingresar datos,simples, dobles y triples
     //-------------------sustitucion con una casilla existente
+    /*
     matrizDispersa matriz;
     matriz.insertarNodo(1,"",0,9,5);
     matriz.insertarNodo(2,"",0,10,5);
-    matriz.insertarNodo(2,"J",0,11,3);
+    matriz.insertarNodo(2,"J",5,11,3);
     matriz.insertarNodo(1,"",0,9,5);
     int entradaTeclado;    
     do
@@ -96,6 +97,7 @@ int main(){
         cout<<"1. Insertar ficha"<<endl;
         cout<<"2. Eliminar ficha"<<endl;
         cout<<"3. Mostrar matriz"<<endl;
+        cout<<"4. Buscar Nodo"<<endl;
         cout<<"Salir-Esc"<<endl;
         entradaTeclado = getch();
         
@@ -113,21 +115,12 @@ int main(){
         }
         else if(entradaTeclado==50)
         {
-            string letra;
             int posx,posy;
-            cout<<"ingres la letra: ";
-            cin>>letra;
             cout<<"ingres la posicion en x: ";
             cin>>posx;
             cout<<"ingrese la posicion en y: ";
             cin>>posy;
-            matriz.imprimirColumnas();
-            cout<<endl;
-            matriz.imprimirFilas();
-            cout<<endl;
             matriz.eliminarNodo(posx,posy);
-            cout<<"--------------------------"<<endl;
-            matriz.imprimirMatriz();
         }
         else if(entradaTeclado==51)
         {
@@ -135,9 +128,27 @@ int main(){
             matriz.crearPNG();
             matriz.abrirPNG();
         }
+        else if(entradaTeclado==52)
+        {
+            int posx,posy,puntaje;
+            bool resultadoBusqueda;
+            cout<<"ingres la posicion en x: ";
+            cin>>posx;
+            cout<<"ingrese la posicion en y: ";
+            cin>>posy;
+            resultadoBusqueda=matriz.buscarNodo(posx,posy,puntaje);
+            if(resultadoBusqueda==true)
+            {
+                cout<<"Nodo en la posicion ["<<posx<<","<<posy<<"] con putaje: "<<puntaje<<endl;
+            }
+            else
+            {
+                cout<<"no se encontro el nodo"<<endl;    
+            }
+        }
        
     } while (entradaTeclado!=27);
-
+    */
 
     /*
     matriz.imprimirColumnas();

@@ -47,61 +47,69 @@ void listaDoble::insertaFicha(string caracter,int num)
 
 
 //-------------------------- metodo para eliminar de la lista
-void listaDoble::eliminarFicha(string letra)
+void listaDoble::eliminarFicha(string letra,int &puntajeReturnLista)
 {
     nodoListaDoble *nodoAuxiliar = primero;
     while(nodoAuxiliar!=NULL)
     {
         if(letra==nodoAuxiliar->getLetra())
         {
-            if(primero==nodoAuxiliar)
+            if(primero==nodoAuxiliar)//SI LA FICHA ES IGUAL A PRIMERO
             {  
                 if(nodoAuxiliar->getSiguiente()!=NULL)
                 {
+                    puntajeReturnLista = primero->getPuntaje();
                     primero = nodoAuxiliar->getSiguiente();
                     delete nodoAuxiliar;
                     size = size - 1;
                 }
                 else
                 {
+                    puntajeReturnLista = primero->getPuntaje();
                     primero = NULL;
                     ultimo = NULL;
                     size = size - 1;
                 }
             }
-            else if(ultimo==nodoAuxiliar)
+            else if(ultimo==nodoAuxiliar)//SI LA FICHA ES IGUAL A ULTIIMO
             {     
                 if(nodoAuxiliar->getAnterior()!=NULL)
                 {
                     nodoListaDoble *nodoAux = ultimo->getAnterior();
+                    puntajeReturnLista = ultimo->getPuntaje();
                     ultimo->setAnterior(NULL);
                     nodoAux->setSiguiente(NULL);
                     ultimo = nodoAux;
                 }
                 else
                 {
+                    puntajeReturnLista = ultimo->getPuntaje();
                     ultimo= NULL;
                     primero = NULL;
                     size = size - 1;
                 }
             }
-            else
+            else//SI LA FICHA ESTA EN MEDIO
             {
                 nodoListaDoble *aux1 = nodoAuxiliar->getAnterior();
                 nodoListaDoble *aux2 = nodoAuxiliar->getSiguiente();
+                puntajeReturnLista = nodoAuxiliar->getPuntaje();
                 aux1->setSiguiente(aux2);
                 aux2->setAnterior(aux1);
                 delete nodoAuxiliar; 
                 size = size - 1;             
             }
             break;
-        }
+        }//fin del primer if que revisa cuando se halla encontrado la letra
         nodoAuxiliar = nodoAuxiliar->getSiguiente();
     }
 }
 
 
 
+//---------metodo eliminar de utlimo y vaciar la lista
+void listaDoble::eliminarUltimo(string &letra, int &puntaje)
+{}
 
 
 

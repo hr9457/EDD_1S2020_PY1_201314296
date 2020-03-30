@@ -107,6 +107,7 @@ void ventana::generarFichas()
     //-------------- 10PUNTOS
     listaFichas.insertar(10,"Z",1);
 
+    //--------------CREAR LA COLA RANDOM
     int size = listaFichas.getSize();
     int puntajeReturn;
     string letraReturn;
@@ -178,9 +179,9 @@ void ventana::opReportes(int op)
     //--------- visualizar la biblioteca
     if(op == 49)
     {
-        bibliotecaDePalabras.generarDot();
-        bibliotecaDePalabras.generarPNG();
-        bibliotecaDePalabras.aperturaImagen();
+        //bibliotecaDePalabras.generarDot();
+        //bibliotecaDePalabras.generarPNG();
+        //bibliotecaDePalabras.aperturaImagen();
     }
 
     //cola fichas disponibles
@@ -298,7 +299,8 @@ void ventana::ventanaReportes()
 //------------------------ METODO PARA INICIAR LA VENTANA DE INTERRACION CON EL JUEGO
 void ventana::ventanaJugar()
 {
-    matrizDispersa matrizScrabble;
+    matrizDispersa matrizScrabble;//creo una matriz
+    listaCircular bibliotecaDePalabras;//creo la lista para la biblioteca
     //----------------------- realizo la lectura del archivo json primero
     gotoxy(centroMenu,lineaMenu);
     cout<<"ingrese la ruta del archivo json: ";
@@ -363,18 +365,19 @@ void ventana::ventanaJugar()
 
 
 
-    //abro la matriz
+    //-----------------------ABRO LA MATRIZ
+    //-----------------------PARA QUE LOS JUGADORES PUEDAN VER EL TABLERO
     matrizScrabble.crearDOT();
     matrizScrabble.crearPNG();
     matrizScrabble.abrirPNG();
 
 
-    //creo la pila aleatoriamente con las fichas 
+    //----------------creo la pila aleatoriamente con las fichas 
     generarFichas();
 
 
-    //creo las dos lista de cada jugador
-    
+
+    //--------------creo las dos lista de cada jugador    
     listaDoble listaJugador1;
     listaDoble listaJugador2;
 
@@ -394,12 +397,164 @@ void ventana::ventanaJugar()
     }
     
     
+    //---------------------------------- JUGABILIDAD
+    int entradaTeclado;
+    int numeroJugador=1;
+    int opMenuJugador;
+    int puntajeJugador1,puntajeJugador2;
+    //---------------------------------REPITE HASTA QUE TERMINEN EL JUEGO
+    do
+    {       
+
+        //------------- PANTALLA PARA JUGADOR 1
+        if(numeroJugador==1)
+        {
+            string validacionPalabra="";//PARA BUSCAR LA PALABRA EN LA BIBLIOTECA
+            listaDoble listaUltimaJugada;//PARA GUARDAR LAS FICHAS QUE VA JUGANDO 
+
+            //--------------REPTIR EL MENU HASTA
+            do
+            { 
+                system("cls");//limpieza de pantalla
+                system("color 2");//color de letras pantalla
+                lineaMenu=5;//para posicionar el cursos arriba
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"JUEGO INICIADO   -   ESC PARA SALIR";
+                //---------ABRO SU LISTA CON SUS FICHAS DISPONIBLES
+                listaJugador1.generarDOT(jugador1);
+                listaJugador1.generarPNG();
+                listaJugador1.abrirPNG();
+                //----------MUESTRO EN SU PANTALLA LAS OPCIONES
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"JUGANDO JUGADOR 1: "<<jugador1;//muetro en patalla que jugador esta jugando
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"1. INGRESAR FICHA";
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"2. USAR FICHA DEL TABLERO";
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"3. INTERCAMBIAR MIS FICHAS";
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"4. VALIDAR JUGADA";
+                opMenuJugador=getch();
+                //----------REVISANDO OP QUE ESCOGIO EL JUGADOR
+
+                if(opMenuJugador==49)//OP PARA INSERTAR UNA FICHA EN EL JUEGO
+                {
+                    string letra;
+                    int posx,posy;
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"INGRESE LA LETRA DE LA FICHA: ";
+                    cin>>letra;
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"INGRESE LA POSICION EN X: ";
+                    cin>>posx;
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"INGRESE LA POSICION EN Y: ";
+                    cin>>posy;
+                    //------------SACO DE LA LISTA DEL JUGADOR
+                    int puntajeReturnLista;
+                    listaJugador1.eliminarFicha(letra,puntajeReturnLista);
+
+                    //-----------CONCATENO LA PALABRA
+                    validacionPalabra = validacionPalabra + letra;
+
+                    //------------INGRESO A LA LISTA DE LA ULTIMA JUGADA
+                    listaUltimaJugada.insertaFicha(letra,puntajeReturnLista);
+
+                    //------------LA INGRESO A LA MATRIZ
+                    matrizScrabble.insertarNodo(0,letra,puntajeReturnLista,posx,posy);//tipo,letra,puntaje,posx,posy
+                
+                }//FIN DE LA OPCION 1 DE INSERTAR UNA FICHA
+
+                else if(opMenuJugador==50)//OP PARA USAR UNA FICHA EN EL TABLERO
+                {
+                    string letraEscogida;
+                    int posxLetraEscogida, posyLetraEscogida;
+                    int puntajeEscogida;
+                    bool resultadoLetraBusqueda;
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"INGRESE LA LETRA DE LA FICHA: ";
+                    cin>>letraEscogida;
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"INGRESE LA POSICION QUE ESTA EN X: ";
+                    cin>>posxLetraEscogida;
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"INGRESE LA POSICION QUE ESTA EN Y: ";
+                    cin>>posyLetraEscogida;
+
+                    
+
+                    //---------------BUSCO LA LETRA EN LA MATRIZ
+                    int puntajeDevuelta;
+                    resultadoLetraBusqueda=matrizScrabble.buscarNodo(posxLetraEscogida,posyLetraEscogida,puntajeDevuelta);//posx,posy,puntaje referencia
+
+                    //VERIFICACION DE LA PALABRA BUSCADA
+                    if(resultadoLetraBusqueda==true)
+                    {
+                        //-----------CONCATENO LA PALABRA
+                        validacionPalabra = validacionPalabra + letraEscogida;
+                    }
+                    else
+                    {
+                        lineaMenu=lineaMenu+1;
+                        gotoxy(centroMenu,lineaMenu);
+                        cout<<"LETRA NO SE ENCUNTRA EN EL TABLERO ";
+                    }
+                    
+                }//FIN DE LA OPCION 2 DE ESCOGER UNA LETRA DEL TABLERO
+
+
+                else if(opMenuJugador==51)//OPCION PARA QUE EL JUGADOR INTERCAMBIE TODOS SUS FICHAS
+                {}//FIN DEL METODO PAR INTERCAMBIAR LAS FICHAS
+
+                else if(opMenuJugador==52)//OPCION DONDE EL JUGADOR VALIDA SU JUGADA
+                {
+                    bool validacionDeJugada;
+                    bibliotecaDePalabras.buscar(validacionPalabra,validacionDeJugada);//busco en la biblioteca
+                    //reviso si exite o no en la biblioteca
+                    if(validacionDeJugada==true)
+                    {}
+                    else
+                    {                        
+                    }
+                    
+                }//FIN DEL METODO PARA VALIDAR LA JUGADA
+            
+
+            }while(opMenuJugador!=54 || opMenuJugador!=27);//FIN DEL REPETIR HASTA QUE
+
+            numeroJugador=2;
+        }//FIN DE LA PANTALLA PARA EL JUGADOR 1
+
+
+        //-----PANTALLA PARA JUGADOR 2
+        else if(numeroJugador==2)
+        {
+            numeroJugador=1;
+        }//FIN DE LA PANTALLA PARA EL JUGADOR 2
+
+        entradaTeclado = getch();
+    } while (entradaTeclado!=27);
+    
+    
     //abro las fichas disponibles para el jugador 1
     //para que inicie a jugar el jugador 1
+    /*
     listaJugador1.generarDOT(jugador1);
     listaJugador1.generarPNG();
     listaJugador1.abrirPNG();
-    
+    */
 
 }
 

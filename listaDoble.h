@@ -19,7 +19,8 @@ class listaDoble
         listaDoble();
         bool estdoLista();
         void insertaFicha(string,int);
-        void eliminarFicha(string);
+        void eliminarFicha(string,int&);
+        void eliminarUltimo(string &,int &);
         int getSize();
         void setSize(int);
         void imprimir();        

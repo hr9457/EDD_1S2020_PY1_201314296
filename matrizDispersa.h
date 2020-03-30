@@ -38,6 +38,9 @@ class matrizDispersa
         void eliminarNodo(int,int);
 
 
+        bool buscarNodo(int,int,int &);//busco con posiciones X y Y del nodo  y un int por referencia
+
+
         void imprimirColumnas();
         void imprimirFilas();
         void impresionPorFilas(nodoMatriz *);

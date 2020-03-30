@@ -20,6 +20,7 @@ class listaCircular
         listaCircular();
         bool estadoLista();
         void insertar(string arg);
+        void buscar(string,bool &);
         void imprimir();
         void generarDot();
         void generarPNG();

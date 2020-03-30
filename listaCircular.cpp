@@ -33,6 +33,30 @@ void listaCircular::insertar(string arg){
     }
 }
 
+
+//metodo para buscar una palabra en la biblioteca
+void listaCircular::buscar(string palabra, bool &validacionDeJugada)
+{
+    nodoCircular *nodoAuxPrimero = primero;
+    do
+    {
+        if(palabra==nodoAuxPrimero->getPalabra())
+        {
+            validacionDeJugada = true;
+            break;
+        }
+        else
+        {
+            validacionDeJugada = false;
+            nodoAuxPrimero = nodoAuxPrimero->getSiguiente();
+        }
+        
+    } while (nodoAuxPrimero!=primero);
+    
+}
+
+
+
 //impresion de la lista
 void listaCircular::imprimir(){    
     if(estadoLista() == true){
