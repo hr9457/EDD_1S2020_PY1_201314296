@@ -182,10 +182,11 @@ void ventana::opReportes(int op)
         //bibliotecaDePalabras.generarDot();
         //bibliotecaDePalabras.generarPNG();
         //bibliotecaDePalabras.aperturaImagen();
+        system("Reportes\\ListaCircular.png");
     }
 
     //cola fichas disponibles
-    if(op == 50)
+    else if(op == 50)
     {        
         colaFichas.generarDot();
         colaFichas.generarPNG();
@@ -193,7 +194,7 @@ void ventana::opReportes(int op)
     }
 
     //arbol binario
-    if(op == 51)
+    else if(op == 51)
     {
         arbol.generarDot();
         arbol.generarPNG();
@@ -201,7 +202,7 @@ void ventana::opReportes(int op)
     }
 
     //arbol binario preorden
-    if(op == 52)
+    else if(op == 52)
     {
         arbol.generarDotPreorden();
         arbol.generarPNGPreorden();
@@ -209,7 +210,7 @@ void ventana::opReportes(int op)
     }
 
     //arbol binario inorden
-    if(op == 53)
+    else if(op == 53)
     {
         arbol.generarDotInorden();
         arbol.generarPNGInorden();
@@ -217,7 +218,7 @@ void ventana::opReportes(int op)
     }
 
     //arbol binario postorden
-    if(op == 54)
+    else if(op == 54)
     {
         arbol.generarDotPostorden();
         arbol.generarPNGPostorden();
@@ -225,11 +226,18 @@ void ventana::opReportes(int op)
     }
 
     //matriz
-    if(op ==56)
+    else if(op ==56)
     {
         //matrizScrabble.crearDOT();
         //matrizScrabble.crearPNG();
         //matrizScrabble.abrirPNG();
+        system("Reportes\\Matriz.png");
+    }
+
+    //ultima lista de jugador
+    else if(op==57)
+    {
+       system("Reportes\\ListaJugador.png"); 
     }
 }
 
@@ -370,6 +378,8 @@ void ventana::ventanaJugar()
     //matrizScrabble.crearDOT();
     //matrizScrabble.crearPNG();
     //matrizScrabble.abrirPNG();
+    bibliotecaDePalabras.generarDot();
+    bibliotecaDePalabras.generarPNG();
 
 
     //----------------creo la pila aleatoriamente con las fichas 
@@ -405,6 +415,7 @@ void ventana::ventanaJugar()
 
 
     string palabraJugador1="";//PARA BUSCAR LA PALABRA EN LA BIBLIOTECA
+    string palabraJugador2="";//PARA BUSCAR LA PALABRA EN LA BIBLIOTECA
     listaDoble ultimaJugada;//PARA GUARDAR LAS FICHAS QUE VA JUGANDO 
     int tamanioListaJugador1;
     int tamanioListaJugador2;
@@ -478,9 +489,9 @@ void ventana::ventanaJugar()
 
                 //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
                 matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
-                matrizScrabble.crearDOT();
-                matrizScrabble.crearPNG();
-                matrizScrabble.abrirPNG();
+                //matrizScrabble.crearDOT();
+                //matrizScrabble.crearPNG();
+                //matrizScrabble.abrirPNG();
 
                 //-----------CONCATENO LA PALABRA
                 palabraJugador1 = palabraJugador1 + letra;
@@ -562,7 +573,11 @@ void ventana::ventanaJugar()
                     colaFichas.eliminarLetra(puntaje,letra);
                     listaJugador1.insertaFicha(letra,puntaje,0,0);
                 }
-                numeroJugador==2;//CAMBIO DE TURNO
+
+                if(numeroJugador=1)
+                {
+                    numeroJugador=2;
+                }
                 
             }//FIN DEL INTERCAMBIO DE FICHAS
 
@@ -572,7 +587,7 @@ void ventana::ventanaJugar()
             //------------------------Y ELIMINO DE LA MATRIZ SI LA PALABRAS ES INCORECTA
             else if(entradaTeclado==52)
             {
-                bool validacionDeJugada;
+                bool validacionDeJugada=false;
                 bibliotecaDePalabras.buscar(palabraJugador1,validacionDeJugada);
                 if(validacionDeJugada==true)
                 {
@@ -589,7 +604,8 @@ void ventana::ventanaJugar()
                     //QUITO LAS FICHAS QUE EN LA ULTIMA JUGADA
                     ultimaJugada.setPrimero(NULL);
                     ultimaJugada.setUltimo(NULL);
-                    numeroJugador==2;//CAMBIO DE TURNO
+                    
+                    
                 }
                 else
                 {
@@ -603,17 +619,231 @@ void ventana::ventanaJugar()
                         matrizScrabble.eliminarNodo(posxReturnEliminacion,posyReturnEliminacion);
                         listaJugador1.insertaFicha(letra,puntajeReturn,0,0);
                     }while(ultimaJugada.estdoLista()!=true);
+                    
                 }
+                
+                //cambiar de jugador
+                if(numeroJugador=1)
+                {
+                    numeroJugador=2;
+                }
+
             }//FIN VALIDACION DE LA PALABRA
 
         }//FIN DE LA PANTALLA PARA EL JUGADOR 1
+
+
+
+
+        //------------- PANTALLA PARA JUGADOR 2
+        else if(numeroJugador==2)
+        {
+            //------------------------PARA MOSTRAR AL JUGADOR CUANTAS FICHAS TIENE
+            //------------------------  QUE FICHAS TIENE ACTUALMENTE
+            listaJugador2.generarDOT(jugador2);
+            listaJugador2.generarPNG();
+            listaJugador2.abrirPNG();
+            //--------------------------------------------------------------------
+            //-----------------------ABRO LA MATRIZ
+            //-----------------------PARA QUE LOS JUGADORES PUEDAN VER EL TABLERO    
+            matrizScrabble.crearDOT();
+            matrizScrabble.crearPNG();
+            matrizScrabble.abrirPNG();
+            
+
+            system("cls");//limpieza de pantalla
+            system("color 2");//color de letras pantalla
+            lineaMenu=5;//para posicionar el cursos arriba
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"JUEGO INICIADO   -   ESC PARA SALIR";
+            
+            //----------MUESTRO EN SU PANTALLA LAS OPCIONES
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"JUGANDO JUGADOR 2: "<<jugador2;//muetro en patalla que jugador esta jugando
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"1. INGRESAR FICHA";//49
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"2. USAR FICHA DEL TABLERO";//50
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"3. INTERCAMBIAR MIS FICHAS";//51
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"4. VALIDAR JUGADA";//52
+
+
+            entradaTeclado = getch();
+            //----------REVISANDO OP QUE ESCOGIO EL JUGADOR
+
+            if(entradaTeclado==49)//OP PARA INSERTAR UNA FICHA EN EL JUEGO
+            {
+                //--------------------------------------------------------------------
+                string letra;
+                int posx,posy;
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"INGRESE LA LETRA DE LA FICHA: ";
+                cin>>letra;
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"INGRESE LA POSICION EN X: ";
+                cin>>posx;
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"INGRESE LA POSICION EN Y: ";
+                cin>>posy;
+                //------------SACO DE LA LISTA DEL JUGADOR
+                int puntajeReturnLista;
+                listaJugador2.eliminarFicha(letra,puntajeReturnLista);
+
+                //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
+                matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
+                //matrizScrabble.crearDOT();
+                //matrizScrabble.crearPNG();
+                //matrizScrabble.abrirPNG();
+
+                //-----------CONCATENO LA PALABRA
+                palabraJugador2 = palabraJugador2 + letra;
+
+                //------------INGRESO A LA LISTA DE LA ULTIMA JUGADA
+                ultimaJugada.insertaFicha(letra,puntajeReturnLista,posx,posy);
+
+
+            }//FIN DE LA OPCION 1 DE INSERTAR UNA FICHA
+
+
+
+            //-------------------EL USUARIO DESEEA USAR UNA FICHA DEL TABLERO
+            else if(entradaTeclado==50)
+            {
+                string letraEscogida;
+                int posxLetraEscogida, posyLetraEscogida;
+                int puntajeEscogida;
+                bool resultadoLetraBusqueda;
+
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"INGRESE LA LETRA DE LA FICHA: ";
+                cin>>letraEscogida;
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"INGRESE LA POSICION QUE ESTA EN X: ";
+                cin>>posxLetraEscogida;
+                lineaMenu=lineaMenu+1;
+                gotoxy(centroMenu,lineaMenu);
+                cout<<"INGRESE LA POSICION QUE ESTA EN Y: ";
+                cin>>posyLetraEscogida;
+
+                //---------------BUSCO LA LETRA EN LA MATRIZ
+                int puntajeDevuelta;
+                resultadoLetraBusqueda=matrizScrabble.buscarNodo(posxLetraEscogida,posyLetraEscogida,puntajeDevuelta);//posx,posy,puntaje referencia
+
+                //VERIFICACION DE LA PALABRA BUSCADA
+                if(resultadoLetraBusqueda==true)
+                {
+                    //-----------CONCATENO LA PALABRA
+                    palabraJugador2 = palabraJugador2 + letraEscogida;
+                }
+                else
+                {
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"LETRA NO SE ENCUNTRA EN EL TABLERO ";
+                }
+            }//FIN DE ESCOGE UNA FICHA DEL TABLERO
+
+
+
+            //-------------------------ACAD DONDE EL USUARIO ESCOGIO 
+            //-------------------------CAMBIAR TODOAS SUS FICHAS
+            else if(entradaTeclado==51)
+            {
+                //MIRO CUANTAS FICHAS TIENE EL JUGADOR
+                int cantidadFichasJugador = listaJugador2.getSize();
+                for (int i = 0; i < cantidadFichasJugador; i++)
+                {
+                    string letra;
+                    int puntajeReturn;
+                    int posxReturnEliminacion;
+                    int posyReturnEliminacion;
+                    listaJugador2.eliminarUltimo(letra,puntajeReturn,posxReturnEliminacion,posyReturnEliminacion);
+                    colaFichas.insertarLetra(puntajeReturn,letra);
+                }
+                //----ELIMINO LAS 7 FICHAS DEL JUGADOR DE SU LISTA
+                //----Y LAS COLOCO NUEVAMENTE EN LA COLA DE FICHAS
+
+                //----BUSCO FICHAS EN LA COLA
+                //----LAS INSERTO EN LA LISTA DEL JUGADOR
+                //cantidadFichasJugador = listaJugador1.getSize();
+                for (int i=0; i < 7; i++)
+                {
+                    int puntaje;
+                    string letra;
+                    colaFichas.eliminarLetra(puntaje,letra);
+                    listaJugador2.insertaFicha(letra,puntaje,0,0);
+                }
+                //cambiar de jugador
+                if(numeroJugador=2)
+                {
+                    numeroJugador=1;
+                }
+                
+            }//FIN DEL INTERCAMBIO DE FICHAS
+
+
+
+            //-------------------------ACA DONDE VALIDO LA JUGADA DEL JUEGO
+            //------------------------Y ELIMINO DE LA MATRIZ SI LA PALABRAS ES INCORECTA
+            else if(entradaTeclado==52)
+            {
+                bool validacionDeJugada;
+                bibliotecaDePalabras.buscar(palabraJugador1,validacionDeJugada);
+                if(validacionDeJugada==true)
+                {
+                    //ver cuantas fichas tiene el jugador
+                    tamanioListaJugador2 = listaJugador2.getSize();
+                    for (tamanioListaJugador2; tamanioListaJugador2 < 6; tamanioListaJugador1++)
+                    {
+                        int puntaje;
+                        string letra;
+                        colaFichas.eliminarLetra(puntaje,letra);
+                        listaJugador2.insertaFicha(letra,puntaje,0,0);
+                    }
+                    
+                    //QUITO LAS FICHAS QUE EN LA ULTIMA JUGADA
+                    ultimaJugada.setPrimero(NULL);
+                    ultimaJugada.setUltimo(NULL);
+                }
+                else
+                {
+                    //ELIMINO DE LA MATRIZ, Y LAS DEVUELVO A JUGADOR
+                    do{
+                        string letra;
+                        int puntajeReturn;
+                        int posxReturnEliminacion;
+                        int posyReturnEliminacion;
+                        ultimaJugada.eliminarUltimo(letra,puntajeReturn,posxReturnEliminacion,posyReturnEliminacion);
+                        matrizScrabble.eliminarNodo(posxReturnEliminacion,posyReturnEliminacion);
+                        listaJugador2.insertaFicha(letra,puntajeReturn,0,0);
+                    }while(ultimaJugada.estdoLista()!=true);
+                }
+                //cambiar de jugador
+                if(numeroJugador=2)
+                {
+                    numeroJugador=1;
+                }
+            }
+        }//FIN DE LA PANTALLA JUGADOR 2
 
 
         //entradaTeclado = getch();
     } while (entradaTeclado!=27);
 
 }
-
+//----------------------------FIN DE LA JUGABILIDAD
 
 
 
@@ -660,6 +890,9 @@ void ventana::selecionJugador(int op)
         else
         {
             ventanaJugar(); 
+            rutaArchivo="";
+            jugador1="";
+            jugador2="";
         }        
     }
 }

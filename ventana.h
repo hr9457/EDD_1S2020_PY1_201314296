@@ -12,6 +12,7 @@
 #include "fstream"
 #include "cstdlib"
 #include "ctime"
+#include "windows.h"
 
 //--------importaciones de mis estructruas
 #include "listaCircular.h"
