@@ -18,7 +18,7 @@ bool Cola::estadoCola()
 }
 
 
-void Cola::insertarLetra(int num, string arg)
+void Cola::insertarLetra(int num, string arg)//puntaje y letra
 {
     nodoCola *nodoTemporal = new nodoCola(num,arg);
     if (estadoCola() == true)

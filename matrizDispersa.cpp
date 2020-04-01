@@ -738,7 +738,7 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
         }
         else
         {
-            archivo<<"label=\"\"";
+            archivo<<"label=\" \"";
         }
         
         
@@ -798,6 +798,7 @@ void matrizDispersa::nodoCOLUMNASDOT(nodoMatriz *nodoInformacion)
 //metodo para crear el dot del archivo
 void matrizDispersa::crearDOT()
 {
+    contadorGroup = 0;
     archivo.open("ArchivosDot\\Matriz.dot",ios::out);
     if(archivo.fail()){
         cout<<"no se puedo abrir el archivo"<<endl;

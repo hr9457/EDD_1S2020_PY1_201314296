@@ -22,10 +22,34 @@ bool listaDoble::estdoLista()
 
 
 
-//--------------------- metodo para insertar una ficha en la lista
-void listaDoble::insertaFicha(string caracter,int num)
+//---------------------metodo que envian y devueleven en primero y ultimo
+nodoListaDoble * listaDoble::getPrimero()
 {
-    nodoListaDoble *nodoTemporal = new nodoListaDoble(caracter,num);
+    return primero;
+}
+
+
+void listaDoble::setPrimero(nodoListaDoble *puntero)
+{
+    this->primero = puntero;
+}
+
+nodoListaDoble * listaDoble::getUltimo()
+{
+    return ultimo;
+}
+
+void listaDoble::setUltimo(nodoListaDoble *puntero)
+{
+    this->ultimo = puntero;
+}
+
+
+
+//--------------------- metodo para insertar una ficha en la lista
+void listaDoble::insertaFicha(string caracter,int num,int posx,int posy)
+{
+    nodoListaDoble *nodoTemporal = new nodoListaDoble(caracter,num,posx,posy);
     if(estdoLista() == true)
     {
         primero = nodoTemporal;
@@ -108,8 +132,35 @@ void listaDoble::eliminarFicha(string letra,int &puntajeReturnLista)
 
 
 //---------metodo eliminar de utlimo y vaciar la lista
-void listaDoble::eliminarUltimo(string &letra, int &puntaje)
-{}
+void listaDoble::eliminarUltimo(string &letra, int &puntaje,int &posxReturnEliminacion,int &posyReturnEliminacion)
+{
+    if(estdoLista()!=true)
+    {
+        if(ultimo==primero)
+        {
+            letra = ultimo->getLetra();
+            puntaje = ultimo->getPuntaje();
+            posxReturnEliminacion=ultimo->getPosx();
+            posyReturnEliminacion=ultimo->getPosy();
+            primero=NULL;
+            ultimo=NULL;
+            size = size - 1; 
+        }
+        else
+        {
+            letra = ultimo->getLetra();
+            puntaje = ultimo->getPuntaje();
+            posxReturnEliminacion=ultimo->getPosx();
+            posyReturnEliminacion=ultimo->getPosy();
+            nodoListaDoble *auxAnterior = ultimo->getAnterior();
+            ultimo->setAnterior(NULL);
+            auxAnterior->setSiguiente(NULL);
+            ultimo = auxAnterior;
+            size = size - 1; 
+        }
+        
+    }
+}
 
 
 
@@ -188,17 +239,7 @@ void listaDoble::abrirPNG()
 }
 
 
-//------------------- metodo para utilizar de elimiar de ultimo 
-void listaDoble::eliminarUltimo()
-{
-    if(estdoLista()!=true)
-    {
-        nodoListaDoble *nodoAux = ultimo->getAnterior();
-        ultimo->setAnterior(NULL);
-        nodoAux->setSiguiente(NULL);
-        ultimo = nodoAux;
-    }
-}
+
 
 
 

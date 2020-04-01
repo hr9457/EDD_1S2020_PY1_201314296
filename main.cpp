@@ -17,80 +17,16 @@ using namespace std;
 
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){
-
-    ventana principal;  
-
+    ventana ventanainicio;
     /*
-    int size = 5;
-    while(size>0)
-    {
-        srand((unsigned)time(0)); 
-        int i;
-        i = (rand()%size); 
-        cout << i << "\n";        
-        size--;
-    }
-    getch();
-    */
-    
-
-
-
-    
-    /*
-    listaDoble lista;
-    //-----------------MENU PROVICIONAL
-    int entradaTeclado;    
-    do
-    {
-        cout<<"1. Ingresar ficha en la lista"<<endl;
-        cout<<"2. Imprimir elementos de la lista"<<endl;
-        cout<<"3. Eliminar ficha de la lista"<<endl;
-        cout<<"4. Salir"<<endl;
-        entradaTeclado = getch();
-        
-        if(entradaTeclado==49)
-        {
-            string letra;
-            int num;
-            cout<<"ingrese la letra"<<endl;
-            cin>>letra;  
-            cout<<"ingres puntaje"<<endl;
-            cin>>num;
-            lista.insertaFicha(letra,num); 
-        }
-        else if(entradaTeclado==50)
-        {
-            lista.generarDOT("hector");
-            lista.generarPNG();
-            lista.abrirPNG();
-        }
-        else if(entradaTeclado==51)
-        {
-            string letraEliminar;
-            cout<<"ingrese la letra de la ficha"<<endl;
-            cin>>letraEliminar;
-            lista.eliminarFicha(letraEliminar);
-        }
-       
-    } while (entradaTeclado!=52);
-    */
-    
-
-
-
-    
-    //matrizDispersa matriz;    
+    matrizDispersa matriz;    
     
     //------------------pruba cond datos en la matriz 
     //------------------ingresar datos,simples, dobles y triples
     //-------------------sustitucion con una casilla existente
-    /*
-    matrizDispersa matriz;
-    matriz.insertarNodo(1,"",0,9,5);
-    matriz.insertarNodo(2,"",0,10,5);
-    matriz.insertarNodo(2,"J",5,11,3);
-    matriz.insertarNodo(1,"",0,9,5);
+    matriz.insertarNodo(1,"",0,2,5);
+    matriz.insertarNodo(1,"",5,10,15);
+    matriz.insertarNodo(2,"",0,0,1);
     int entradaTeclado;    
     do
     {
@@ -128,60 +64,8 @@ int main(){
             matriz.crearPNG();
             matriz.abrirPNG();
         }
-        else if(entradaTeclado==52)
-        {
-            int posx,posy,puntaje;
-            bool resultadoBusqueda;
-            cout<<"ingres la posicion en x: ";
-            cin>>posx;
-            cout<<"ingrese la posicion en y: ";
-            cin>>posy;
-            resultadoBusqueda=matriz.buscarNodo(posx,posy,puntaje);
-            if(resultadoBusqueda==true)
-            {
-                cout<<"Nodo en la posicion ["<<posx<<","<<posy<<"] con putaje: "<<puntaje<<endl;
-            }
-            else
-            {
-                cout<<"no se encontro el nodo"<<endl;    
-            }
-        }
        
     } while (entradaTeclado!=27);
-    */
-
-    /*
-    matriz.imprimirColumnas();
-    cout<<endl;
-    matriz.imprimirFilas();
-    cout<<endl;
-    cout<<"--------------------------"<<endl;
-    matriz.imprimirMatriz();
-    matriz.crearDOT();
-    matriz.crearPNG();
-    matriz.abrirPNG();
-    getch();
-    */
-
-    /*
-    ----------------------------------prueba para el arbol
-    arbolBinario arbol;
-    arbol.insertarJugador("heidy");
-    arbol.insertarJugador("carlos");
-    arbol.insertarJugador("antonio");
-    arbol.insertarJugador("eduardo");
-    arbol.insertarJugador("rodrigo");
-    arbol.generarDot();
-    arbol.generarPNG(); 
-
-    arbol.generarDotPreorden();
-    arbol.generarPNGPreorden();
-    
-    arbol.generarDotInorden();
-    arbol.generarPNGInorden();
-    arbol.generarDotPostorden();
-    arbol.generarPNGPostorden();
-
     */
     return 0;
 }

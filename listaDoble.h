@@ -18,16 +18,23 @@ class listaDoble
     public:
         listaDoble();
         bool estdoLista();
-        void insertaFicha(string,int);
+        nodoListaDoble * getPrimero();
+        void setPrimero(nodoListaDoble *);
+        nodoListaDoble * getUltimo();
+        void setUltimo(nodoListaDoble *);
+        void insertaFicha(string,int,int,int);
         void eliminarFicha(string,int&);
-        void eliminarUltimo(string &,int &);
+        void eliminarUltimo(string &,int &,int &,int &);
         int getSize();
+        int getPosx();
+        void setPosx(int);
+        int getPosy();
+        void setPosy(int);
         void setSize(int);
         void imprimir();        
         void generarDOT(string);
         void generarPNG();
         void abrirPNG();
-        void eliminarUltimo();
         ~listaDoble();
 };
 

@@ -1,8 +1,10 @@
 #include "nodoListaDoble.h"
 
-nodoListaDoble::nodoListaDoble(string caracter,int num){
+nodoListaDoble::nodoListaDoble(string caracter,int num,int posx,int posy){
     this->letra = caracter;
     this->puntaje = num;
+    this->posx = posx;
+    this->posy = posy;
     this->siguiente = NULL;
     this->anterior = NULL;
 }
@@ -26,6 +28,28 @@ void nodoListaDoble::setPuntaje(int num)
 {
     this->puntaje = num;
 }
+
+
+int nodoListaDoble::getPosx()
+{
+    return posx;
+}
+
+void nodoListaDoble::setPosx(int num)
+{
+    this->posx = num;
+}
+
+int nodoListaDoble::getPosy()
+{
+    return posy;
+}
+
+void nodoListaDoble::setPosy(int num)
+{
+    this->posy = num;
+}
+
 
 nodoListaDoble * nodoListaDoble::getSiguiente()
 {
