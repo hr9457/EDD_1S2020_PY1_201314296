@@ -178,8 +178,19 @@ void matrizDispersa::anidarInformacionColumna(nodoMatriz *columna,nodoMatriz *no
         else if(columnaTemporal->getAbajo()!=NULL && columnaTemporal->getAbajo()->getPosy() == nodoTemporal->getPosy())
         {
             //CUANDO SON IGUALES
-            columnaTemporal->getAbajo()->setPalabra(nodoTemporal->getPalabra()); 
-            columnaTemporal->getAbajo()->setPuntaje(nodoTemporal->getPuntaje());              
+            columnaTemporal->getAbajo()->setPalabra(nodoTemporal->getPalabra());//cambio por la letra enviada
+            if(columnaTemporal->getAbajo()->getTipoCasilla()==1)
+            {
+                columnaTemporal->getAbajo()->setPuntaje(nodoTemporal->getPuntaje()*2);//cambio el puntaje por el enviado
+            }
+            else if(columnaTemporal->getAbajo()->getTipoCasilla()==2)
+            {
+                columnaTemporal->getAbajo()->setPuntaje(nodoTemporal->getPuntaje()*3);//cambio el puntaje por el enviado
+            }
+            else
+            {
+                columnaTemporal->getAbajo()->setPuntaje(nodoTemporal->getPuntaje());//cambio el puntaje por el enviado              
+            }       
         }        
     }
 }

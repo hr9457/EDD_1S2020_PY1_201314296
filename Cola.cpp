@@ -18,6 +18,13 @@ bool Cola::estadoCola()
 }
 
 
+//estado del tamanaio de la cola
+int Cola::getSize()
+{
+    return tamanio;
+}
+
+
 void Cola::insertarLetra(int num, string arg)//puntaje y letra
 {
     nodoCola *nodoTemporal = new nodoCola(num,arg);
@@ -25,11 +32,13 @@ void Cola::insertarLetra(int num, string arg)//puntaje y letra
     {
         primero = nodoTemporal;
         ultimo = nodoTemporal;
+        tamanio = tamanio +1;
     }
     else
     {
         ultimo->setSiguiente(nodoTemporal);
         ultimo = nodoTemporal;
+        tamanio = tamanio +1;
     }    
 }
 
@@ -51,6 +60,7 @@ void Cola::eliminarLetra(int &puntaje,string &letra)
             letra = primero->getLetra();
             primero = NULL;
             ultimo = NULL;
+            tamanio = tamanio -1;
         }   
         else
         {
@@ -59,6 +69,7 @@ void Cola::eliminarLetra(int &puntaje,string &letra)
             letra = nodoAuxiiar->getLetra();            
             primero = primero->getSiguiente();
             delete nodoAuxiiar;
+            tamanio = tamanio -1;
         }        
     }
 }

@@ -412,6 +412,7 @@ void ventana::ventanaJugar()
     int numeroJugador=1;
     int opMenuJugador;
     int puntajeJugador1,puntajeJugador2;
+    int tamanioColaFichas;
 
 
     string palabraJugador1="";//PARA BUSCAR LA PALABRA EN LA BIBLIOTECA
@@ -589,7 +590,7 @@ void ventana::ventanaJugar()
             {
                 bool validacionDeJugada=false;
                 bibliotecaDePalabras.buscar(palabraJugador1,validacionDeJugada);
-                if(validacionDeJugada==true)
+                if(validacionDeJugada==true && palabraJugador1!="")
                 {
                     //ver cuantas fichas tiene el jugador
                     tamanioListaJugador1 = listaJugador1.getSize();
@@ -622,6 +623,8 @@ void ventana::ventanaJugar()
                     
                 }
                 
+                //borroo lo actual con la que se evaluo
+                palabraJugador1 = "";
                 //cambiar de jugador
                 if(numeroJugador=1)
                 {
@@ -800,8 +803,8 @@ void ventana::ventanaJugar()
             else if(entradaTeclado==52)
             {
                 bool validacionDeJugada;
-                bibliotecaDePalabras.buscar(palabraJugador1,validacionDeJugada);
-                if(validacionDeJugada==true)
+                bibliotecaDePalabras.buscar(palabraJugador2,validacionDeJugada);
+                if(validacionDeJugada==true && palabraJugador2!="")
                 {
                     //ver cuantas fichas tiene el jugador
                     tamanioListaJugador2 = listaJugador2.getSize();
@@ -830,6 +833,8 @@ void ventana::ventanaJugar()
                         listaJugador2.insertaFicha(letra,puntajeReturn,0,0);
                     }while(ultimaJugada.estdoLista()!=true);
                 }
+                //borroo lo actual con la que se evaluo
+                palabraJugador2 = "";
                 //cambiar de jugador
                 if(numeroJugador=2)
                 {
@@ -840,7 +845,9 @@ void ventana::ventanaJugar()
 
 
         //entradaTeclado = getch();
-    } while (entradaTeclado!=27);
+        //guardo la cantidad actual de la cola de fichas
+        tamanioColaFichas = colaFichas.getSize();
+    } while (entradaTeclado!=27 || tamanioColaFichas != 0);
 
 }
 //----------------------------FIN DE LA JUGABILIDAD

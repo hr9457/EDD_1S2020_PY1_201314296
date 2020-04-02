@@ -14,6 +14,7 @@ class Cola
     private:
         nodoCola *primero;
         nodoCola *ultimo;
+        int tamanio;
 
     public:
         Cola();
@@ -22,6 +23,7 @@ class Cola
         nodoCola * getUltimo();
         void setUltimo();
         bool estadoCola();
+        int getSize();
         void insertarLetra(int num, string arg);
         string getLetraPrimero();
         void eliminarLetra(int&,string&);
