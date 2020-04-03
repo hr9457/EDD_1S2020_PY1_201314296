@@ -1,8 +1,10 @@
 digraph arbol
 {
 rankdir=TB;
-nodohector[ label = "hector"]; 
-nodohector->nodojosue
-nodojosue[ label = "josue"]; 
+nodoHECTOR[ label = "HECTOR"]; 
+nodoHECTOR->nodoCARLOS
+nodoCARLOS[ label = "CARLOS"]; 
+nodoHECTOR->nodoJOSUE
+nodoJOSUE[ label = "JOSUE"]; 
 label = " Arbol Binario " 
 }

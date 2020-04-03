@@ -494,24 +494,34 @@ void ventana::ventanaJugar()
                 gotoxy(centroMenu,lineaMenu);
                 cout<<"INGRESE LA POSICION EN Y: ";
                 cin>>posy;
-                //------------SACO DE LA LISTA DEL JUGADOR
-                int puntajeReturnLista;
-                listaJugador1.eliminarFicha(letra,puntajeReturnLista);
-                //sumo al puntaje del jugador
-                puntajeJugador1=puntajeJugador1+puntajeReturnLista;
 
-                //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
-                matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
-                //matrizScrabble.crearDOT();
-                //matrizScrabble.crearPNG();
-                //matrizScrabble.abrirPNG();
+                //condicional para que no se salgo mas alla del tablero
+                if(posx<=dimensionMaxima && posy<=dimensionMaxima)
+                {
+                    //------------SACO DE LA LISTA DEL JUGADOR
+                    int puntajeReturnLista;
+                    listaJugador1.eliminarFicha(letra,puntajeReturnLista);
+                    //sumo al puntaje del jugador
+                    puntajeJugador1=puntajeJugador1+puntajeReturnLista;
 
-                //-----------CONCATENO LA PALABRA
-                palabraJugador1 = palabraJugador1 + letra;
+                    //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
+                    matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
+                    //matrizScrabble.crearDOT();
+                    //matrizScrabble.crearPNG();
+                    //matrizScrabble.abrirPNG();
 
-                //------------INGRESO A LA LISTA DE LA ULTIMA JUGADA
-                ultimaJugada.insertaFicha(letra,puntajeReturnLista,posx,posy);
+                    //-----------CONCATENO LA PALABRA
+                    palabraJugador1 = palabraJugador1 + letra;
 
+                    //------------INGRESO A LA LISTA DE LA ULTIMA JUGADA
+                    ultimaJugada.insertaFicha(letra,puntajeReturnLista,posx,posy);
+                }
+                else
+                {
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"POSICIONES X Y Y SE SALEN DEL TABLERO DEL JUEGO";
+                }
 
             }//FIN DE LA OPCION 1 DE INSERTAR UNA FICHA
 
@@ -744,25 +754,34 @@ void ventana::ventanaJugar()
                 gotoxy(centroMenu,lineaMenu);
                 cout<<"INGRESE LA POSICION EN Y: ";
                 cin>>posy;
-                //------------SACO DE LA LISTA DEL JUGADOR
-                int puntajeReturnLista;
-                listaJugador2.eliminarFicha(letra,puntajeReturnLista);
+                //CONDICIONAL PARA QUE NO SALGA MAS ALLA DEL TABLERO DEL JUEGO
+                if(posx<=dimensionMaxima && posy<=dimensionMaxima)
+                {
+                    //------------SACO DE LA LISTA DEL JUGADOR
+                    int puntajeReturnLista;
+                    listaJugador2.eliminarFicha(letra,puntajeReturnLista);
 
-                //agergo al puntaje del jugador
-                puntajeJugador2=puntajeJugador2+puntajeReturnLista;
+                    //agergo al puntaje del jugador
+                    puntajeJugador2=puntajeJugador2+puntajeReturnLista;
 
-                //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
-                matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
-                //matrizScrabble.crearDOT();
-                //matrizScrabble.crearPNG();
-                //matrizScrabble.abrirPNG();
+                    //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
+                    matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
+                    //matrizScrabble.crearDOT();
+                    //matrizScrabble.crearPNG();
+                    //matrizScrabble.abrirPNG();
 
-                //-----------CONCATENO LA PALABRA
-                palabraJugador2 = palabraJugador2 + letra;
+                    //-----------CONCATENO LA PALABRA
+                    palabraJugador2 = palabraJugador2 + letra;
 
-                //------------INGRESO A LA LISTA DE LA ULTIMA JUGADA
-                ultimaJugada.insertaFicha(letra,puntajeReturnLista,posx,posy);
-
+                    //------------INGRESO A LA LISTA DE LA ULTIMA JUGADA
+                    ultimaJugada.insertaFicha(letra,puntajeReturnLista,posx,posy);
+                }
+                else
+                {
+                    lineaMenu=lineaMenu+1;
+                    gotoxy(centroMenu,lineaMenu);
+                    cout<<"POSICIONES X Y Y SE SALEN DEL TABLERO DEL JUEGO";
+                }
 
             }//FIN DE LA OPCION 1 DE INSERTAR UNA FICHA
 
