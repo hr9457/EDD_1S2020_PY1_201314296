@@ -4,6 +4,8 @@
 #include "nodoRecord.h"
 #include "iostream"
 #include "string"
+#include "fstream"
+#include "windows.h"
 using namespace std;
 
 class listaRecord
@@ -11,16 +13,19 @@ class listaRecord
     private:
         nodoRecord *primero;
         nodoRecord *ultimo;
-        int tamanioLista;
+        int tamanioLista=0;
 
     public:
         listaRecord();
         int getSize();
         void setSize(int);
         bool estadoLista();
-        nodoRecord * buscar(string);
+        void buscar(string,nodoRecord *&);
         void insertar(string,int);
         void ordenamientoBurbuja();
+        void generarDOTGeneral();
+        void generarPNGGeneral();
+        void abrirPNGGeneral();
         ~listaRecord();
 };
 

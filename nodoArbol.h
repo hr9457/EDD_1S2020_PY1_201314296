@@ -3,6 +3,7 @@
 
 #include "iostream"
 #include "string"
+#include "listaRecord.h"
 using namespace std;
 
 class nodoArbol
@@ -12,6 +13,7 @@ class nodoArbol
         int puntaje;
         nodoArbol *derecha;
         nodoArbol *izquierda;
+        listaRecord lista;//lista como atributo de cada nodo-
 
     public:
         nodoArbol(string arg, int);

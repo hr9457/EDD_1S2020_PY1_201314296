@@ -1,0 +1,11 @@
+digraph Scoreboard {
+rankdir=LR;
+Nodo0[shape=record,label="carlos, 50-Pts"];
+Nodo1[shape=record,label="josue, 30-Pts"];
+Nodo2[shape=record,label="hector, 25-Pts"];
+Nodo3[shape=record,label="marlon, 1-Pts"];
+Nodo0->Nodo1;
+Nodo1->Nodo2;
+Nodo2->Nodo3;
+label="Scoreboard General";
+}

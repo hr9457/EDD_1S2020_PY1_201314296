@@ -22,6 +22,7 @@
 #include "nodoArbol.h"
 #include "matrizDispersa.h"
 #include "listaDoble.h"
+#include "listaRecord.h"
 
 using json = nlohmann::json;//para el archiv json
 using namespace std;
@@ -34,7 +35,7 @@ class ventana
         arbolBinario arbol;//arbol de usuarios
         listaABC listaFichas;
         Cola colaFichas;//colas de las fichas random
-        
+        listaRecord listaTOP;
 
         int centroMenu = 45 ;
         int lineaMenu = 5 ;
@@ -44,7 +45,9 @@ class ventana
         json JSON;
         string nuevoJugador;
         string jugador1;
+        int puntajeGeneralJugador1;
         string jugador2;
+        int puntajeGeneralJugador2;
         bool resultadoBusquedaJugador1=false;
         bool resultadoBusquedaJugador2=false;
 

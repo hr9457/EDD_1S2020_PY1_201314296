@@ -1,7 +1,11 @@
 #include "listaRecord.h"
 
 //contructor
-listaRecord::listaRecord(){}
+listaRecord::listaRecord()
+{
+    this->primero=NULL;
+    this->ultimo=NULL;
+}
 
 
 //estado de la lista
@@ -11,9 +15,13 @@ bool listaRecord::estadoLista()
     else{return false;}
 }
 
+
+
 //tamanio lista
 int listaRecord::getSize()
 {return tamanioLista;}
+
+
 
 void listaRecord::setSize(int num)
 {this->tamanioLista=num;}
@@ -21,23 +29,23 @@ void listaRecord::setSize(int num)
 
 
 //buscar
-nodoRecord * listaRecord::buscar(string nombre)
+void listaRecord::buscar(string nombre, nodoRecord *&nodoBusqueda)
 {
     nodoRecord *auxPrimero = primero;
     while (auxPrimero!=NULL)
     {
         if(nombre==auxPrimero->getNombreUsuario())
         {
-            return auxPrimero;
+            nodoBusqueda=auxPrimero;
             break;
         }
         else
         {
-            return NULL;
-            auxPrimero->getSiguiente(); 
-        }          
-    }
-    return NULL;    
+            nodoBusqueda=NULL;
+        }
+        
+        auxPrimero = auxPrimero->getSiguiente();        
+    }  
 }
 
 
@@ -55,26 +63,92 @@ void listaRecord::insertar(string nombre,int puntaje)
     }
     else
     {
-        ultimo->setSiguiente(nodoTemporal);
-        nodoTemporal->setAnterior(ultimo);
-        ultimo = nodoTemporal;
-        tamanioLista = tamanioLista+1;
+        nodoRecord *nodoBusqueda;
+        buscar(nombre,nodoBusqueda);
+        if(nodoBusqueda==NULL)
+        {
+            ultimo->setSiguiente(nodoTemporal);
+            nodoTemporal->setAnterior(ultimo);
+            ultimo = nodoTemporal;
+            tamanioLista = tamanioLista+1;
+        }
+        else
+        {
+            nodoBusqueda->setPuntaje(puntaje);
+        }
     }    
 }
 
 
 
-//forma de ordenar la lista por el ordenamiento burbuja
+//ordenamiento burbuja
 void listaRecord::ordenamientoBurbuja()
 {
-    int tamanioActuaLista = getSize();
-    nodoRecord *auxPrimero=primero;
-    for(int i=0;i<tamanioActuaLista-1;i++)
+    int tamanioLista = getSize();
+    nodoRecord *auxprimero=primero;
+    if(tamanioLista>1)
     {
-        
+        for(int i=0;i<tamanioLista-1;i++)
+        {
+            for(int j=0;j<tamanioLista-1;j++)
+            {
+                if(auxprimero->getPuntaje()>auxprimero->getSiguiente()->getPuntaje())
+                {
+                    string letraAuxiliar = auxprimero->getNombreUsuario();
+                    int numAuxiliar = auxprimero->getPuntaje();                    
+
+                    auxprimero->setNombreUsuario(auxprimero->getSiguiente()->getNombreUsuario());
+                    auxprimero->setPuntaje(auxprimero->getSiguiente()->getPuntaje());
+                    
+                    auxprimero->getSiguiente()->setNombreUsuario(letraAuxiliar);
+                    auxprimero->getSiguiente()->setPuntaje(numAuxiliar);
+                }
+                auxprimero = auxprimero->getSiguiente();
+            }
+            auxprimero = primero;
+        }
     }
 }
 
+
+//metodo para generar los reportes en graphviz
+void listaRecord::generarDOTGeneral()
+{
+    int numeroNodo = 0;//colocacion deun indice
+    ofstream archivo("ArchivosDot\\scoreboardGeneral.dot");
+    archivo<<"digraph Scoreboard {"<<endl;
+    archivo<<"rankdir=LR;"<<endl;
+    //para la colocacion de los nodos
+    if (estadoLista() == true)
+    {
+        //fin del archivo
+        archivo<<"}"<<endl;
+        archivo.close();
+    }
+    else
+    {
+        nodoRecord *nodoTemporal = ultimo;
+        while (nodoTemporal!=NULL)
+        {
+            archivo<<"Nodo"<<numeroNodo<<"[shape=record,label=\""<<
+            nodoTemporal->getNombreUsuario()<<", "<<nodoTemporal->getPuntaje()<<"-Pts\"];"<<endl;
+            nodoTemporal = nodoTemporal->getAnterior();
+            numeroNodo = numeroNodo + 1;
+        }
+            //anidacion de los nodos
+        for (int i = 0; i < numeroNodo-1; i++)
+        {
+            archivo<<"Nodo"<<i<<"->Nodo"<<i+1<<";"<<endl;
+        }    
+        //fin del archivo
+        archivo<<"label=\"Scoreboard General\";"<<endl;
+        archivo<<"}"<<endl;
+        archivo.close();        
+    }
+
+    system("dot.exe -Tpng ArchivosDot\\scoreboardGeneral.dot -o Reportes\\scoreboardGeneral.png");
+    system("Reportes\\scoreboardGeneral.png");
+}
 
 
 

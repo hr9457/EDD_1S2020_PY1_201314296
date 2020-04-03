@@ -217,6 +217,13 @@ void ventana::opReportes(int op)
         arbol.abrirPNGInorden();
     }
 
+    //para mostrar los record general de la aplicacion
+    else if(op==55)
+    {
+        listaTOP.ordenamientoBurbuja();
+        listaTOP.generarDOTGeneral();
+    }
+
     //arbol binario postorden
     else if(op == 54)
     {
@@ -274,7 +281,7 @@ void ventana::ventanaReportes()
         cout<<"6. Recorrdio postorden arbol binario";
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
-        cout<<"7. historial puntaje por jugador";
+        cout<<"7. Scoreboard General jugadores";//55
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
         cout<<"8. matriz dispersa";
@@ -487,6 +494,8 @@ void ventana::ventanaJugar()
                 //------------SACO DE LA LISTA DEL JUGADOR
                 int puntajeReturnLista;
                 listaJugador1.eliminarFicha(letra,puntajeReturnLista);
+                //sumo al puntaje del jugador
+                puntajeJugador1=puntajeJugador1+puntajeReturnLista;
 
                 //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
                 matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
@@ -535,6 +544,8 @@ void ventana::ventanaJugar()
                 {
                     //-----------CONCATENO LA PALABRA
                     palabraJugador1 = palabraJugador1 + letraEscogida;
+                    //agrego al puntaje del jugador
+                    puntajeJugador1=puntajeJugador1+puntajeDevuelta;
                 }
                 else
                 {
@@ -590,7 +601,7 @@ void ventana::ventanaJugar()
             {
                 bool validacionDeJugada=false;
                 bibliotecaDePalabras.buscar(palabraJugador1,validacionDeJugada);
-                if(validacionDeJugada==true && palabraJugador1!="")
+                if(validacionDeJugada==true && palabraJugador1!="")//si es valida la jugada
                 {
                     //ver cuantas fichas tiene el jugador
                     tamanioListaJugador1 = listaJugador1.getSize();
@@ -605,7 +616,9 @@ void ventana::ventanaJugar()
                     //QUITO LAS FICHAS QUE EN LA ULTIMA JUGADA
                     ultimaJugada.setPrimero(NULL);
                     ultimaJugada.setUltimo(NULL);
-                    
+                    //agrego a su puntuacion general
+                    puntajeGeneralJugador1=puntajeGeneralJugador1+puntajeJugador1;
+                    puntajeJugador1=0;
                     
                 }
                 else
@@ -620,7 +633,8 @@ void ventana::ventanaJugar()
                         matrizScrabble.eliminarNodo(posxReturnEliminacion,posyReturnEliminacion);
                         listaJugador1.insertaFicha(letra,puntajeReturn,0,0);
                     }while(ultimaJugada.estdoLista()!=true);
-                    
+                    //quito del puntaje que llevaba el jugador
+                    puntajeJugador1=0;
                 }
                 
                 //borroo lo actual con la que se evaluo
@@ -702,6 +716,9 @@ void ventana::ventanaJugar()
                 int puntajeReturnLista;
                 listaJugador2.eliminarFicha(letra,puntajeReturnLista);
 
+                //agergo al puntaje del jugador
+                puntajeJugador2=puntajeJugador2+puntajeReturnLista;
+
                 //------------LA INGRESO A LA MATRIZ Y ACTUALIZO
                 matrizScrabble.insertarNodo(0,letra,0,posx,posy);//tipo,letra,puntaje,posx,posy
                 //matrizScrabble.crearDOT();
@@ -749,6 +766,8 @@ void ventana::ventanaJugar()
                 {
                     //-----------CONCATENO LA PALABRA
                     palabraJugador2 = palabraJugador2 + letraEscogida;
+                    //agergo al puntaje del jugador
+                    puntajeJugador2=puntajeJugador2+puntajeDevuelta;
                 }
                 else
                 {
@@ -804,7 +823,7 @@ void ventana::ventanaJugar()
             {
                 bool validacionDeJugada;
                 bibliotecaDePalabras.buscar(palabraJugador2,validacionDeJugada);
-                if(validacionDeJugada==true && palabraJugador2!="")
+                if(validacionDeJugada==true && palabraJugador2!="")//si la jugada es valida
                 {
                     //ver cuantas fichas tiene el jugador
                     tamanioListaJugador2 = listaJugador2.getSize();
@@ -819,7 +838,11 @@ void ventana::ventanaJugar()
                     //QUITO LAS FICHAS QUE EN LA ULTIMA JUGADA
                     ultimaJugada.setPrimero(NULL);
                     ultimaJugada.setUltimo(NULL);
-                }
+
+                    //agrego a su puntuacion general
+                    puntajeGeneralJugador2=puntajeGeneralJugador2+puntajeJugador2;
+                    puntajeJugador2=0;
+                }//fin de validez
                 else
                 {
                     //ELIMINO DE LA MATRIZ, Y LAS DEVUELVO A JUGADOR
@@ -832,9 +855,15 @@ void ventana::ventanaJugar()
                         matrizScrabble.eliminarNodo(posxReturnEliminacion,posyReturnEliminacion);
                         listaJugador2.insertaFicha(letra,puntajeReturn,0,0);
                     }while(ultimaJugada.estdoLista()!=true);
+                    //le quito los puntos al jugadore
+                    puntajeJugador2=0;
                 }
                 //borroo lo actual con la que se evaluo
                 palabraJugador2 = "";
+                //borro puntaje
+                //agergo al puntaje del jugador
+                puntajeJugador2=0;
+
                 //cambiar de jugador
                 if(numeroJugador=2)
                 {
@@ -849,8 +878,10 @@ void ventana::ventanaJugar()
         tamanioColaFichas = colaFichas.getSize();
     } while (entradaTeclado!=27 || tamanioColaFichas != 0);
 
-}
-//----------------------------FIN DE LA JUGABILIDAD
+
+    
+    
+}//----------------------------FIN DE LA JUGABILIDAD
 
 
 
@@ -896,10 +927,14 @@ void ventana::selecionJugador(int op)
         }
         else
         {
-            ventanaJugar(); 
+            ventanaJugar();
+            listaTOP.insertar(jugador1,puntajeGeneralJugador1);
+            listaTOP.insertar(jugador2,puntajeGeneralJugador2); 
             rutaArchivo="";
             jugador1="";
+            puntajeGeneralJugador1=0;
             jugador2="";
+            puntajeGeneralJugador2=0;
         }        
     }
 }
