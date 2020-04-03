@@ -1,11 +1,8 @@
 digraph arbolInorden {
 node [shape=record];
 rankdir=LR;
-nodo0[label="antonio"];
-nodo1[label="carlos"];
-nodo2[label="eduardo"];
-nodo3[label="heidy"];
-nodo4[label="rodrigo"];
-nodo0->nodo1->nodo2->nodo3->nodo4;
+nodo0[label="hector"];
+nodo1[label="josue"];
+nodo0->nodo1;
 label = " Arbol Binario - Inorden " 
 }

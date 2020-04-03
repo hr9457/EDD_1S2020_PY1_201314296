@@ -418,7 +418,7 @@ void ventana::ventanaJugar()
     int entradaTeclado;
     int numeroJugador=1;
     int opMenuJugador;
-    int puntajeJugador1,puntajeJugador2;
+    int puntajeJugador1=0,puntajeJugador2=0;
     int tamanioColaFichas;
 
 
@@ -469,6 +469,9 @@ void ventana::ventanaJugar()
             lineaMenu=lineaMenu+1;
             gotoxy(centroMenu,lineaMenu);
             cout<<"4. VALIDAR JUGADA";//52
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"5. SALTAR TURNO";//53
 
 
             entradaTeclado = getch();
@@ -653,6 +656,15 @@ void ventana::ventanaJugar()
 
             }//FIN VALIDACION DE LA PALABRA
 
+            //EL JUGADOR DECIDE SALTA SU TURNO
+            else if(entradaTeclado==53)
+            {
+                if(numeroJugador=1)
+                {
+                    numeroJugador=2;
+                }
+            }
+
             //para salir del la jugabilidad
             else if(entradaTeclado==27)
             {
@@ -702,6 +714,9 @@ void ventana::ventanaJugar()
             lineaMenu=lineaMenu+1;
             gotoxy(centroMenu,lineaMenu);
             cout<<"4. VALIDAR JUGADA";//52
+            lineaMenu=lineaMenu+1;
+            gotoxy(centroMenu,lineaMenu);
+            cout<<"5. SALTAR TURNO";//53
 
 
             entradaTeclado = getch();
@@ -889,11 +904,21 @@ void ventana::ventanaJugar()
                 }
             }
 
+            //EL JUGADOR DECIDE SALTA SU TURNO
+            else if(entradaTeclado==53)
+            {
+                if(numeroJugador=2)
+                {
+                    numeroJugador=1;
+                }
+            }
+
             //para salir del la jugabilidad
             else if(entradaTeclado==27)
             {
                 break;
             }
+
         }//FIN DE LA PANTALLA JUGADOR 2
 
 

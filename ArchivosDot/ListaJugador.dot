@@ -1,13 +1,13 @@
 digraph Lista {
 rankdir=LR;
 node [shape=record];
-Nodo0[label="M  X3pts"]
-Nodo1[label="A  X1pts"]
-Nodo2[label="G  X2pts"]
-Nodo3[label="C  X3pts"]
-Nodo4[label="X  X8pts"]
-Nodo5[label="I  X1pts"]
-Nodo6[label="C  X3pts"]
+Nodo0[label="G  X2pts"]
+Nodo1[label="C  X3pts"]
+Nodo2[label="H  X4pts"]
+Nodo3[label="O  X1pts"]
+Nodo4[label="R  X1pts"]
+Nodo5[label="A  X1pts"]
+Nodo6[label="F  X4pts"]
 Nodo0->Nodo1[dir=both];
 Nodo1->Nodo2[dir=both];
 Nodo2->Nodo3[dir=both];
