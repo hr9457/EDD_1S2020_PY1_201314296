@@ -600,7 +600,12 @@ void ventana::ventanaJugar()
             else if(entradaTeclado==52)
             {
                 bool validacionDeJugada=false;
-                bibliotecaDePalabras.buscar(palabraJugador1,validacionDeJugada);
+                //CONDICION PARA QUE NO BUSQUE UNA PALABRA EN BLANCO
+                if(palabraJugador1!="")
+                {
+                    bibliotecaDePalabras.buscar(palabraJugador1,validacionDeJugada);
+                }
+
                 if(validacionDeJugada==true && palabraJugador1!="")//si es valida la jugada
                 {
                     //ver cuantas fichas tiene el jugador
@@ -822,7 +827,11 @@ void ventana::ventanaJugar()
             else if(entradaTeclado==52)
             {
                 bool validacionDeJugada;
-                bibliotecaDePalabras.buscar(palabraJugador2,validacionDeJugada);
+                //mira que la palaabra no venga vacia
+                if(palabraJugador2!="")
+                {
+                    bibliotecaDePalabras.buscar(palabraJugador2,validacionDeJugada);
+                }
                 if(validacionDeJugada==true && palabraJugador2!="")//si la jugada es valida
                 {
                     //ver cuantas fichas tiene el jugador
