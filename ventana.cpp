@@ -599,7 +599,7 @@ void ventana::ventanaJugar()
             //------------------------Y ELIMINO DE LA MATRIZ SI LA PALABRAS ES INCORECTA
             else if(entradaTeclado==52)
             {
-                bool validacionDeJugada=false;
+                bool validacionDeJugada;
                 //CONDICION PARA QUE NO BUSQUE UNA PALABRA EN BLANCO
                 if(palabraJugador1!="")
                 {
@@ -626,7 +626,7 @@ void ventana::ventanaJugar()
                     puntajeJugador1=0;
                     
                 }
-                else
+                else if(validacionDeJugada==false && palabraJugador1!="")
                 {
                     //ELIMINO DE LA MATRIZ, Y LAS DEVUELVO A JUGADOR
                     do{
@@ -641,6 +641,7 @@ void ventana::ventanaJugar()
                     //quito del puntaje que llevaba el jugador
                     puntajeJugador1=0;
                 }
+                else{}
                 
                 //borroo lo actual con la que se evaluo
                 palabraJugador1 = "";
@@ -651,6 +652,12 @@ void ventana::ventanaJugar()
                 }
 
             }//FIN VALIDACION DE LA PALABRA
+
+            //para salir del la jugabilidad
+            else if(entradaTeclado==27)
+            {
+                break;
+            }
 
         }//FIN DE LA PANTALLA PARA EL JUGADOR 1
 
@@ -832,6 +839,7 @@ void ventana::ventanaJugar()
                 {
                     bibliotecaDePalabras.buscar(palabraJugador2,validacionDeJugada);
                 }
+
                 if(validacionDeJugada==true && palabraJugador2!="")//si la jugada es valida
                 {
                     //ver cuantas fichas tiene el jugador
@@ -852,7 +860,7 @@ void ventana::ventanaJugar()
                     puntajeGeneralJugador2=puntajeGeneralJugador2+puntajeJugador2;
                     puntajeJugador2=0;
                 }//fin de validez
-                else
+                else if(validacionDeJugada==false && palabraJugador2!="")
                 {
                     //ELIMINO DE LA MATRIZ, Y LAS DEVUELVO A JUGADOR
                     do{
@@ -867,6 +875,7 @@ void ventana::ventanaJugar()
                     //le quito los puntos al jugadore
                     puntajeJugador2=0;
                 }
+                else{}
                 //borroo lo actual con la que se evaluo
                 palabraJugador2 = "";
                 //borro puntaje
@@ -878,6 +887,12 @@ void ventana::ventanaJugar()
                 {
                     numeroJugador=1;
                 }
+            }
+
+            //para salir del la jugabilidad
+            else if(entradaTeclado==27)
+            {
+                break;
             }
         }//FIN DE LA PANTALLA JUGADOR 2
 
