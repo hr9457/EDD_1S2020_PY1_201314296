@@ -418,7 +418,7 @@ void ventana::ventanaJugar()
     int entradaTeclado;
     int numeroJugador=1;
     int opMenuJugador;
-    int puntajeJugador1=0,puntajeJugador2=0;
+    int puntajeJugador1=0,puntajeJugador2=0;//puntajes por jugador
     int tamanioColaFichas;
 
 
@@ -643,6 +643,9 @@ void ventana::ventanaJugar()
                     }while(ultimaJugada.estdoLista()!=true);
                     //quito del puntaje que llevaba el jugador
                     puntajeJugador1=0;
+                    //QUITO LAS FICHAS QUE EN LA ULTIMA JUGADA
+                    ultimaJugada.setPrimero(NULL);
+                    ultimaJugada.setUltimo(NULL);
                 }
                 else{}
                 
@@ -668,6 +671,8 @@ void ventana::ventanaJugar()
             //para salir del la jugabilidad
             else if(entradaTeclado==27)
             {
+                puntajeGeneralJugador1=puntajeGeneralJugador1+puntajeJugador1;
+                puntajeJugador1=0;
                 break;
             }
 
@@ -859,7 +864,7 @@ void ventana::ventanaJugar()
                 {
                     //ver cuantas fichas tiene el jugador
                     tamanioListaJugador2 = listaJugador2.getSize();
-                    for (tamanioListaJugador2; tamanioListaJugador2 < 6; tamanioListaJugador1++)
+                    for (tamanioListaJugador2; tamanioListaJugador2 < 6; tamanioListaJugador2++)
                     {
                         int puntaje;
                         string letra;
@@ -889,14 +894,13 @@ void ventana::ventanaJugar()
                     }while(ultimaJugada.estdoLista()!=true);
                     //le quito los puntos al jugadore
                     puntajeJugador2=0;
+                    //QUITO LAS FICHAS QUE EN LA ULTIMA JUGADA
+                    ultimaJugada.setPrimero(NULL);
+                    ultimaJugada.setUltimo(NULL);
                 }
                 else{}
                 //borroo lo actual con la que se evaluo
                 palabraJugador2 = "";
-                //borro puntaje
-                //agergo al puntaje del jugador
-                puntajeJugador2=0;
-
                 //cambiar de jugador
                 if(numeroJugador=2)
                 {
@@ -916,6 +920,8 @@ void ventana::ventanaJugar()
             //para salir del la jugabilidad
             else if(entradaTeclado==27)
             {
+                puntajeGeneralJugador2=puntajeGeneralJugador2+puntajeJugador2;
+                puntajeJugador2=0;
                 break;
             }
 
@@ -981,8 +987,8 @@ void ventana::selecionJugador(int op)
             listaTOP.insertar(jugador2,puntajeGeneralJugador2); 
             rutaArchivo="";
             jugador1="";
-            puntajeGeneralJugador1=0;
             jugador2="";
+            puntajeGeneralJugador1=0;            
             puntajeGeneralJugador2=0;
         }        
     }

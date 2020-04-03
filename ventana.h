@@ -45,9 +45,9 @@ class ventana
         json JSON;
         string nuevoJugador;
         string jugador1;
-        int puntajeGeneralJugador1;
+        int puntajeGeneralJugador1=0;
         string jugador2;
-        int puntajeGeneralJugador2;
+        int puntajeGeneralJugador2=0;
         bool resultadoBusquedaJugador1=false;
         bool resultadoBusquedaJugador2=false;
 

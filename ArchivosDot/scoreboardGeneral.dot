@@ -1,7 +1,7 @@
 digraph Scoreboard {
 rankdir=LR;
 Nodo0[shape=record,label="josue, 0-Pts"];
-Nodo1[shape=record,label="hector, -2-Pts"];
+Nodo1[shape=record,label="hector, 0-Pts"];
 Nodo0->Nodo1;
 label="Scoreboard General";
 }
