@@ -68,6 +68,74 @@ void arbolBinario::insertarJugador(string arg){
 }
 
 
+
+//busqueda para insertar historial 
+void arbolBinario::buscarNodo(nodoArbol *nodo,string nombre,nodoArbol *nodoEncontrado)
+{
+    if(nombre==nodo->getNombreJugador())
+    {
+        nodoEncontrado=nodo;
+    }
+    else if(nombre<nodo->getNombreJugador())
+    {
+        if(nodo->getIzquierda() == NULL)
+        {       
+            nodoEncontrado = NULL;     
+        }
+        else
+        {
+            nodo = nodo->getIzquierda();
+            buscarInsert(nodo,nombre);
+        }
+    }
+    else if(nombre>nodo->getNombreJugador())
+    {
+       if(nodo->getDerecha() == NULL)
+        {     
+            nodoEncontrado = NULL;       
+        }
+        else
+        {
+            nodo = nodo->getDerecha();
+            buscarInsert(nodo,nombre);
+        } 
+    }
+}
+
+void arbolBinario::insertaPuntaje(string nombre,int puntaje)
+{
+    nodoArbol *auxRoot = root;
+    nodoArbol *nodoEncontrado;
+    if(estadoArbol()!=true)
+    {
+        buscarNodo(auxRoot,nombre,nodoEncontrado);
+        if(nodoEncontrado!=NULL)
+        {
+            nodoEncontrado->insertarEnNodo(nombre,puntaje);
+        }
+        else
+        {}
+    }
+}
+
+
+void arbolBinario::puntajeOrdenado(string nombre)
+{
+    nodoArbol *auxRoot = root;
+    nodoArbol *nodoEncontrado;
+    if(estadoArbol()!=true)
+    {
+        buscarNodo(auxRoot,nombre,nodoEncontrado);
+        if(nodoEncontrado!=NULL)
+        {
+            nodoEncontrado->mostarPuntajesOrdenados();
+        }
+        else
+        {}
+    }
+}
+
+
 //para imprimir en el doot los nodos
 void arbolBinario::recorrerArbol(nodoArbol *inicio){
     if (inicio != NULL){

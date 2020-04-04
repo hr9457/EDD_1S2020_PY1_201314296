@@ -26,9 +26,16 @@ class arbolBinario
         void setRoot();
         void buscarInsert(nodoArbol *puntero,string);
         void insertarJugador(string);
+        
+        void buscarNodo(nodoArbol *,string,nodoArbol *);
+        void insertaPuntaje(string,int);
+        void puntajeOrdenado(string);
+        
+
         void recorrerArbol(nodoArbol *inicio);
         void recorrerArbol2(nodoArbol *inicio);
-        
+                
+
         void generarDot();
         void generarPNG();
         void abrirPNG();

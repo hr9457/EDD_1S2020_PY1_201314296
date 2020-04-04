@@ -25,6 +25,8 @@ class nodoArbol
         void setDerecha(nodoArbol *puntero);
         nodoArbol * getIzquierda();
         void setIzquierda(nodoArbol *puntero);
+        void insertarEnNodo(string,int);
+        void mostarPuntajesOrdenados();
         ~nodoArbol();
 };
 

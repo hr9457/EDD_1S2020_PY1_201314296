@@ -18,19 +18,17 @@ using namespace std;
 
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){
-    ventana ventanainicio;
+    //ventana ventanainicio;
 
-
-    /*
-    listaRecord lista;
-
+    arbolBinario arbol;
     
     int entradaTeclado;
     do
     {
         cout<<"1. Insertar jugador"<<endl;
-        cout<<"2. Ordenar Lista"<<endl;
-        cout<<"3. Graficar Lista"<<endl;
+        cout<<"2. Mostrar arbol"<<endl;
+        cout<<"3. insertar puntaje"<<endl;
+        cout<<"4. Mostar puntaje de jugador"<<endl;
         cout<<"Salir-Esc"<<endl;
 
         entradaTeclado = getch();        
@@ -40,20 +38,33 @@ int main(){
             int puntaje;
             cout<<"ingrese el nombre del jugador: ";
             cin>>nombre;
-            cout<<"ingrese el puntaje del jugadore: ";
-            cin>>puntaje;
-            lista.insertar(nombre,puntaje);
+            arbol.insertarJugador(nombre);
         }
         else if(entradaTeclado==50)
         {
-            lista.ordenamientoBurbuja();
+            arbol.generarDot();
+            arbol.generarPNG();
+            arbol.abrirPNG();
         }
         else if(entradaTeclado==51)
         {
-            lista.generarDOTGeneral();
+            string nombre;
+            int puntaje;
+            cout<<"ingrese el nombre del jugador: ";
+            cin>>nombre;
+            cout<<"ingrese el punaje del juagador";
+            arbol.insertaPuntaje(nombre,puntaje);
+        }
+        else if(entradaTeclado==52)
+        {
+            string nombre;
+            cout<<"ingrese el nombre del juagador: ";
+            cin>>nombre;
+            arbol.puntajeOrdenado(nombre);
         }
        
     } while (entradaTeclado!=27);
-    */
+    
+
     return 0;
 }

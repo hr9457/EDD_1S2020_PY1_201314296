@@ -45,5 +45,18 @@ void nodoArbol::setIzquierda(nodoArbol *puntero){
     this->izquierda = puntero;
 }
 
+
+//para insertare nel lista 
+void nodoArbol::insertarEnNodo(string nombre,int puntaje)
+{
+    lista.insertar(nombre,puntaje);
+}
+
+void nodoArbol::mostarPuntajesOrdenados()
+{
+    lista.ordenamientoBurbuja();
+    lista.generarDOTGeneral();
+}
+
 //destructor
 nodoArbol::~nodoArbol(){}
