@@ -781,13 +781,13 @@ void ventana::ventanaJugar()
                     //------------SACO DE LA LISTA DEL JUGADOR
                     int puntajeReturnLista;
 
-                    try
+                    try//por si surge un erro a la hora eliminar de la lista del jugador
                     {
-                    listaJugador2.eliminarFicha(letra,puntajeReturnLista);
+                        listaJugador2.eliminarFicha(letra,puntajeReturnLista);
                     }
                     catch(...)
                     {}
-                        
+
                     //agergo al puntaje del jugador
                     puntajeJugador2=puntajeJugador2+puntajeReturnLista;
 
