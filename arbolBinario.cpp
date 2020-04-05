@@ -70,37 +70,36 @@ void arbolBinario::insertarJugador(string arg){
 
 
 //busqueda para insertar historial 
-void arbolBinario::buscarNodo(nodoArbol *nodo,string nombre,nodoArbol *nodoEncontrado)
+void arbolBinario::buscarNodo(nodoArbol *auxRoot,string nombre,nodoArbol *&nodoEncontrado)
 {
-    if(nombre==nodo->getNombreJugador())
-    {
-        nodoEncontrado=nodo;
+    if(nombre == auxRoot->getNombreJugador())
+    {  
+        nodoEncontrado = auxRoot;      
     }
-    else if(nombre<nodo->getNombreJugador())
+    else if(nombre < auxRoot->getNombreJugador())
     {
-        if(nodo->getIzquierda() == NULL)
-        {       
-            nodoEncontrado = NULL;     
+        if(auxRoot->getIzquierda() == NULL)
+        {
+            nodoEncontrado =  NULL;
         }
         else
         {
-            nodo = nodo->getIzquierda();
-            buscarInsert(nodo,nombre);
-        }
+            buscarNodo(auxRoot->getIzquierda(),nombre,nodoEncontrado);
+        }        
     }
-    else if(nombre>nodo->getNombreJugador())
+    else if(nombre > auxRoot->getNombreJugador())
     {
-       if(nodo->getDerecha() == NULL)
-        {     
-            nodoEncontrado = NULL;       
+        if(auxRoot->getDerecha() == NULL)
+        {
+            nodoEncontrado =  NULL;
         }
         else
         {
-            nodo = nodo->getDerecha();
-            buscarInsert(nodo,nombre);
+            buscarNodo(auxRoot->getDerecha(),nombre,nodoEncontrado);
         } 
     }
 }
+
 
 void arbolBinario::insertaPuntaje(string nombre,int puntaje)
 {
@@ -109,12 +108,17 @@ void arbolBinario::insertaPuntaje(string nombre,int puntaje)
     if(estadoArbol()!=true)
     {
         buscarNodo(auxRoot,nombre,nodoEncontrado);
-        if(nodoEncontrado!=NULL)
-        {
-            nodoEncontrado->insertarEnNodo(nombre,puntaje);
+        
+        if(nodoEncontrado==NULL)
+        {            
+            cout<<"NO SE ENCUENTRA"<<endl;
         }
         else
-        {}
+        {
+            nodoEncontrado->insertarEnNodo(nombre,puntaje);
+            cout<<nodoEncontrado->getNombreJugador()<<endl;
+            cout<<"ECONTRADO"<<endl;
+        }        
     }
 }
 
@@ -126,12 +130,18 @@ void arbolBinario::puntajeOrdenado(string nombre)
     if(estadoArbol()!=true)
     {
         buscarNodo(auxRoot,nombre,nodoEncontrado);
-        if(nodoEncontrado!=NULL)
+        
+        if(nodoEncontrado==NULL)
         {
-            nodoEncontrado->mostarPuntajesOrdenados();
+            
+            cout<<"NO SE ENCUENTRA"<<endl;
         }
         else
-        {}
+        {
+            nodoEncontrado->mostarPuntajesOrdenados();
+            cout<<"ECONTRADO"<<endl;
+        }
+        
     }
 }
 

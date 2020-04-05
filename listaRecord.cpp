@@ -79,6 +79,24 @@ void listaRecord::insertar(string nombre,int puntaje)
     }    
 }
 
+//insertar de ultimo
+void listaRecord::insertarUltimo(string nombre,int puntaje)
+{
+    nodoRecord *nodoTemporal = new nodoRecord(nombre,puntaje);
+    if(estadoLista()==true)
+    {
+        primero=nodoTemporal;
+        ultimo=nodoTemporal;
+        tamanioLista=tamanioLista+1;
+    }
+    else
+    {
+        ultimo->setSiguiente(nodoTemporal);
+        nodoTemporal->setAnterior(ultimo);
+        ultimo=nodoTemporal;
+        tamanioLista=tamanioLista+1;
+    }    
+}
 
 
 //ordenamiento burbuja
@@ -151,6 +169,43 @@ void listaRecord::generarDOTGeneral()
 }
 
 
+void listaRecord::generarDOTINDIVIDUAL()
+{
+    int numeroNodo = 0;//colocacion deun indice
+    ofstream archivo("ArchivosDot\\scoreboardINDIVIDUAL.dot");
+    archivo<<"digraph Scoreboard {"<<endl;
+    archivo<<"rankdir=LR;"<<endl;
+    //para la colocacion de los nodos
+    if (estadoLista() == true)
+    {
+        //fin del archivo
+        archivo<<"}"<<endl;
+        archivo.close();
+    }
+    else
+    {
+        nodoRecord *nodoTemporal = ultimo;
+        while (nodoTemporal!=NULL)
+        {
+            archivo<<"Nodo"<<numeroNodo<<"[shape=record,label=\""<<
+            nodoTemporal->getNombreUsuario()<<", "<<nodoTemporal->getPuntaje()<<"-Pts\"];"<<endl;
+            nodoTemporal = nodoTemporal->getAnterior();
+            numeroNodo = numeroNodo + 1;
+        }
+            //anidacion de los nodos
+        for (int i = 0; i < numeroNodo-1; i++)
+        {
+            archivo<<"Nodo"<<i<<"->Nodo"<<i+1<<";"<<endl;
+        }    
+        //fin del archivo
+        archivo<<"label=\"Scoreboard General\";"<<endl;
+        archivo<<"}"<<endl;
+        archivo.close();        
+    }
+
+    system("dot.exe -Tpng ArchivosDot\\scoreboardINDIVIDUAL.dot -o Reportes\\scoreboardINDIVIDUAL.png");
+    system("Reportes\\scoreboardINDIVIDUAL.png");
+}
 
 //destructor
 listaRecord::~listaRecord(){}

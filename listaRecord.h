@@ -22,8 +22,10 @@ class listaRecord
         bool estadoLista();
         void buscar(string,nodoRecord *&);
         void insertar(string,int);
+        void insertarUltimo(string,int);
         void ordenamientoBurbuja();
         void generarDOTGeneral();
+        void generarDOTINDIVIDUAL();
         void generarPNGGeneral();
         void abrirPNGGeneral();
         ~listaRecord();

@@ -42,12 +42,12 @@ void listaCircular::buscar(string palabra, bool &validacionDeJugada)
     {
         if(palabra==nodoAuxPrimero->getPalabra())
         {
-            validacionDeJugada = true;
+            validacionDeJugada = true;//return
             break;
         }
         else
         {
-            validacionDeJugada = false;
+            validacionDeJugada = false;//retunr 
             nodoAuxPrimero = nodoAuxPrimero->getSiguiente();
         }
         

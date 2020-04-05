@@ -18,8 +18,9 @@ using namespace std;
 
 //METODO MAIN PARA ARRAQUE DEL SCRABBLE
 int main(){
-    //ventana ventanainicio;
+    ventana ventanainicio;
 
+    /*
     arbolBinario arbol;
     
     int entradaTeclado;
@@ -52,8 +53,10 @@ int main(){
             int puntaje;
             cout<<"ingrese el nombre del jugador: ";
             cin>>nombre;
-            cout<<"ingrese el punaje del juagador";
+            cout<<"ingrese el punaje del juagador: ";
+            cin>>puntaje;
             arbol.insertaPuntaje(nombre,puntaje);
+            cout<<endl;
         }
         else if(entradaTeclado==52)
         {
@@ -64,7 +67,7 @@ int main(){
         }
        
     } while (entradaTeclado!=27);
-    
+    */
 
     return 0;
 }

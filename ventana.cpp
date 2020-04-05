@@ -246,6 +246,17 @@ void ventana::opReportes(int op)
     {
        system("Reportes\\ListaJugador.png"); 
     }
+
+    //historila por jugador
+    else if(op==70)
+    {
+        string nombre;
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"INGRESE EL NOMBRE DEL JUGADOR: ";
+        cin>>nombre;
+        arbol.puntajeOrdenado(nombre);
+    }
 }
 
 
@@ -288,6 +299,9 @@ void ventana::ventanaReportes()
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
         cout<<"9. lista contiene ficahs por de los jugadores";
+        lineaMenu = lineaMenu +1;
+        gotoxy(centroMenu,lineaMenu);
+        cout<<"F. LISTADO INDIVIDUAL POR JUGADOR";
         lineaMenu = lineaMenu +1;
         gotoxy(centroMenu,lineaMenu);
         cout<<"Esc(Salir)";
@@ -1003,7 +1017,9 @@ void ventana::selecionJugador(int op)
         {
             ventanaJugar();
             listaTOP.insertar(jugador1,puntajeGeneralJugador1);
-            listaTOP.insertar(jugador2,puntajeGeneralJugador2); 
+            listaTOP.insertar(jugador2,puntajeGeneralJugador2);
+            arbol.insertaPuntaje(jugador1,puntajeGeneralJugador1);
+            arbol.insertaPuntaje(jugador2,puntajeGeneralJugador2); 
             rutaArchivo="";
             jugador1="";
             jugador2="";
