@@ -2,9 +2,7 @@ digraph arbol
 {
 rankdir=TB;
 nodohector[ label = "hector"]; 
-nodohector->nodoana
-nodoana[ label = "ana"]; 
-nodohector->nodosandi
-nodosandi[ label = "sandi"]; 
+nodohector->nodojosue
+nodojosue[ label = "josue"]; 
 label = " Arbol Binario " 
 }

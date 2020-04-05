@@ -1,0 +1,5 @@
+digraph Scoreboard {
+rankdir=LR;
+Nodo0[shape=record,label="hector, 0-Pts"];
+label="Scoreboard General";
+}

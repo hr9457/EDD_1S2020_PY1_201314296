@@ -514,7 +514,14 @@ void ventana::ventanaJugar()
                 {
                     //------------SACO DE LA LISTA DEL JUGADOR
                     int puntajeReturnLista;
-                    listaJugador1.eliminarFicha(letra,puntajeReturnLista);
+
+                    try
+                    {
+                        listaJugador1.eliminarFicha(letra,puntajeReturnLista);
+                    }
+                    catch(...)
+                    {}
+
                     //sumo al puntaje del jugador
                     puntajeJugador1=puntajeJugador1+puntajeReturnLista;
 
@@ -773,8 +780,14 @@ void ventana::ventanaJugar()
                 {
                     //------------SACO DE LA LISTA DEL JUGADOR
                     int puntajeReturnLista;
-                    listaJugador2.eliminarFicha(letra,puntajeReturnLista);
 
+                    try
+                    {
+                    listaJugador2.eliminarFicha(letra,puntajeReturnLista);
+                    }
+                    catch(...)
+                    {}
+                        
                     //agergo al puntaje del jugador
                     puntajeJugador2=puntajeJugador2+puntajeReturnLista;
 

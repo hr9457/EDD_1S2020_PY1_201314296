@@ -116,8 +116,8 @@ void arbolBinario::insertaPuntaje(string nombre,int puntaje)
         else
         {
             nodoEncontrado->insertarEnNodo(nombre,puntaje);
-            cout<<nodoEncontrado->getNombreJugador()<<endl;
-            cout<<"ECONTRADO"<<endl;
+            //cout<<nodoEncontrado->getNombreJugador()<<endl;
+            //cout<<"ECONTRADO"<<endl;
         }        
     }
 }
@@ -139,7 +139,7 @@ void arbolBinario::puntajeOrdenado(string nombre)
         else
         {
             nodoEncontrado->mostarPuntajesOrdenados();
-            cout<<"ECONTRADO"<<endl;
+            //cout<<"ECONTRADO"<<endl;
         }
         
     }

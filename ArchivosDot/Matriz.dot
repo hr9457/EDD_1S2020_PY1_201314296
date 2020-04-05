@@ -33,12 +33,12 @@ F01->nodo110->nodo310->nodo910[dir=both];
 {rank = same; F01;nodo110;nodo310;nodo910;}
 F02->nodo620->nodo920[dir=both];
 {rank = same; F02;nodo620;nodo920;}
-F03->nodo730[dir=both];
-{rank = same; F03;nodo730;}
+F03->nodo23;->nodo730[dir=both];
+{rank = same; F03;nodo23;;nodo730;}
 F04->nodo1740[dir=both];
 {rank = same; F04;nodo1740;}
-F05->nodo250->nodo1150[dir=both];
-{rank = same; F05;nodo250;nodo1150;}
+F05->nodo250->nodo55;->nodo1150[dir=both];
+{rank = same; F05;nodo250;nodo55;;nodo1150;}
 F08->nodo280[dir=both];
 {rank = same; F08;nodo280;}
 F010->nodo4100->nodo6100->nodo15100[dir=both];
@@ -48,15 +48,17 @@ F015->nodo5150->nodo10150[dir=both];
 
 nodo110[group =0,label=" ",style=filled,fillcolor="cyan4"];
 C10->nodo110[dir=both];
+nodo23;[group =1,label=";"];
 nodo250[group =1,label=" ",style=filled,fillcolor="Indianred"];
 nodo280[group =1,label=" ",style=filled,fillcolor="Indianred"];
-C20->nodo250->nodo280[dir=both];
+C20->nodo23;->nodo250->nodo280[dir=both];
 nodo310[group =2,label=" ",style=filled,fillcolor="cyan4"];
 C30->nodo310[dir=both];
 nodo4100[group =3,label=" ",style=filled,fillcolor="Indianred"];
 C40->nodo4100[dir=both];
+nodo55;[group =4,label=";"];
 nodo5150[group =4,label=" ",style=filled,fillcolor="cyan4"];
-C50->nodo5150[dir=both];
+C50->nodo55;->nodo5150[dir=both];
 nodo620[group =5,label=" ",style=filled,fillcolor="cyan4"];
 nodo6100[group =5,label=" ",style=filled,fillcolor="cyan4"];
 C60->nodo620->nodo6100[dir=both];
